@@ -1,0 +1,167 @@
+/* ========== HEADER ========== */
+.header {
+    width: 100%;
+    height: 81px;
+    background: #FFFFFF;
+    border-bottom: 1px solid #E5E7EB;
+    padding-right: 126.5px;
+    padding-left: 126.5px;
+    display: flex;
+    align-items: center;
+}
+
+.header-inner {
+    width: 100%;
+    max-width: 1216px;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+}
+
+/* Logo */
+.logo-link {
+    display: flex;
+    align-items: center;
+    height: 40px;
+    gap: 8px;
+}
+
+.logo-icon-container {
+    width: 40px;
+    height: 40px;
+    background: #FF6900;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.logo-icon {
+    width: 24px;
+    height: 24px;
+    position: relative;
+}
+
+.paw {
+    position: absolute;
+    border: 2px solid #FFFFFF;
+    border-radius: 50%;
+}
+
+.paw-1 { width: 4px; height: 4px; top: 2px; left: 9px; }
+.paw-2 { width: 4px; height: 4px; top: 6px; left: 16px; }
+.paw-3 { width: 4px; height: 4px; top: 14px; left: 18px; }
+.paw-4 { width: 12px; height: 12px; top: 10px; left: 2px; }
+
+.logo-text {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 28px;
+    letter-spacing: -0.45px;
+    color: #101828;
+}
+
+/* Navigation */
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    height: 24px;
+}
+
+.nav-link {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.31px;
+    color: #364153;
+    white-space: nowrap;
+    transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+    color: #FF6900;
+}
+
+/* Icons */
+.nav-icons {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.icon-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    transition: background 0.2s ease;
+}
+
+.icon-btn:hover {
+    background: #f3f4f6;
+}
+
+/* Search icon */
+.icon-search {
+    width: 20px;
+    height: 20px;
+    position: relative;
+}
+
+.search-circle {
+    width: 13.33px;
+    height: 13.33px;
+    border: 2px solid #364153;
+    border-radius: 50%;
+    position: absolute;
+    top: 2.5px;
+    left: 2.5px;
+}
+
+.search-handle {
+    width: 3.58px;
+    height: 3.58px;
+    border: 2px solid #364153;
+    position: absolute;
+    top: 13.92px;
+    left: 13.92px;
+    transform: rotate(45deg);
+}
+
+/* Cart icon */
+.icon-cart {
+    width: 20px;
+    height: 20px;
+    position: relative;
+}
+
+.cart-body {
+    width: 16.7px;
+    height: 11.67px;
+    border: 2px solid #364153;
+    position: absolute;
+    top: 1.71px;
+    left: 1.71px;
+    border-radius: 2px;
+}
+
+.cart-wheel-1,
+.cart-wheel-2 {
+    width: 1.67px;
+    height: 1.67px;
+    border: 2px solid #364153;
+    position: absolute;
+    border-radius: 50%;
+}
+
+.cart-wheel-1 { top: 16.67px; left: 5.83px; }
+.cart-wheel-2 { top: 16.67px; left: 15px; }

@@ -88,3 +88,266 @@
     transform: rotate(-45deg);
     opacity: 0.5;
 }
+
+/* ========== PRODUCT GRID ========== */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+/* Карточка */
+.product-card {
+    position: relative;
+    width: 293.33px;
+    text-decoration: none;
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Картинка */
+.product-image-wrap {
+    width: 291.33px;
+    height: 364.16px;
+    position: relative;
+    overflow: hidden;
+    background: #F3F4F6;
+    z-index: 1;
+}
+
+.product-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Увеличение картинки при наведении */
+.product-card:hover .product-image-wrap img {
+    transform: scale(1.05);
+}
+
+/* Цена (бейдж справа вверху картинки) */
+.product-price-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    min-width: 74.59px;
+    height: 36px;
+    background: #FF6900;
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.15px;
+    padding: 8px 12px;
+    border-radius: 16777200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 6px -4px rgba(0, 0, 0, 0.1),
+                0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+    z-index: 2;
+    transition: opacity 0.35s ease;
+}
+
+.product-card:hover .product-price-badge {
+    opacity: 0;
+}
+
+/* ========== НИЖНИЙ БЛОК (всегда видно) ========== */
+.product-info {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background: #FFFFFF;
+    z-index: 4;
+    position: relative;
+}
+
+.product-name {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.15px;
+    color: #101828;
+}
+
+.product-rating-row {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.product-stars {
+    display: flex;
+    gap: 2px;
+}
+
+.star-icon {
+    width: 14px;
+    height: 14px;
+}
+
+.star-icon svg {
+    width: 14px;
+    height: 14px;
+    display: block;
+}
+
+.product-rating-number {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    color: #6A7282;
+    margin-left: 2px;
+}
+
+/* ========== OVERLAY ========== */
+.product-overlay {
+    position: absolute;
+    bottom: 94px;
+    left: 0;
+    right: 0;
+    height: 188px;
+    padding: 16px;
+    transform: translateY(100%);
+    opacity: 0;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.35s ease;
+    z-index: 3;
+}
+
+.product-card:hover .product-overlay {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.product-overlay-inner {
+    width: 100%;
+    height: 156px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(4px);
+    border-radius: 10px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    box-shadow: 0px 4px 6px -4px rgba(0, 0, 0, 0.1),
+                0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.overlay-name {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.31px;
+    color: #101828;
+}
+
+.overlay-rating-row {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.overlay-stars {
+    display: flex;
+    gap: 2px;
+}
+
+.overlay-star {
+    width: 14px;
+    height: 14px;
+}
+
+.overlay-star svg {
+    width: 14px;
+    height: 14px;
+    display: block;
+}
+
+.overlay-rating-number {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    color: #6A7282;
+    margin-left: 2px;
+}
+
+.overlay-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+}
+
+.overlay-price {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 28px;
+    letter-spacing: -0.45px;
+    color: #FF6900;
+}
+
+/* Кнопка корзины (как в header) */
+.overlay-cart-btn {
+    width: 40px;
+    height: 40px;
+    background: #FF6900;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    box-shadow: 0px 2px 4px -2px rgba(0, 0, 0, 0.1),
+                0px 4px 6px -1px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background 0.2s ease;
+    position: relative;
+}
+
+.overlay-cart-btn:hover {
+    background: #E55D00;
+}
+
+/* Корзина — копия из header (прямоугольник + 2 колеса) */
+.cart-icon-overlay {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    display: block;
+}
+
+.cart-body-overlay {
+    width: 16.7px;
+    height: 11.67px;
+    border: 2px solid #FFFFFF;
+    position: absolute;
+    top: 1.71px;
+    left: 1.71px;
+    border-radius: 2px;
+}
+
+.cart-wheel-overlay {
+    width: 1.67px;
+    height: 1.67px;
+    border: 2px solid #FFFFFF;
+    position: absolute;
+    border-radius: 50%;
+}
+
+.cart-wheel-1-overlay {
+    top: 16.67px;
+    left: 5.83px;
+}
+
+.cart-wheel-2-overlay {
+    top: 16.67px;
+    left: 15px;
+}

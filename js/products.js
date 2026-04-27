@@ -1,0 +1,172 @@
+// ========== PRODUCT DATA ==========
+const products = [
+       {
+        id: 1,
+        name: "Airline-Approved Pet Travel Carrier",
+        price: 54.99,
+        rating: 4.8,
+        image: "https://images.unsplash.com/photo-1545249390-6bdfa286032f?w=300&h=370&fit=crop"
+    },
+    {
+        id: 2,
+        name: "Multi-Level Cat Scratching Post",
+        price: 89.99,
+        rating: 4.9,
+        image: "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=300&h=370&fit=crop"
+    },
+    {
+        id: 3,
+        name: "Orthopedic Dog Bed Large",
+        price: 79.99,
+        rating: 4.7,
+        image: "https://images.unsplash.com/photo-1541599540903-216a46ca1dc0?w=300&h=370&fit=crop"
+    },
+    {
+        id: 4,
+        name: "Automatic Pet Feeder",
+        price: 64.99,
+        rating: 4.5,
+        image: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=300&h=370&fit=crop"
+    },
+    {
+        id: 5,
+        name: "Interactive Dog Puzzle Toy",
+        price: 29.99,
+        rating: 4.6,
+        image: "https://images.unsplash.com/photo-1576201836106-db1758fd1c97?w=300&h=370&fit=crop"
+    },
+    {
+        id: 6,
+        name: "Cozy Cat Hammock Window Seat",
+        price: 44.99,
+        rating: 4.4,
+        image: "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=300&h=370&fit=crop"
+    },
+    {
+        id: 7,
+        name: "Premium Leather Dog Leash Set",
+        price: 39.99,
+        rating: 4.7,
+        image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=300&h=370&fit=crop"
+    },
+    {
+        id: 8,
+        name: "Plush Donut Pet Bed",
+        price: 49.99,
+        rating: 4.8,
+        image: "https://images.unsplash.com/photo-1592194996308-7b43878e84a6?w=300&h=370&fit=crop"
+    },
+    {
+        id: 9,
+        name: "Ceramic Pet Food Bowl Set",
+        price: 24.99,
+        rating: 4.3,
+        image: "https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=300&h=370&fit=crop"
+    }
+];
+
+// ========== RENDER STARS ==========
+function renderStars(rating) {
+    let starsHTML = '';
+    for (let i = 1; i <= 5; i++) {
+        const filled = i <= Math.floor(rating);
+        const half = !filled && i - 0.5 <= rating;
+        
+        let fillColor = '#FFFFFF';
+        let strokeColor = '#D1D5DC';
+        
+        if (filled) {
+            fillColor = '#FDC700';
+            strokeColor = '#FDC700';
+        } else if (half) {
+            fillColor = `url(#halfGrad${i})`;
+            strokeColor = '#FDC700';
+        }
+        
+        starsHTML += `
+            <span class="star-icon">
+                <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    ${half ? `
+                    <defs>
+                        <linearGradient id="halfGrad${i}">
+                            <stop offset="50%" stop-color="#FDC700"/>
+                            <stop offset="50%" stop-color="#FFFFFF"/>
+                        </linearGradient>
+                    </defs>
+                    ` : ''}
+                    <path d="M6 1L7.545 4.13L11 4.635L8.5 7.07L9.09 10.5L6 8.84L2.91 10.5L3.5 7.07L1 4.635L4.455 4.13L6 1Z"
+                          fill="${fillColor}" 
+                          stroke="${strokeColor}" 
+                          stroke-width="1.17"
+                          stroke-linejoin="round"/>
+                </svg>
+            </span>
+        `;
+    }
+    return starsHTML;
+}
+
+// ========== RENDER PRODUCTS ==========
+function renderProducts() {
+    const grid = document.getElementById('productGrid');
+    
+    grid.innerHTML = products.map(product => `
+        <a href="product.html?id=${product.id}" class="product-card">
+            
+            <!-- Оверлей (выезжает при наведении) -->
+            <div class="product-overlay">
+                <div class="product-overlay-inner">
+                    <span class="overlay-name">${product.name}</span>
+                    <div class="overlay-rating-row">
+                        <div class="overlay-stars">
+                            ${renderStars(product.rating)}
+                        </div>
+                        <span class="overlay-rating-number">${product.rating}</span>
+                    </div>
+                    <div class="overlay-bottom">
+                        <span class="overlay-price">$${product.price.toFixed(2)}</span>
+                        <button class="overlay-cart-btn" aria-label="Add to cart" onclick="event.preventDefault(); addToCart(products.find(p => p.id === ${product.id}))">
+                            <span class="cart-icon-overlay">
+                                <span class="cart-body-overlay"></span>
+                                <span class="cart-wheel-overlay cart-wheel-1-overlay"></span>
+                                <span class="cart-wheel-overlay cart-wheel-2-overlay"></span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Картинка -->
+            <div class="product-image-wrap">
+                <img src="${product.image}" alt="${product.name}" loading="lazy">
+                <span class="product-price-badge">$${product.price.toFixed(2)}</span>
+            </div>
+            
+            <!-- Нижний блок -->
+            <div class="product-info">
+                <h3 class="product-name">${product.name}</h3>
+                <div class="product-rating-row">
+                    <div class="product-stars">
+                        ${renderStars(product.rating)}
+                    </div>
+                    <span class="product-rating-number">${product.rating}</span>
+                </div>
+            </div>
+            
+        </a>
+    `).join('');
+}
+
+// ========== UPDATE PRODUCT COUNT ==========
+function updateProductCount() {
+    const countEl = document.querySelector('.product-count');
+    if (countEl) {
+        countEl.textContent = `${products.length} products`;
+    }
+}
+
+// ========== INIT ==========
+document.addEventListener('DOMContentLoaded', () => {
+    renderProducts();
+    updateProductCount();
+});

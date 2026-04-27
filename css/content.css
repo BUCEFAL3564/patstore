@@ -95,7 +95,11 @@
     opacity: 0.5;
 }
 
-
+.overlay-cart-icon {
+    width: 20px;
+    height: 20px;
+    filter: brightness(0) invert(1);
+}
 
 .sort-menu {
     position: absolute;

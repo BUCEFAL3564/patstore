@@ -5,12 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PawsStore — Premium Pet Supplies</title>
     
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Stylesheets -->
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/hero.css">
@@ -26,12 +24,7 @@
         <div class="header-inner">
             <a href="#" class="logo-link">
                 <div class="logo-icon-container">
-                    <div class="logo-icon">
-                        <span class="paw paw-1"></span>
-                        <span class="paw paw-2"></span>
-                        <span class="paw paw-3"></span>
-                        <span class="paw paw-4"></span>
-                    </div>
+                    <img src="assets/icons/paw.svg" alt="PawsStore" class="logo-paw-icon">
                 </div>
                 <span class="logo-text">PawsStore</span>
             </a>
@@ -45,18 +38,10 @@
 
             <div class="nav-icons">
                 <button class="icon-btn" aria-label="Search">
-                    <span class="icon-search">
-                        <span class="search-circle"></span>
-                        <span class="search-handle"></span>
-                    </span>
+                    <img src="assets/icons/search.svg" alt="Search" class="icon-svg">
                 </button>
                 <a href="#" class="icon-btn cart-btn-wrapper" aria-label="Cart">
-                    <span class="icon-btn-inner">
-                        <span class="cart-vector1"></span>
-                        <span class="cart-vector2"></span>
-                        <span class="cart-vector3"></span>
-                    </span>
-                    <!-- Бейдж с количеством товаров -->
+                    <img src="assets/icons/basket.svg" alt="Cart" class="icon-svg">
                     <span id="cartBadge" class="cart-badge" style="display: none;">0</span>
                 </a>
             </div>
@@ -79,14 +64,13 @@
     <main class="page-wrapper">
         <div class="content-container">
             
-            <!-- Sidebar -->
             <aside class="sidebar">
                 <div class="filters-card">
                     <h2 class="filters-title">Filters</h2>
                     
                     <div class="filter-section">
                         <h3 class="filter-heading">Rating</h3>
-                                                <div class="checkbox-group">
+                        <div class="checkbox-group">
                             <label class="checkbox-row">
                                 <input type="checkbox" class="checkbox-input" value="5">
                                 <span class="checkbox-box"></span>
@@ -128,10 +112,8 @@
                 </div>
             </aside>
 
-            <!-- Product Area -->
             <div class="main-content">
-                <!-- Top Bar -->
-                                <div class="top-bar">
+                <div class="top-bar">
                     <span class="product-count">9 products</span>
                     <div class="sort-group">
                         <span class="sort-label">Sort by:</span>
@@ -150,10 +132,7 @@
                     </div>
                 </div>
 
-                <!-- Product Grid -->
-                <div class="product-grid" id="productGrid">
-                    <!-- Карточки генерируются через JS -->
-                </div>
+                <div class="product-grid" id="productGrid"></div>
             </div>
         </div>
     </main>
@@ -162,23 +141,16 @@
     <footer class="footer">
         <div class="footer-top">
             
-            <!-- Column 1: Brand -->
             <div class="footer-col">
                 <a href="#" class="footer-logo">
                     <div class="footer-logo-icon">
-                        <div class="footer-paw">
-                            <span class="fp fp-1"></span>
-                            <span class="fp fp-2"></span>
-                            <span class="fp fp-3"></span>
-                            <span class="fp fp-4"></span>
-                        </div>
+                        <img src="assets/icons/paw.svg" alt="PawsStore" class="footer-paw-icon">
                     </div>
                     <span class="footer-logo-text">PawsStore</span>
                 </a>
                 <p class="footer-desc">Your trusted source for premium pet supplies and accessories.</p>
             </div>
 
-            <!-- Column 2: Quick Links -->
             <div class="footer-col">
                 <h3 class="footer-heading">Quick Links</h3>
                 <ul class="footer-list">
@@ -189,7 +161,6 @@
                 </ul>
             </div>
 
-            <!-- Column 3: Customer Service -->
             <div class="footer-col">
                 <h3 class="footer-heading">Customer Service</h3>
                 <ul class="footer-list">
@@ -200,17 +171,13 @@
                 </ul>
             </div>
 
-            <!-- Column 4: Newsletter -->
             <div class="footer-col">
                 <h3 class="footer-heading">Newsletter</h3>
                 <p class="footer-desc">Subscribe to get special offers and updates.</p>
                 <div class="footer-form">
                     <input type="email" class="footer-input" placeholder="Your email">
                     <button class="footer-btn" aria-label="Subscribe">
-                        <span class="envelope">
-                            <span class="env-body"></span>
-                            <span class="env-flap"></span>
-                        </span>
+                        <img src="assets/icons/mail.svg" alt="Subscribe" class="footer-mail-icon">
                     </button>
                 </div>
             </div>
@@ -218,23 +185,15 @@
 
         <div class="footer-bottom">
             <p class="copyright">© 2026 PawsStore. All rights reserved.</p>
-            <div class="socials">
+                       <div class="socials">
                 <a href="#" class="social-link" aria-label="Facebook">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                        <path d="M11.6667 7.5H13.3333L12.5 10H11.6667V17.5H8.33333V10H6.66667V7.5H8.33333V5.83333C8.33333 4.5 9.16667 2.5 11.6667 2.5L13.3333 2.5V5H12.0833C11.4167 5 11.6667 5.41667 11.6667 6.25V7.5Z" stroke="#99A1AF" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+                    <img src="assets/icons/facebook.svg" alt="Facebook" class="social-svg-fb">
                 </a>
                 <a href="#" class="social-link" aria-label="Twitter">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                        <path d="M17.5 2.5L13.3167 7.68333C12.9083 7.18333 12.5 6.68333 12.0833 6.18333L13.75 4.16667H10.8333L9.16667 6.18333L6.25 2.5H2.5L7.08333 8.75L2.5 17.5H6.66667L10.8333 12.3667L13.75 17.5H17.5L12.9167 11.25L17.5 2.5Z" stroke="#99A1AF" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+                    <img src="assets/icons/twitter.svg" alt="Twitter" class="social-svg-tw">
                 </a>
                 <a href="#" class="social-link" aria-label="Instagram">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                        <rect x="1.67" y="1.67" width="16.66" height="16.66" rx="4" stroke="#99A1AF" stroke-width="1.67"/>
-                        <circle cx="10" cy="10" r="3.33" stroke="#99A1AF" stroke-width="1.67"/>
-                        <circle cx="14.58" cy="5.42" r="0.83" fill="#99A1AF"/>
-                    </svg>
+                    <img src="assets/icons/instagram.svg" alt="Instagram" class="social-svg-ig">
                 </a>
             </div>
         </div>

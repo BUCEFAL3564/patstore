@@ -2,7 +2,7 @@
 .footer {
     width: 100%;
     background: #101828;
-    padding: 48px 32px;
+    padding: 48px 150px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -31,6 +31,7 @@
     height: 40px;
 }
 
+/* Footer logo */
 .footer-logo-icon {
     width: 40px;
     height: 40px;
@@ -42,22 +43,18 @@
     flex-shrink: 0;
 }
 
-.footer-paw {
+.footer-paw-icon {
     width: 24px;
     height: 24px;
-    position: relative;
+    filter: brightness(0) invert(1);
 }
 
-.fp {
-    position: absolute;
-    border: 2px solid #FFFFFF;
-    border-radius: 50%;
+/* Social icons */
+.social-svg {
+    width: 20px;
+    height: 20px;
+    display: block;
 }
-
-.fp-1 { width: 4px; height: 4px; top: 2px; left: 9px; }
-.fp-2 { width: 4px; height: 4px; top: 6px; left: 16px; }
-.fp-3 { width: 4px; height: 4px; top: 14px; left: 18px; }
-.fp-4 { width: 12px; height: 12px; top: 10px; left: 2px; }
 
 .footer-logo-text {
     font-weight: 600;
@@ -147,32 +144,9 @@
     background: #e55d00;
 }
 
-.envelope {
-    width: 16px;
-    height: 16px;
-    position: relative;
-}
 
-.env-body {
-    position: absolute;
-    width: 13.33px;
-    height: 10.67px;
-    top: 2.67px;
-    left: 1.33px;
-    border: 1.33px solid #FFFFFF;
-    border-radius: 1px;
-}
 
-.env-flap {
-    position: absolute;
-    width: 13.33px;
-    height: 4px;
-    top: 4.67px;
-    left: 1.33px;
-    border: 1.33px solid #FFFFFF;
-    border-radius: 1px;
-    clip-path: polygon(0 0, 50% 100%, 100% 0);
-}
+
 
 /* Footer Bottom */
 .footer-bottom {
@@ -199,15 +173,57 @@
     gap: 16px;
 }
 
+/* Social icons */
 .social-link {
     width: 20px;
     height: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
+    text-decoration: none;
     transition: opacity 0.2s ease;
 }
 
 .social-link:hover {
     opacity: 0.7;
+}
+
+.social-svg {
+    display: block;
+}
+
+
+.social-svg-fb {
+    width: 18x;
+    height: 18px;
+}
+
+
+.social-svg-tw {
+    width: 25px;
+    height: 25px;
+}
+
+.social-svg-ig {
+    width: 30px;
+    height: 30px;
+}
+
+.footer-mail-icon {
+    width: 20px;
+    height: 20px;
+    filter: brightness(100) invert(1);
+}
+
+.social-svg-fb,
+.social-svg-tw,
+.social-svg-ig {
+    filter: invert(69%) sepia(8%) saturate(334%) hue-rotate(179deg) brightness(92%) contrast(86%);
+}
+
+/* Соц-иконки — оранжевый при наведении */
+.social-link:hover .social-svg-fb,
+.social-link:hover .social-svg-tw,
+.social-link:hover .social-svg-ig {
+    filter: invert(45%) sepia(98%) saturate(1352%) hue-rotate(360deg) brightness(101%) contrast(101%);
 }

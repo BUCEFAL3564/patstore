@@ -1,5 +1,8 @@
 /* ========== SIDEBAR ========== */
 .sidebar {
+    position: sticky;
+    top: 100px;
+    align-self: flex-start;
     width: 256px;
     flex-shrink: 0;
 }

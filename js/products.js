@@ -125,12 +125,8 @@ function renderProducts() {
                     </div>
                     <div class="overlay-bottom">
                         <span class="overlay-price">$${product.price.toFixed(2)}</span>
-                        <button class="overlay-cart-btn" aria-label="Add to cart" onclick="event.preventDefault(); addToCart(products.find(p => p.id === ${product.id}))">
-                            <span class="cart-icon-overlay">
-                                <span class="cart-body-overlay"></span>
-                                <span class="cart-wheel-overlay cart-wheel-1-overlay"></span>
-                                <span class="cart-wheel-overlay cart-wheel-2-overlay"></span>
-                            </span>
+                            <button class="overlay-cart-btn" aria-label="Add to cart" onclick="event.preventDefault(); addToCart(products.find(p => p.id === ${product.id}))">
+                            <img src="assets/icons/basket.svg" alt="Cart" class="overlay-cart-icon">
                         </button>
                     </div>
                 </div>

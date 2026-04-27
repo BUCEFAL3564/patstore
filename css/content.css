@@ -58,6 +58,11 @@
     color: #364153;
 }
 
+/* ========== SORT DROPDOWN ========== */
+.sort-dropdown {
+    position: relative;
+}
+
 .sort-button {
     width: 192px;
     height: 36px;
@@ -73,6 +78,7 @@
     line-height: 20px;
     letter-spacing: -0.15px;
     color: #0A0A0A;
+    cursor: pointer;
     transition: background 0.2s ease;
 }
 
@@ -82,11 +88,65 @@
 
 .sort-chevron {
     width: 8px;
-    height: 4px;
-    border-left: 1.33px solid #717182;
-    border-bottom: 1.33px solid #717182;
-    transform: rotate(-45deg);
+    height: 8px;
+    border-right: 2px solid #717182;
+    border-bottom: 2px solid #717182;
+    transform: rotate(45deg);
     opacity: 0.5;
+}
+
+
+
+.sort-menu {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    width: 192px;
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    list-style: none;
+    display: none;
+    z-index: 10;
+    overflow: hidden;
+}
+
+.sort-dropdown.open .sort-menu {
+    display: block;
+}
+
+.sort-option {
+    padding: 10px 12px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.15px;
+    color: #364153;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.sort-option:hover {
+    background: #F3F3F5;
+}
+
+.sort-option.active {
+    background: #F3F3F5;
+    color: #364153;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sort-option.active::after {
+    content: '';
+    width: 6px;
+    height: 10px;
+    border-right: 2px solid #364153;
+    border-bottom: 2px solid #364153;
+    transform: rotate(45deg);
+    margin-left: 8px;
 }
 
 /* ========== PRODUCT GRID ========== */

@@ -128,14 +128,22 @@
             <!-- Product Area -->
             <div class="main-content">
                 <!-- Top Bar -->
-                <div class="top-bar">
-                    <span class="product-count">12 products</span>
+                                <div class="top-bar">
+                    <span class="product-count">9 products</span>
                     <div class="sort-group">
                         <span class="sort-label">Sort by:</span>
-                        <button class="sort-button">
-                            <span>Name (A-Z)</span>
-                            <span class="sort-chevron"></span>
-                        </button>
+                        <div class="sort-dropdown">
+                            <button class="sort-button" id="sortButton">
+                                <span id="sortButtonText">Name (A-Z)</span>
+                                <span class="sort-chevron"></span>
+                            </button>
+                            <ul class="sort-menu" id="sortMenu">
+                                <li class="sort-option active" data-sort="name-asc">Name (A-Z)</li>
+                                <li class="sort-option" data-sort="name-desc">Name (Z-A)</li>
+                                <li class="sort-option" data-sort="price-asc">Price (Low to High)</li>
+                                <li class="sort-option" data-sort="price-desc">Price (High to Low)</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
@@ -231,5 +239,6 @@
 
     <script src="js/cart.js"></script>
     <script src="js/products.js"></script>
+    <script src="js/sorting.js"></script>
 </body>
 </html>

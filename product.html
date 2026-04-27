@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PawsStore — Product</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/product.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+    <!-- ========== HEADER ========== -->
+    <header class="header">
+        <div class="header-inner">
+            <a href="index.html" class="logo-link">
+                <div class="logo-icon-container">
+                    <img src="assets/icons/paw.svg" alt="PawsStore" class="logo-paw-icon">
+                </div>
+                <span class="logo-text">PawsStore</span>
+            </a>
+
+            <nav class="nav">
+                <a href="index.html" class="nav-link">Shop</a>
+                <a href="#" class="nav-link">Categories</a>
+                <a href="#" class="nav-link">Deals</a>
+                <a href="#" class="nav-link">About</a>
+            </nav>
+
+            <div class="nav-icons">
+                <button class="icon-btn" aria-label="Search">
+                    <img src="assets/icons/search.svg" alt="Search" class="icon-svg">
+                </button>
+                <a href="#" class="icon-btn cart-btn-wrapper" aria-label="Cart">
+                    <img src="assets/icons/basket.svg" alt="Cart" class="icon-svg">
+                    <span id="cartBadge" class="cart-badge" style="display: none;">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ========== BREADCRUMBS ========== -->
+        <nav class="breadcrumbs">
+        <div class="breadcrumbs-inner">
+            <a href="index.html" class="breadcrumb-link">Home</a>
+            <img src="assets/icons/chevron.svg" alt="" class="breadcrumb-chevron">
+            <a href="#" class="breadcrumb-link" id="breadcrumbCategory">Category</a>
+            <img src="assets/icons/chevron.svg" alt="" class="breadcrumb-chevron">
+            <span class="breadcrumb-current" id="breadcrumbProduct">Product Name</span>
+        </div>
+    </nav>
+
+      <!-- ========== PRODUCT DETAIL ========== -->
+    <main class="product-page">
+        <div class="product-container">
+            
+            <!-- Элемент 1: Две колонки -->
+            <div class="product-layout">
+                
+                <!-- Элемент 3: Левая колонка (информация) -->
+                <div class="product-left">
+                    <!-- Здесь будет: картинка, название, цена, рейтинг, описание -->
+                </div>
+                
+                                <!-- Элемент 2: Правая колонка -->
+                <div class="product-right">
+                    
+                    <!-- Блок 1: Цена, рейтинг, название -->
+                    <div class="product-block-1" id="productInfo">
+                        <!-- Заполняется через JS -->
+                    </div>
+                    
+                    <!-- Блок 2: Key Highlights -->
+                    <div class="product-block-2" id="productHighlights">
+                        <!-- Заполняется через JS -->
+                    </div>
+                    
+                    <!-- Блок 3: Description -->
+                    <div class="product-block-3" id="productDescription">
+                        <!-- Заполняется через JS -->
+                    </div>
+                    
+                    <!-- Блок 4: 584×42 -->
+                    <div class="product-block-4">
+                        <!-- будет заполнено -->
+                    </div>
+                    
+                    <!-- Блок 5: Кнопка -->
+                    <button class="product-block-5">
+                        <!-- будет заполнено -->
+                    </button>
+                    
+                    <!-- Блок 6: 584×348 -->
+                    <div class="product-block-6">
+                        <!-- будет заполнено -->
+                    </div>
+                    
+                </div>
+                
+            </div>
+            
+        </div>
+    </main>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+        <div class="footer-top">
+            
+            <div class="footer-col">
+                <a href="index.html" class="footer-logo">
+                    <div class="footer-logo-icon">
+                        <img src="assets/icons/paw.svg" alt="PawsStore" class="footer-paw-icon">
+                    </div>
+                    <span class="footer-logo-text">PawsStore</span>
+                </a>
+                <p class="footer-desc">Your trusted source for premium pet supplies and accessories.</p>
+            </div>
+
+            <div class="footer-col">
+                <h3 class="footer-heading">Quick Links</h3>
+                <ul class="footer-list">
+                    <li><a href="index.html">Shop All</a></li>
+                    <li><a href="#">New Arrivals</a></li>
+                    <li><a href="#">Best Sellers</a></li>
+                    <li><a href="#">Sale Items</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3 class="footer-heading">Customer Service</h3>
+                <ul class="footer-list">
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Shipping Info</a></li>
+                    <li><a href="#">Returns Policy</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3 class="footer-heading">Newsletter</h3>
+                <p class="footer-desc">Subscribe to get special offers and updates.</p>
+                <div class="footer-form">
+                    <input type="email" class="footer-input" placeholder="Your email">
+                    <button class="footer-btn" aria-label="Subscribe">
+                        <img src="assets/icons/mail.svg" alt="Subscribe" class="footer-mail-icon">
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p class="copyright">© 2026 PawsStore. All rights reserved.</p>
+            <div class="socials">
+                <a href="#" class="social-link" aria-label="Facebook">
+                    <img src="assets/icons/facebook.svg" alt="Facebook" class="social-svg-fb">
+                </a>
+                              <a href="#" class="social-link" aria-label="Twitter">
+                    <img src="assets/icons/twitter.svg" alt="Twitter" class="social-svg-tw">
+                </a>
+                <a href="#" class="social-link" aria-label="Instagram">
+                    <img src="assets/icons/instagram.svg" alt="Instagram" class="social-svg-ig">
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/product.js"></script>
+</body>
+</html>

@@ -1,6 +1,6 @@
 const products = [
     {
-        id: 1, name: "Airline-Approved Pet Travel Carrier", price: 54.99, rating: 4.8,
+        id: 1, name: "Airline-Approved Pet Carrier", price: 54.99, rating: 4.8,
         category: "Travel & Carriers",
         highlights: ["Dimensions: 18 x 11 x 11 inches", "Material: Polyester with Mesh Panels", "Weight Limit: Up to 15 lbs"],
         description: "Soft-sided pet carrier approved for airline cabin use. Features mesh panels for ventilation, padded shoulder strap, and collapsible design for easy storage. Interior fleece pad provides comfort. Meets TSA requirements for in-cabin pet travel.",
@@ -75,7 +75,7 @@ const products = [
         image: "https://images.unsplash.com/photo-1576201836106-db1758fd1c97?w=300&h=370&fit=crop"
     },
     {
-        id: 6, name: "Cozy Cat Hammock Window Seat", price: 44.99, rating: 4.4,
+        id: 6, name: "Cozy Cat Window Seat", price: 44.99, rating: 4.4,
         category: "Beds & Furniture",
         highlights: ["Dimensions: 23 x 12 inches", "Material: Soft Fleece Fabric", "Weight Limit: Up to 30 lbs"],
         description: "Window-mounted cat hammock with sturdy suction cups. Perfect for sunbathing and bird watching.",

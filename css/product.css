@@ -246,7 +246,7 @@
     color: #364153;
 }
 
-/* Блок 4 */
+/* Блок 4 — Quantity */
 .product-block-4 {
     width: 584px;
     height: 42px;
@@ -255,7 +255,103 @@
     gap: 16px;
 }
 
-/* Блок 5 — Кнопка */
+.quantity-label {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.15px;
+    color: #364153;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    height: 42px;
+    border: 1px solid #D1D5DC;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.qty-btn {
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    margin: 5px;
+    transition: background 0.2s ease;
+    border-radius: 6px;
+}
+
+.qty-btn:hover {
+    background: #F3F4F6;
+}
+
+/* Минус (горизонтальная линия) */
+.qty-minus-icon {
+    width: 16px;
+    height: 16px;
+    position: relative;
+    display: block;
+}
+
+.qty-minus-icon::after {
+    content: '';
+    position: absolute;
+    width: 9.33px;
+    height: 0;
+    top: 8px;
+    left: 3.33px;
+    border-top: 1.33px solid #0A0A0A;
+}
+
+/* Плюс */
+.qty-plus-icon {
+    width: 16px;
+    height: 16px;
+    position: relative;
+    display: block;
+}
+
+.qty-plus-v {
+    position: absolute;
+    width: 0;
+    height: 9.33px;
+    top: 3.33px;
+    left: 8px;
+    border-left: 1.33px solid #0A0A0A;
+}
+
+.qty-plus-h {
+    position: absolute;
+    width: 9.33px;
+    height: 0;
+    top: 8px;
+    left: 3.33px;
+    border-top: 1.33px solid #0A0A0A;
+}
+
+.qty-value {
+    width: 48px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.31px;
+    color: #0A0A0A;
+    text-align: center;
+}
+
+/* Блок 5 — Кнопка Add to Cart */
 .product-block-5 {
     width: 584px;
     height: 56px;
@@ -263,6 +359,10 @@
     border: none;
     border-radius: 10px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
     transition: background 0.2s ease;
 }
 
@@ -270,10 +370,29 @@
     background: #E55D00;
 }
 
-/* Блок 6 */
+.add-to-cart-icon {
+    width: 20px;
+    height: 20px;
+    filter: brightness(0) invert(1);
+}
+
+.add-to-cart-text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.31px;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+.product-block-5:hover {
+    background: #E55D00;
+}
+
+/* Блок 6 — Technical Specifications */
 .product-block-6 {
     width: 584px;
-    height: 348px;
     background: linear-gradient(135deg, #F9FAFB 0%, #F3F4F6 100%);
     border: 1px solid #E5E7EB;
     border-radius: 14px;
@@ -281,4 +400,123 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+}
+
+/* Заголовок */
+.specs-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 534px;
+    height: 36px;
+}
+
+.specs-icon-box {
+    width: 36px;
+    height: 36px;
+    background: #FF6900;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+}
+
+.specs-icon {
+    width: 20px;
+    height: 20px;
+    filter: brightness(0) invert(1);
+}
+
+.specs-heading {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 28px;
+    letter-spacing: -0.44px;
+    color: #101828;
+}
+
+/* Сетка */
+.specs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(3, auto);
+    gap: 12px;
+    width: 534px;
+}
+
+/* Карточка спецификации */
+.spec-card {
+    width: 261px;
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    border-radius: 10px;
+    padding: 17px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    cursor: pointer;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.spec-card:hover {
+    border-color: #FF6900;
+    box-shadow: 0px 4px 12px rgba(255, 105, 0, 0.15);
+}
+
+.spec-card-icon {
+    width: 32px;
+    height: 32px;
+    background: #FFF7ED;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    flex-shrink: 0;
+    transition: background 0.2s ease;
+}
+
+.spec-card:hover .spec-card-icon {
+    background: #FF6900;
+}
+
+.spec-card-icon img {
+    width: 16px;
+    height: 16px;
+    transform: rotate(180deg);
+    transition: filter 0.2s ease;
+}
+
+.spec-card:hover .spec-card-icon img {
+    filter: brightness(0) invert(1);
+}
+
+.spec-card-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.spec-card-label {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    color: #6A7282;
+}
+.spec-card:hover {
+    color: #FF6900;
+}
+
+.spec-card-value {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.15px;
+    color: #101828;
 }

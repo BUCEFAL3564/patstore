@@ -40,6 +40,46 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p class="description-text">${product.description}</p>
             `;
         }
+                // Блок 4 — Quantity
+        let quantity = 1;
+        const qtyValue = document.getElementById('qtyValue');
+        
+        document.getElementById('qtyMinus').addEventListener('click', () => {
+            if (quantity > 1) {
+                quantity--;
+                qtyValue.textContent = quantity;
+            }
+        });
+        
+        document.getElementById('qtyPlus').addEventListener('click', () => {
+            if (quantity < 99) {
+                quantity++;
+                qtyValue.textContent = quantity;
+            }
+        });
+
+                // Блок 5 — Add to Cart
+        document.getElementById('addToCartBtn').addEventListener('click', () => {
+            for (let i = 0; i < quantity; i++) {
+                addToCart(product);
+            }
+        });
+        // Блок 6 — Technical Specifications
+        if (product.specs) {
+            const specsHTML = product.specs.map(spec => `
+                <div class="spec-card">
+                    <div class="spec-card-icon">
+                        <img src="assets/icons/exclamation-mark.svg" alt="">
+                    </div>
+                    <div class="spec-card-text">
+                        <span class="spec-card-label">${spec.label}</span>
+                        <span class="spec-card-value">${spec.value}</span>
+                    </div>
+                </div>
+            `).join('');
+            
+            document.getElementById('specsGrid').innerHTML = specsHTML;
+        }
     }
 });
 

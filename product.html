@@ -87,19 +87,45 @@
                         <!-- Заполняется через JS -->
                     </div>
                     
-                    <!-- Блок 4: 584×42 -->
+                    <!-- Блок 4: Quantity -->
                     <div class="product-block-4">
-                        <!-- будет заполнено -->
+                        <span class="quantity-label">Quantity:</span>
+                        <div class="quantity-controls">
+                            <button class="qty-btn qty-minus" id="qtyMinus">
+                                <span class="qty-minus-icon"></span>
+                            </button>
+                            <span class="qty-value" id="qtyValue">1</span>
+                            <button class="qty-btn qty-plus" id="qtyPlus">
+                                <span class="qty-plus-icon">
+                                    <span class="qty-plus-v"></span>
+                                    <span class="qty-plus-h"></span>
+                                </span>
+                            </button>
+                        </div>
                     </div>
                     
-                    <!-- Блок 5: Кнопка -->
-                    <button class="product-block-5">
-                        <!-- будет заполнено -->
+                    <!-- Блок 5: Add to Cart -->
+                    <button class="product-block-5" id="addToCartBtn">
+                        <img src="assets/icons/basket.svg" alt="" class="add-to-cart-icon">
+                        <span class="add-to-cart-text">Add to Cart</span>
                     </button>
-                    
-                    <!-- Блок 6: 584×348 -->
+
+                    <!-- Блок 6: Technical Specifications -->
                     <div class="product-block-6">
-                        <!-- будет заполнено -->
+                        
+                        <!-- Заголовок с иконкой -->
+                        <div class="specs-header">
+                            <div class="specs-icon-box">
+                                <img src="assets/icons/box.svg" alt="" class="specs-icon">
+                            </div>
+                            <h3 class="specs-heading">Technical Specifications</h3>
+                        </div>
+                        
+                        <!-- Сетка спецификаций -->
+                        <div class="specs-grid" id="specsGrid">
+                            <!-- Заполняется через JS -->
+                        </div>
+                        
                     </div>
                     
                 </div>
@@ -161,7 +187,7 @@
                 <a href="#" class="social-link" aria-label="Facebook">
                     <img src="assets/icons/facebook.svg" alt="Facebook" class="social-svg-fb">
                 </a>
-                              <a href="#" class="social-link" aria-label="Twitter">
+                <a href="#" class="social-link" aria-label="Twitter">
                     <img src="assets/icons/twitter.svg" alt="Twitter" class="social-svg-tw">
                 </a>
                 <a href="#" class="social-link" aria-label="Instagram">

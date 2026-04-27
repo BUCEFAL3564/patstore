@@ -4,14 +4,14 @@ const products = [
         id: 1,
         name: "Airline-Approved Pet Travel Carrier",
         price: 54.99,
-        rating: 4.8,
+        rating: 5,
         image: "https://images.unsplash.com/photo-1545249390-6bdfa286032f?w=300&h=370&fit=crop"
     },
     {
         id: 2,
         name: "Multi-Level Cat Scratching Post",
         price: 89.99,
-        rating: 4.9,
+        rating: 3.4,
         image: "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=300&h=370&fit=crop"
     },
     {
@@ -32,14 +32,14 @@ const products = [
         id: 5,
         name: "Interactive Dog Puzzle Toy",
         price: 29.99,
-        rating: 4.6,
+        rating: 5,
         image: "https://images.unsplash.com/photo-1576201836106-db1758fd1c97?w=300&h=370&fit=crop"
     },
     {
         id: 6,
         name: "Cozy Cat Hammock Window Seat",
         price: 44.99,
-        rating: 4.4,
+        rating: 2.6,
         image: "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=300&h=370&fit=crop"
     },
     {

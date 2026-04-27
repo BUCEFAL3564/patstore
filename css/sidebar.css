@@ -37,6 +37,7 @@
 }
 
 /* Checkboxes */
+/* Checkboxes */
 .checkbox-group {
     display: flex;
     flex-direction: column;
@@ -48,6 +49,12 @@
     align-items: center;
     gap: 8px;
     cursor: pointer;
+    user-select: none;
+}
+
+/* Скрываем нативный input */
+.checkbox-input {
+    display: none;
 }
 
 .checkbox-box {
@@ -58,6 +65,31 @@
     border-radius: 4px;
     box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
     flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+/* Галочка (скрыта по умолчанию) */
+.checkbox-box::after {
+    content: '';
+    width: 5px;
+    height: 8px;
+    border-right: 2px solid #FFFFFF;
+    border-bottom: 2px solid #FFFFFF;
+    transform: rotate(45deg);
+    display: none;
+}
+
+/* Активный чекбокс */
+.checkbox-input:checked + .checkbox-box {
+    background: #101828;
+    border-color: #101828;
+}
+
+.checkbox-input:checked + .checkbox-box::after {
+    display: block;
 }
 
 .checkbox-text {
@@ -67,7 +99,6 @@
     letter-spacing: -0.15px;
     color: #364153;
 }
-
 /* Price Range */
 .price-row {
     display: flex;

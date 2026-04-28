@@ -11,7 +11,6 @@ function renderCart() {
     if (!cart || cart.length === 0) {
         cartContent.innerHTML = '';
         
-        // Скрыть header bar
         if (headerBar) headerBar.style.display = 'none';
         
         const emptyDiv = document.createElement('div');
@@ -42,7 +41,6 @@ function renderCart() {
         return;
     }
     
-    // Показать header bar
     if (headerBar) headerBar.style.display = 'block';
     
     cartSummary.style.display = 'block';
@@ -53,8 +51,7 @@ function renderCart() {
     document.getElementById('summaryItemCount').textContent = 
         `${totalItems} ${totalItems === 1 ? 'item' : 'items'} in your bag`;
     
-    // Товары
-    cartItemsEl.innerHTML = cart.map(item => `
+               cartItemsEl.innerHTML = cart.map(item => `
         <div class="cart-item">
             <a href="product.html?id=${item.id}" class="cart-item-img">
                 <img src="${item.image}" alt="${item.name}">
@@ -77,14 +74,13 @@ function renderCart() {
                     <p class="cart-item-total">$${(item.price * item.quantity).toFixed(2)}</p>
                     <p class="cart-item-each">$${item.price.toFixed(2)} each</p>
                 </div>
-                <button class="cart-item-remove" onclick="removeItem(${item.id})" aria-label="Remove item">
-                    <img src="assets/icons/trash-basket.svg" alt="Remove" class="remove-icon">
-                </button>
             </div>
+            <button class="cart-item-remove" onclick="removeItem(${item.id})" aria-label="Remove item">
+                <img src="assets/icons/trash-basket.svg" alt="Remove" class="remove-icon">
+            </button>
         </div>
     `).join('');
     
-    // Суммы
     const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
     const tax = subtotal * 0.08;
     const shipping = subtotal >= 50 ? 0 : 5.99;
@@ -93,7 +89,6 @@ function renderCart() {
     document.getElementById('summaryTax').textContent = `$${tax.toFixed(2)}`;
     document.getElementById('summaryTotal').textContent = `$${(subtotal + tax + shipping).toFixed(2)}`;
     
-    // Qualified
     const qualifiedEl = document.getElementById('shippingQualified');
     if (subtotal >= 50) {
         qualifiedEl.textContent = '✓ Qualified!';
@@ -125,11 +120,9 @@ function removeItem(id) {
     updateCartBadge();
     renderCart();
     
-    // Toast при удалении
     showToast(`${itemName} was removed from cart`);
 }
 
-// ========== PROMO CODE ==========
 function applyPromo() {
     const input = document.querySelector('.promo-input');
     const code = input.value.trim().toUpperCase();
@@ -163,9 +156,7 @@ function applyPromo() {
         promoWrap.innerHTML = `
             <div class="promo-applied">
                 <div class="promo-applied-left">
-                    <div class="promo-check-icon">
-                        <span>✓</span>
-                    </div>
+                    <div class="promo-check-icon"><span>✓</span></div>
                     <div>
                         <p class="promo-applied-code">SAVE10</p>
                         <p class="promo-applied-text">10% discount applied</p>
@@ -173,8 +164,7 @@ function applyPromo() {
                 </div>
                 <button class="promo-remove-btn" onclick="removePromo()">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
-                        <path d="M18 6 6 18"/>
-                        <path d="m6 6 12 12"/>
+                        <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
                     </svg>
                 </button>
             </div>

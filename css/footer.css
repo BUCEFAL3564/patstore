@@ -107,7 +107,7 @@
 }
 
 .footer-input {
-    width: 271.25px;
+    width: auto;
     height: 38px;
     background: #1E2939;
     border: 1px solid #364153;
@@ -143,8 +143,6 @@
 .footer-btn:hover {
     background: #e55d00;
 }
-
-
 
 
 

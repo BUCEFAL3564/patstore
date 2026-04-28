@@ -13,6 +13,10 @@
     align-items: center;
 }
 
+.burger-btn {
+    display: none !important;
+}
+
 .header-inner {
     width: 100%;
     max-width: 1216px;
@@ -23,7 +27,7 @@
     margin: 0 auto;
 }
 
-/* Logo */
+
 .logo-link {
     display: flex;
     align-items: center;
@@ -78,7 +82,7 @@
     color: #FF6900;
 }
 
-/* Icons */
+
 .nav-icons {
     display: flex;
     align-items: center;
@@ -104,14 +108,14 @@
     background: #f3f4f6;
 }
 
-/* SVG иконки */
+
 .icon-svg {
     width: 20px;
     height: 20px;
     display: block;
 }
 
-/* Cart */
+
 .cart-btn-wrapper {
     position: relative;
 }
@@ -133,4 +137,36 @@
     justify-content: center;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
     pointer-events: none;
+}
+
+/* ========== MOBILE NAV ========== */
+.mobile-nav {
+    display: none;
+    border-top: 1px solid #E5E7EB;
+    background: #FFFFFF;
+    padding: 16px 0;
+}
+
+.mobile-nav.open {
+    display: block;
+}
+
+.mobile-nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 0 16px;
+}
+
+.mobile-nav-links a {
+    font-size: 16px;
+    font-weight: 500;
+    color: #364153;
+    text-decoration: none;
+    padding: 8px 0;
+    transition: color 0.2s;
+}
+
+.mobile-nav-links a:hover {
+    color: #FF6900;
 }

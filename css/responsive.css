@@ -1,18 +1,359 @@
-@media (max-width: 1024px) {
-    .product-grid {
-        grid-template-columns: repeat(2, 1fr);
+@media (max-width: 1023px) {
+    .nav {
+        display: none !important;
+    }
+    
+    .burger-btn {
+        display: flex !important;
+    }
+    
+    .mobile-nav {
+        display: none;
+    }
+    
+    .mobile-nav.open {
+        display: block !important;
+    }
+    
+    .header {
+        padding-right: 16px;
+        padding-left: 16px;
+        position: relative;
+        top: auto;
+        z-index: auto;
+    }
+    
+    .logo-text {
+        display: none !important;
     }
     
     .product-card {
-        width: 100%;
+        max-width: 100%;
         height: auto;
-        aspect-ratio: 291 / 364;
     }
+    
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .footer-top {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .content-container {
+        flex-direction: column;
+        gap: 16px;
+        padding: 16px;
+    }
+    
+    .sidebar {
+        display: none;
+        width: 100%;
+        position: relative;
+        top: auto;
+        margin-top: 0;
+    }
+    
+    .sidebar.open {
+        display: block;
+    }
+    
+    .main-content {
+        width: 100%;
+        gap: 16px;
+    }
+    
+    .filters-card {
+        width: 100% !important;
+    }
+    
+    .top-bar {
+        margin-bottom: 0;
+    }
+    
+    .filter-toggle-btn {
+        display: flex;
+    }
+    
+    .filters-close-btn {
+        display: flex;
+    }
+
+    .hero {
+        height: auto;
+        padding: 40px 16px;
+    }
+    
+    .hero-inner {
+        gap: 8px;
+    }
+    
+    .hero-heading {
+        height: auto;
+    }
+    
+    .hero-title {
+        font-size: 28px;
+        line-height: 34px;
+    }
+    
+    .hero-subtitle {
+        height: auto;
+    }
+    
+    .hero-subtitle p {
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+    .product-page {
+        padding: 24px 16px;
+    }
+    
+    .product-container {
+        padding: 0;
+    }
+    
+    .product-layout {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+    
+    .product-left,
+    .product-right {
+        width: 100%;
+    }
+    
+    .product-slider,
+    .slider-slide,
+    .slider-slide img {
+        width: 100%;
+    }
+    
+    .product-block-1,
+    .product-block-2,
+    .product-block-3,
+    .product-block-4,
+    .product-block-5,
+    .product-block-6 {
+        width: 100% !important;
+    }
+    
+    .specs-grid {
+        grid-template-columns: 1fr;
+        width: 100%;
+    }
+    
+    .spec-card {
+        width: 100%;
+    }
+    
+    .related-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* --- CART --- */
+    .cart-page {
+        padding: 24px 16px;
+        height: auto;
+    }
+    
+    .cart-container {
+        padding: 0;
+    }
+    
+    .cart-content {
+        flex-direction: column;
+        width: 100%;
+        gap: 24px;
+    }
+    
+    .cart-items {
+        width: 100%;
+    }
+    
+    .cart-summary {
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    .summary-card {
+        position: relative;
+        top: auto;
+    }
+    
+    .cart-header-bar {
+        padding: 0 16px;
+    }
+    
+    /* Хлебные крошки */
+    .breadcrumbs {
+        padding: 12px 16px;
+    }
+    
+ 
 }
 
-@media (max-width: 640px) {
+@media (max-width: 623px) {
     .product-grid {
         grid-template-columns: 1fr;
+    }
+
+    .footer-top {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        gap: 32px;
+    }
+    
+    .top-bar {
+        flex-direction: column;
+        height: auto;
+        padding: 16px;
+        gap: 12px;
+    }
+
+    .top-bar-left {
+        width: 100%;
+    }
+    
+    .sort-group {
+        width: 100%;
+        gap: 8px;
+        justify-content: flex-start;
+    }
+    
+    .sort-dropdown {
+        flex: 1;
+    }
+    
+    .sort-button {
+        width: 100% !important;
+    }
+    
+    .footer-input {
+        width: 100%;
+    }
+
+    .related-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .product-slider {
+        aspect-ratio: auto;
+        height: 300px;
+    }
+    
+    .slider-slide,
+    .slider-slide img {
+        height: 300px;
+    }
+    
+    /* --- CART 623 --- */
+    .cart-header-bar {
+        padding: 0 12px;
+    }
+    
+    .cart-header-inner {
+        padding: 16px 0;
+        gap: 16px;
+    }
+    
+    .cart-header-top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    
+    .cart-header-title {
+        width: 100%;
+    }
+    
+    .cart-header-heading {
+        font-size: 22px;
+        line-height: 28px;
+    }
+    
+    .cart-header-subtitle {
+        font-size: 14px;
+    }
+    
+    .cart-shipping-bar {
+        flex-direction: column;
+        height: auto;
+        padding: 12px 16px;
+        gap: 8px;
+        align-items: flex-start;
+    }
+    
+    .shipping-qualified {
+        align-self: flex-end;
+    }
+    
+        .cart-item {
+        position: relative;
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 12px;
+    }
+    
+       .cart-item-img {
+        width: 80px;
+        height: 80px;
+        flex-shrink: 0;
+        align-self: center;
+    }
+    
+    .cart-item-details {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .cart-item-info {
+        width: 100%;
+        padding-right: 40px;
+    }
+    
+     .cart-item-bottom-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        justify-content: flex-start;
+    }
+    
+        .cart-item-qty {
+        width: fit-content;
+        flex-shrink: 0;
+        margin-right: auto;
+    }
+    
+    .cart-item-price-wrap {
+        text-align: left;
+        margin-right: auto;
+    }
+    
+    .cart-item-remove {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+    }
+  
+    
+    .summary-header {
+        padding: 16px;
+    }
+    
+    .summary-header-title {
+        font-size: 20px;
+    }
+    
+    .summary-body {
+        padding: 16px;
         gap: 16px;
     }
 }

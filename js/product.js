@@ -67,20 +67,27 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         // Слайдер
-        const totalSlides = 5;
+        const totalSlides = 3;
         let currentSlide = 0;
         const track = document.getElementById('sliderTrack');
         const dots = document.getElementById('sliderDots');
         
         track.innerHTML = Array(totalSlides).fill(`<div class="slider-slide"><img src="${product.image}" alt="${product.name}"></div>`).join('');
         dots.innerHTML = Array(totalSlides).fill(0).map((_, i) => `<button class="slider-dot ${i === 0 ? 'active' : ''}" data-index="${i}"></button>`).join('');
-        
+              
         function goToSlide(index) {
             if (index < 0) index = totalSlides - 1;
             if (index >= totalSlides) index = 0;
+            
             currentSlide = index;
-            track.style.transform = `translateX(-${index * 534}px)`;
-            document.querySelectorAll('.slider-dot').forEach((dot, i) => dot.classList.toggle('active', i === index));
+            
+           
+            const slideWidth = track.querySelector('.slider-slide').offsetWidth;
+            track.style.transform = `translateX(-${index * slideWidth}px)`;
+            
+            document.querySelectorAll('.slider-dot').forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
         }
         
         document.getElementById('sliderPrev').addEventListener('click', () => goToSlide(currentSlide - 1));

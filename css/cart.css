@@ -234,7 +234,8 @@
 
 .cart-item-details {
     flex: 1;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto auto auto;
     align-items: center;
     gap: 16px;
     min-width: 0;
@@ -321,6 +322,12 @@
 .cart-item-each {
     font-size: 12px;
     color: #6A7282;
+}
+.cart-item-right {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
 }
 
 .cart-item-remove {

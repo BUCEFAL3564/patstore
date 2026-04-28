@@ -177,14 +177,14 @@ function renderStars(rating) {
     return starsHTML;
 }
 
-// ========== RENDER PRODUCTS ==========
+
 function renderProducts() {
     const grid = document.getElementById('productGrid');
     
     grid.innerHTML = products.map(product => `
         <a href="product.html?id=${product.id}" class="product-card">
             
-            <!-- Оверлей (выезжает при наведении) -->
+           
             <div class="product-overlay">
                 <div class="product-overlay-inner">
                     <span class="overlay-name">${product.name}</span>
@@ -203,13 +203,13 @@ function renderProducts() {
                 </div>
             </div>
             
-            <!-- Картинка -->
+         
             <div class="product-image-wrap">
                 <img src="${product.image}" alt="${product.name}" loading="lazy">
                 <span class="product-price-badge">$${product.price.toFixed(2)}</span>
             </div>
             
-            <!-- Нижний блок -->
+         
             <div class="product-info">
                 <h3 class="product-name">${product.name}</h3>
                 <div class="product-rating-row">

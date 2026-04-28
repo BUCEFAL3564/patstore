@@ -61,11 +61,10 @@ function applyFilters() {
         countEl.textContent = `${filteredProducts.length} products`;
     }
     
-    // Отрисовать отфильтрованные товары
+
     renderFilteredProducts(filteredProducts);
 }
 
-// ========== RENDER FILTERED PRODUCTS ==========
 function renderFilteredProducts(filteredProducts) {
     const grid = document.getElementById('productGrid');
     

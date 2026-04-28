@@ -364,7 +364,7 @@
     color: #FF6900;
 }
 
-/* Кнопка корзины (как в header) */
+
 .overlay-cart-btn {
     width: 40px;
     height: 40px;
@@ -402,20 +402,3 @@
     border-radius: 2px;
 }
 
-.cart-wheel-overlay {
-    width: 1.67px;
-    height: 1.67px;
-    border: 2px solid #FFFFFF;
-    position: absolute;
-    border-radius: 50%;
-}
-
-.cart-wheel-1-overlay {
-    top: 16.67px;
-    left: 5.83px;
-}
-
-.cart-wheel-2-overlay {
-    top: 16.67px;
-    left: 15px;
-}

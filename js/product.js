@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (e.target.classList.contains('slider-dot')) goToSlide(parseInt(e.target.dataset.index));
         });
         
-                // Related Products
+                
         const relatedProducts = products.filter(p => p.category === product.category && p.id !== product.id);
         if (relatedProducts.length > 0) {
             document.getElementById('relatedProducts').innerHTML = `

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PawsStore — Product</title>
+    <title>PawsStore — Cart</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,10 +11,9 @@
     
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/content.css">
     <link rel="stylesheet" href="css/footer.css">
-    <link rel="stylesheet" href="css/product.css">
     <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/cart.css">
 </head>
 <body>
 
@@ -45,83 +44,70 @@
                 </a>
             </div>
         </div>
-    </header>
+    </header>   
 
-    
-    <nav class="breadcrumbs">
-        <div class="breadcrumbs-inner">
-            <a href="index.html" class="breadcrumb-link">Home</a>
-            <img src="assets/icons/chevron.svg" alt="" class="breadcrumb-chevron">
-            <a href="#" class="breadcrumb-link" id="breadcrumbCategory">Category</a>
-            <img src="assets/icons/chevron.svg" alt="" class="breadcrumb-chevron">
-            <span class="breadcrumb-current" id="breadcrumbProduct">Product Name</span>
-        </div>
-    </nav>
-
-    <main class="product-page">
-        <div class="product-container">
-            
-            <div class="product-layout">
+       <!-- ========== CART HEADER BAR ========== -->
+    <div class="cart-header-bar">
+        <div class="cart-header-inner">
+     
+            <div class="cart-header-top">
                 
-                
-                <div class="product-left">
-                    <div class="product-slider">
-                        <button class="slider-arrow slider-prev" id="sliderPrev">
-                            <img src="assets/icons/chevron-right(Lerge).svg" alt="Previous" class="slider-arrow-icon slider-arrow-left-icon">
-                        </button>
-                        <button class="slider-arrow slider-next" id="sliderNext">
-                            <img src="assets/icons/chevron-right(Lerge).svg" alt="Next" class="slider-arrow-icon slider-arrow-right-icon">
-                        </button>
-                        <div class="slider-track" id="sliderTrack"></div>
-                        <div class="slider-dots" id="sliderDots"></div>
-                    </div>
+        
+                <div class="cart-header-title">
+                    <h1 class="cart-header-heading">Shopping Bag</h1>
+                    <p class="cart-header-subtitle" id="cartItemCount">1 item ready for checkout</p>
                 </div>
                 
-             <div class="product-right">
+               
+                <div class="cart-progress">
                     
-                    <div class="product-block-1" id="productInfo"></div>
-                    
-                    <div class="product-block-2" id="productHighlights"></div>
-                    
-                    <div class="product-block-3" id="productDescription"></div>
-                    
-                    <div class="product-block-4">
-                        <span class="quantity-label">Quantity:</span>
-                        <div class="quantity-controls">
-                            <button class="qty-btn qty-minus" id="qtyMinus">
-                                <span class="qty-minus-icon"></span>
-                            </button>
-                            <span class="qty-value" id="qtyValue">1</span>
-                            <button class="qty-btn qty-plus" id="qtyPlus">
-                                <span class="qty-plus-icon">
-                                    <span class="qty-plus-v"></span>
-                                    <span class="qty-plus-h"></span>
-                                </span>
-                            </button>
-                        </div>
+                    <!-- Шаг 1: Cart (активный) -->
+                    <div class="progress-step active">
+                        <span class="progress-num">1</span>
+                        <span class="progress-label">Cart</span>
                     </div>
                     
-                    <button class="product-block-5" id="addToCartBtn">
-                        <img src="assets/icons/basket.svg" alt="" class="add-to-cart-icon">
-                        <span class="add-to-cart-text">Add to Cart</span>
-                    </button>
-
-                    <div class="product-block-6">
-                        <div class="specs-header">
-                            <div class="specs-icon-box">
-                                <img src="assets/icons/box.svg" alt="" class="specs-icon">
-                            </div>
-                            <h3 class="specs-heading">Technical Specifications</h3>
-                        </div>
-                        <div class="specs-grid" id="specsGrid"></div>
+                    <img src="assets/icons/chevron.svg" alt="" class="progress-chevron">
+                    
+                    <!-- Шаг 2: Checkout -->
+                    <div class="progress-step">
+                        <span class="progress-num">2</span>
+                        <span class="progress-label">Checkout</span>
+                    </div>
+                    
+                    <img src="assets/icons/chevron.svg" alt="" class="progress-chevron">
+                    
+                    <!-- Шаг 3: Complete -->
+                    <div class="progress-step">
+                        <span class="progress-num">3</span>
+                        <span class="progress-label">Complete</span>
                     </div>
                     
                 </div>
                 
             </div>
             
-            <!-- Related Products (под layout, в main) -->
-            <div class="related-products" id="relatedProducts"></div>
+            <!-- Нижняя строка: Бесплатная доставка -->
+            <div class="cart-shipping-bar">
+                <div class="shipping-info">
+                    <span class="shipping-icon">
+                             <img src="assets/icons/mark.svg" alt="" class="shipping-mark">
+                        </span>
+                    <span class="shipping-text">Free shipping on orders over <strong>$50</strong></span>
+                </div>
+                <span class="shipping-qualified" id="shippingQualified">✓ Qualified!</span>
+            </div>
+            
+        </div>
+    </div>
+
+       <!-- ========== CART CONTENT ========== -->
+    <main class="cart-page">
+        <div class="cart-container">
+ 
+            <div class="cart-content" id="cartContent">
+               
+            </div>
             
         </div>
     </main>
@@ -170,21 +156,19 @@
         <div class="footer-bottom">
             <p class="copyright">© 2026 PawsStore. All rights reserved.</p>
             <div class="socials">
-                <a href="#" class="social-link" aria-label="Facebook">
+                <a href="#" class="social-link">
                     <img src="assets/icons/facebook.svg" alt="Facebook" class="social-svg-fb">
                 </a>
-                <a href="#" class="social-link" aria-label="Twitter">
+                <a href="#" class="social-link">
                     <img src="assets/icons/twitter.svg" alt="Twitter" class="social-svg-tw">
                 </a>
-                <a href="#" class="social-link" aria-label="Instagram">
+                <a href="#" class="social-link">
                     <img src="assets/icons/instagram.svg" alt="Instagram" class="social-svg-ig">
                 </a>
             </div>
         </div>
     </footer>
 
-    <script src="js/products.js"></script>
     <script src="js/cart.js"></script>
-    <script src="js/product.js"></script>
 </body>
 </html>

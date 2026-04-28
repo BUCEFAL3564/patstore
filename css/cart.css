@@ -1,0 +1,186 @@
+/* ========== CART HEADER BAR ========== */
+.cart-header-bar {
+    width: 100%;
+    background: #FFFFFF;
+    box-shadow: 0px 1px 2px -1px rgba(0, 0, 0, 0.1),
+                0px 1px 3px 0px rgba(0, 0, 0, 0.1);
+    padding: 0 94.5px;
+}
+
+.cart-header-inner {
+    width: 100%;
+    max-width: 1216px;
+    margin: 0 auto;
+    padding: 32px 0 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* Верхняя строка */
+.cart-header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Заголовок */
+.cart-header-title {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.cart-header-heading {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 40px;
+    letter-spacing: 0.37px;
+    background: linear-gradient(90deg, #FF6900 0%, #F6339A 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.cart-header-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.31px;
+    color: #4A5565;
+}
+
+/* Прогресс-бар */
+.cart-progress {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.progress-step {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.5;
+}
+
+.progress-step.active {
+    opacity: 1;
+}
+
+.progress-num {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #D1D5DC;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.15px;
+    color: #6A7282;
+}
+
+.progress-step.active .progress-num {
+    background: #FF6900;
+    color: #FFFFFF;
+    font-weight: 600;
+}
+
+.progress-label {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.15px;
+    color: #6A7282;
+}
+
+.progress-step.active .progress-label {
+    color: #101828;
+    font-weight: 500;
+}
+
+.progress-chevron {
+    width: 16px;
+    height: 16px;
+    opacity: 0.5;
+}
+
+/* Нижняя строка */
+.cart-shipping-bar {
+    width: 100%;
+    height: 54px;
+    background: linear-gradient(90deg, #FFF7ED 0%, #FDF2F8 100%);
+    border: 1px solid #FFEDD4;
+    border-radius: 14px;
+    padding: 0 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.shipping-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.shipping-icon {
+    color: #FF6900;
+    font-weight: 700;
+}
+
+.shipping-text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.15px;
+    color: #364153;
+}
+
+.shipping-text strong {
+    font-weight: 600;
+}
+
+.shipping-qualified {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.15px;
+    color: #00A63E;
+}
+
+.shipping-mark {
+    width: 16px;
+    height: 16px;
+}
+
+/* ========== CART CONTENT ========== */
+.cart-page {
+    width: 100%;
+    background: #F9FAFB;
+    display: flex;
+    justify-content: center;
+    padding: 32px 0 32px;
+}
+
+.cart-container {
+    width: 100%;
+    max-width: 1216px;
+    padding: 32px;
+}
+
+.cart-content {
+    width: 1216px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}

@@ -5,8 +5,8 @@
     z-index: 100;
     width: 100%;
     height: 81px;
-    background: #FFFFFF;
-    border-bottom: 1px solid #E5E7EB;
+    background: #1E293B;
+    border-bottom: 1px solid #334155;
     padding-right: 126.5px;
     padding-left: 126.5px;
     display: flex;
@@ -27,7 +27,7 @@
     margin: 0 auto;
 }
 
-
+/* Logo */
 .logo-link {
     display: flex;
     align-items: center;
@@ -38,7 +38,7 @@
 .logo-icon-container {
     width: 40px;
     height: 40px;
-    background: #FF6900;
+    background: #F59E0B;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -57,7 +57,7 @@
     font-size: 20px;
     line-height: 28px;
     letter-spacing: -0.45px;
-    color: #101828;
+    color: #F1F5F9;
 }
 
 /* Navigation */
@@ -73,16 +73,16 @@
     font-size: 16px;
     line-height: 24px;
     letter-spacing: -0.31px;
-    color: #364153;
+    color: #94A3B8;
     white-space: nowrap;
     transition: color 0.2s ease;
 }
 
 .nav-link:hover {
-    color: #FF6900;
+    color: #F59E0B;
 }
 
-
+/* Icons */
 .nav-icons {
     display: flex;
     align-items: center;
@@ -105,17 +105,18 @@
 }
 
 .icon-btn:hover {
-    background: #f3f4f6;
+    background: #334155;
 }
 
-
+/* SVG иконки */
 .icon-svg {
     width: 20px;
     height: 20px;
     display: block;
+    filter: brightness(0) invert(1);
 }
 
-
+/* Cart */
 .cart-btn-wrapper {
     position: relative;
 }
@@ -126,8 +127,8 @@
     right: -4px;
     width: 20px;
     height: 20px;
-    background: #FF6900;
-    color: #FFFFFF;
+    background: #F59E0B;
+    color: #0F172A;
     font-size: 12px;
     font-weight: 700;
     line-height: 1;
@@ -135,15 +136,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
     pointer-events: none;
 }
 
 /* ========== MOBILE NAV ========== */
 .mobile-nav {
     display: none;
-    border-top: 1px solid #E5E7EB;
-    background: #FFFFFF;
+    border-top: 1px solid #334155;
+    background: #1E293B;
     padding: 16px 0;
 }
 
@@ -161,12 +162,12 @@
 .mobile-nav-links a {
     font-size: 16px;
     font-weight: 500;
-    color: #364153;
+    color: #94A3B8;
     text-decoration: none;
     padding: 8px 0;
     transition: color 0.2s;
 }
 
 .mobile-nav-links a:hover {
-    color: #FF6900;
+    color: #F59E0B;
 }

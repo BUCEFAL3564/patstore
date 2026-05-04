@@ -24,34 +24,32 @@ function renderCart() {
                     <path d="M16 10a4 4 0 0 1-8 0"/>
                 </svg>
             </div>
-            <h2 class="cart-empty-title">Your cart is empty</h2>
-            <p class="cart-empty-desc">Discover amazing products for your furry friends!</p>
+            <h2 class="cart-empty-title">Ваша корзина пуста</h2>
+            <p class="cart-empty-desc">Откройте для себя потрясающие игры для вашей коллекции!</p>
             <a href="index.html" class="cart-empty-btn">
-                Start Shopping
+                Начать покупки
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="m9 18 6-6-6-6"/>
                 </svg>
             </a>
         `;
-        
         cartContent.appendChild(emptyDiv);
         cartSummary.style.display = 'none';
-        document.getElementById('cartItemCount').textContent = '0 items';
+        document.getElementById('cartItemCount').textContent = '0 товаров';
         document.getElementById('shippingQualified').style.display = 'none';
         return;
     }
     
     if (headerBar) headerBar.style.display = 'block';
-    
     cartSummary.style.display = 'block';
     
     const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
     document.getElementById('cartItemCount').textContent = 
-        `${totalItems} ${totalItems === 1 ? 'item' : 'items'} ready for checkout`;
+        `${totalItems} ${totalItems === 1 ? 'товар' : 'товаров'} к оформлению`;
     document.getElementById('summaryItemCount').textContent = 
-        `${totalItems} ${totalItems === 1 ? 'item' : 'items'} in your bag`;
+        `${totalItems} ${totalItems === 1 ? 'товар' : 'товаров'} в корзине`;
     
-               cartItemsEl.innerHTML = cart.map(item => `
+    cartItemsEl.innerHTML = cart.map(item => `
         <div class="cart-item">
             <a href="product.html?id=${item.id}" class="cart-item-img">
                 <img src="${item.image}" alt="${item.name}">
@@ -59,7 +57,7 @@ function renderCart() {
             <div class="cart-item-details">
                 <div class="cart-item-info">
                     <a href="product.html?id=${item.id}" class="cart-item-name">${item.name}</a>
-                    <p class="cart-item-category">${item.category || 'Pet Supplies'}</p>
+                    <p class="cart-item-category">${item.category || 'Игры'}</p>
                 </div>
                 <div class="cart-item-qty">
                     <button class="qty-btn" onclick="updateQty(${item.id}, -1)" ${item.quantity <= 1 ? 'disabled' : ''}>
@@ -72,11 +70,11 @@ function renderCart() {
                 </div>
                 <div class="cart-item-price-wrap">
                     <p class="cart-item-total">$${(item.price * item.quantity).toFixed(2)}</p>
-                    <p class="cart-item-each">$${item.price.toFixed(2)} each</p>
+                    <p class="cart-item-each">$${item.price.toFixed(2)} за шт.</p>
                 </div>
             </div>
-            <button class="cart-item-remove" onclick="removeItem(${item.id})" aria-label="Remove item">
-                <img src="assets/icons/trash-basket.svg" alt="Remove" class="remove-icon">
+            <button class="cart-item-remove" onclick="removeItem(${item.id})" aria-label="Удалить">
+                <img src="assets/icons/trash-basket.svg" alt="Удалить" class="remove-icon">
             </button>
         </div>
     `).join('');
@@ -91,11 +89,11 @@ function renderCart() {
     
     const qualifiedEl = document.getElementById('shippingQualified');
     if (subtotal >= 50) {
-        qualifiedEl.textContent = '✓ Qualified!';
+        qualifiedEl.textContent = '✓ Выполнено!';
         qualifiedEl.style.color = '#00A63E';
     } else {
         const remaining = (50 - subtotal).toFixed(2);
-        qualifiedEl.textContent = `$${remaining} away`;
+        qualifiedEl.textContent = `Ещё $${remaining}`;
         qualifiedEl.style.color = '#FF6900';
     }
 }
@@ -113,14 +111,14 @@ function updateQty(id, change) {
 
 function removeItem(id) {
     const item = cart.find(i => i.id === id);
-    const itemName = item ? (item.name.length > 40 ? item.name.substring(0, 40) + '...' : item.name) : 'Item';
+    const itemName = item ? (item.name.length > 40 ? item.name.substring(0, 40) + '...' : item.name) : 'Товар';
     
     cart = cart.filter(i => i.id !== id);
     saveCart();
     updateCartBadge();
     renderCart();
     
-    showToast(`${itemName} was removed from cart`);
+    showToast(`${itemName} удалён из корзины`);
 }
 
 function applyPromo() {
@@ -147,7 +145,7 @@ function applyPromo() {
             discountRow.className = 'summary-row';
             discountRow.style.color = '#00A63E';
             discountRow.innerHTML = `
-                <span>Discount (10%)</span>
+                <span>Скидка (10%)</span>
                 <span>-$${discount.toFixed(2)}</span>
             `;
             rows.insertBefore(discountRow, rows.lastElementChild);
@@ -159,7 +157,7 @@ function applyPromo() {
                     <div class="promo-check-icon"><span>✓</span></div>
                     <div>
                         <p class="promo-applied-code">SAVE10</p>
-                        <p class="promo-applied-text">10% discount applied</p>
+                        <p class="promo-applied-text">Скидка 10% применена</p>
                     </div>
                 </div>
                 <button class="promo-remove-btn" onclick="removePromo()">
@@ -178,8 +176,8 @@ function applyPromo() {
 function removePromo() {
     const promoWrap = document.querySelector('.promo-input-wrap');
     promoWrap.innerHTML = `
-        <input type="text" placeholder="Enter code" class="promo-input">
-        <button class="promo-apply-btn" onclick="applyPromo()">Apply</button>
+        <input type="text" placeholder="Введите код" class="promo-input">
+        <button class="promo-apply-btn" onclick="applyPromo()">Применить</button>
     `;
     
     const discountRow = document.getElementById('discountRow');

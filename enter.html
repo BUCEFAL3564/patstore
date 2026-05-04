@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KeyHub — Товар</title>
+    <title>KeyHub — Вход</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,9 +11,8 @@
     
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/content.css">
     <link rel="stylesheet" href="css/footer.css">
-    <link rel="stylesheet" href="css/product.css">
+    <link rel="stylesheet" href="css/auth.css">
     <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
@@ -52,54 +51,28 @@
         </nav>
     </div>
 
-    <nav class="breadcrumbs">
-        <div class="breadcrumbs-inner">
-            <a href="index.html" class="breadcrumb-link">Главная</a>
-            <img src="assets/icons/chevron.svg" alt="" class="breadcrumb-chevron">
-            <a href="#" class="breadcrumb-link" id="breadcrumbCategory">Категория</a>
-            <img src="assets/icons/chevron.svg" alt="" class="breadcrumb-chevron">
-            <span class="breadcrumb-current" id="breadcrumbProduct">Название игры</span>
-        </div>
-    </nav>
-
-    <main class="product-page">
-        <div class="product-container">
-            <div class="product-layout">
-                <div class="product-left">
-                    <div class="product-slider">
-                        <button class="slider-arrow slider-prev" id="sliderPrev"><img src="assets/icons/chevron-right(Lerge).svg" alt="Назад" class="slider-arrow-icon slider-arrow-left-icon"></button>
-                        <button class="slider-arrow slider-next" id="sliderNext"><img src="assets/icons/chevron-right(Lerge).svg" alt="Вперёд" class="slider-arrow-icon slider-arrow-right-icon"></button>
-                        <div class="slider-track" id="sliderTrack"></div>
-                        <div class="slider-dots" id="sliderDots"></div>
-                    </div>
+    <main class="auth-page">
+        <div class="auth-container">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <h1 class="auth-title">С возвращением</h1>
+                    <p class="auth-subtitle">Войдите в свой аккаунт KeyHub</p>
                 </div>
-                
-                <div class="product-right">
-                    <div class="product-block-1" id="productInfo"></div>
-                    <div class="product-block-2" id="productHighlights"></div>
-                    <div class="product-block-3" id="productDescription"></div>
-                    <div class="product-block-4">
-                        <span class="quantity-label">Количество:</span>
-                        <div class="quantity-controls">
-                            <button class="qty-btn qty-minus" id="qtyMinus"><span class="qty-minus-icon"></span></button>
-                            <span class="qty-value" id="qtyValue">1</span>
-                            <button class="qty-btn qty-plus" id="qtyPlus"><span class="qty-plus-icon"><span class="qty-plus-v"></span><span class="qty-plus-h"></span></span></button>
-                        </div>
+                <form class="auth-form" id="loginForm">
+                    <div class="form-group">
+                        <label class="form-label">Имя пользователя или почта</label>
+                        <input type="text" class="form-input" placeholder="Введите имя или почту" required>
                     </div>
-                    <button class="product-block-5" id="addToCartBtn">
-                        <img src="assets/icons/basket.svg" alt="" class="add-to-cart-icon">
-                        <span class="add-to-cart-text">В корзину</span>
-                    </button>
-                    <div class="product-block-6">
-                        <div class="specs-header">
-                            <div class="specs-icon-box"><img src="assets/icons/box.svg" alt="" class="specs-icon"></div>
-                            <h3 class="specs-heading">Технические характеристики</h3>
-                        </div>
-                        <div class="specs-grid" id="specsGrid"></div>
+                    <div class="form-group">
+                        <label class="form-label">Пароль</label>
+                        <input type="password" class="form-input" placeholder="Введите пароль" required>
                     </div>
-                </div>
+                    <button type="submit" class="auth-btn">Войти</button>
+                </form>
+                <p class="auth-footer">
+                    Нет аккаунта? <a href="register.html" class="auth-link">Создать</a>
+                </p>
             </div>
-            <div class="related-products" id="relatedProducts"></div>
         </div>
     </main>
 
@@ -133,11 +106,6 @@
         </div>
     </footer>
 
-    <div class="toast-container" id="toastContainer"></div>
-    
     <script src="js/mobile-nav.js"></script>
-    <script src="js/cart.js"></script>
-    <script src="js/products.js"></script>
-    <script src="js/product.js"></script>
 </body>
 </html>

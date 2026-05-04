@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PawsStore — Cart</title>
+    <title>KeyHub — Корзина</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,30 +14,29 @@
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/cart.css">
     <link rel="stylesheet" href="css/responsive.css">
-   
 </head>
 <body>
 
-    <!-- ========== HEADER ========== -->
     <header class="header">
         <div class="header-inner">
             <a href="index.html" class="logo-link">
-                <div class="logo-icon-container"><img src="assets/icons/paw.svg" alt="PawsStore" class="logo-paw-icon"></div>
-                <span class="logo-text">PawsStore</span>
+                <div class="logo-icon-container"><img src="assets/icons/game.svg" alt="KeyHub" class="logo-paw-icon"></div>
+                <span class="logo-text">KeyHub</span>
             </a>
             <nav class="nav">
-                <a href="index.html" class="nav-link">Shop</a>
-                <a href="#" class="nav-link">Categories</a>
-                <a href="#" class="nav-link">Deals</a>
-                <a href="#" class="nav-link">About</a>
+                <a href="index.html" class="nav-link">Магазин</a>
+                <a href="#" class="nav-link">Категории</a>
+                <a href="#" class="nav-link">Скидки</a>
+                <a href="#" class="nav-link">О нас</a>
             </nav>
             <div class="nav-icons">
-                <button class="icon-btn" aria-label="Search"><img src="assets/icons/search.svg" alt="Search" class="icon-svg"></button>
-                <a href="cart.html" class="icon-btn cart-btn-wrapper" aria-label="Cart">
-                    <img src="assets/icons/basket.svg" alt="Cart" class="icon-svg">
+                <a href="enter.html" class="icon-btn" aria-label="Аккаунт"><img src="assets/icons/account.svg" alt="Аккаунт" class="icon-svg"></a>
+                <button class="icon-btn" aria-label="Поиск"><img src="assets/icons/search.svg" alt="Поиск" class="icon-svg"></button>
+                <a href="cart.html" class="icon-btn cart-btn-wrapper" aria-label="Корзина">
+                    <img src="assets/icons/basket.svg" alt="Корзина" class="icon-svg">
                     <span id="cartBadge" class="cart-badge" style="display: none;">0</span>
                 </a>
-                <button class="icon-btn burger-btn" aria-label="Menu">
+                <button class="icon-btn burger-btn" aria-label="Меню">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
                         <line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/>
                     </svg>
@@ -48,7 +47,7 @@
     
     <div class="mobile-nav" id="mobileNav">
         <nav class="mobile-nav-links">
-            <a href="index.html">Shop</a><a href="#">Categories</a><a href="#">Deals</a><a href="#">About</a>
+            <a href="index.html">Магазин</a><a href="#">Категории</a><a href="#">Скидки</a><a href="#">О нас</a>
         </nav>
     </div>
 
@@ -56,23 +55,23 @@
         <div class="cart-header-inner">
             <div class="cart-header-top">
                 <div class="cart-header-title">
-                    <h1 class="cart-header-heading">Shopping Bag</h1>
-                    <p class="cart-header-subtitle" id="cartItemCount">1 item ready for checkout</p>
+                    <h1 class="cart-header-heading">Корзина</h1>
+                    <p class="cart-header-subtitle" id="cartItemCount">1 товар к оформлению</p>
                 </div>
                 <div class="cart-progress">
-                    <div class="progress-step active"><span class="progress-num">1</span><span class="progress-label">Cart</span></div>
+                    <div class="progress-step active"><span class="progress-num">1</span><span class="progress-label">Корзина</span></div>
                     <img src="assets/icons/chevron.svg" alt="" class="progress-chevron">
-                    <div class="progress-step"><span class="progress-num">2</span><span class="progress-label">Checkout</span></div>
+                    <div class="progress-step"><span class="progress-num">2</span><span class="progress-label">Оформление</span></div>
                     <img src="assets/icons/chevron.svg" alt="" class="progress-chevron">
-                    <div class="progress-step"><span class="progress-num">3</span><span class="progress-label">Complete</span></div>
+                    <div class="progress-step"><span class="progress-num">3</span><span class="progress-label">Готово</span></div>
                 </div>
             </div>
             <div class="cart-shipping-bar">
                 <div class="shipping-info">
                     <span class="shipping-icon"><img src="assets/icons/mark.svg" alt="" class="shipping-mark"></span>
-                    <span class="shipping-text">Free shipping on orders over <strong>$50</strong></span>
+                    <span class="shipping-text">Бесплатная доставка при заказе от <strong>$50</strong></span>
                 </div>
-                <span class="shipping-qualified" id="shippingQualified">✓ Qualified!</span>
+                <span class="shipping-qualified" id="shippingQualified">✓ Выполнено!</span>
             </div>
         </div>
     </div>
@@ -84,37 +83,37 @@
                 <div class="cart-summary" id="cartSummary">
                     <div class="summary-card">
                         <div class="summary-header">
-                            <h2 class="summary-header-title">Order Summary</h2>
-                            <p class="summary-header-subtitle" id="summaryItemCount">0 items in your bag</p>
+                            <h2 class="summary-header-title">Сводка заказа</h2>
+                            <p class="summary-header-subtitle" id="summaryItemCount">0 товаров в корзине</p>
                         </div>
                         <div class="summary-body">
                             <div class="promo-block">
                                 <label class="promo-label">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="promo-icon"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/></svg>
-                                    Promo Code
+                                    Промокод
                                 </label>
-                                <div class="promo-input-wrap"><input type="text" placeholder="Enter code" class="promo-input"><button class="promo-apply-btn" onclick="applyPromo()">Apply</button></div>
+                                <div class="promo-input-wrap"><input type="text" placeholder="Введите код" class="promo-input"><button class="promo-apply-btn" onclick="applyPromo()">Применить</button></div>
                             </div>
                             <div class="summary-rows">
-                                <div class="summary-row"><span>Subtotal</span><span id="summarySubtotal">$0.00</span></div>
-                                <div class="summary-row"><span>Tax (8%)</span><span id="summaryTax">$0.00</span></div>
-                                <div class="summary-total"><span>Total</span><span class="summary-total-price" id="summaryTotal">$0.00</span></div>
+                                <div class="summary-row"><span>Подытог</span><span id="summarySubtotal">$0.00</span></div>
+                                <div class="summary-row"><span>Налог (8%)</span><span id="summaryTax">$0.00</span></div>
+                                <div class="summary-total"><span>Итого</span><span class="summary-total-price" id="summaryTotal">$0.00</span></div>
                             </div>
                             <div class="delivery-blocks">
                                 <div class="delivery-block">
                                     <div class="delivery-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-                                    <div><p class="delivery-title">Delivery Time</p><p class="delivery-text">3-5 business days</p></div>
+                                    <div><p class="delivery-title">Время доставки</p><p class="delivery-text">3-5 рабочих дней</p></div>
                                 </div>
                                 <div class="delivery-block">
                                     <div class="delivery-icon purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg></div>
-                                    <div><p class="delivery-title">Shipping To</p><p class="delivery-text">123 Main Street, NY 10001</p></div>
+                                    <div><p class="delivery-title">Доставка</p><p class="delivery-text">Ключ на email мгновенно</p></div>
                                 </div>
                             </div>
                             <button class="checkout-btn">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
-                                Proceed to Checkout
+                                Оформить заказ
                             </button>
-                            <a href="index.html" class="continue-link">← Continue Shopping</a>
+                            <a href="index.html" class="continue-link">← Продолжить покупки</a>
                         </div>
                     </div>
                 </div>
@@ -122,29 +121,28 @@
         </div>
     </main>
 
-    <!-- ========== FOOTER ========== -->
     <footer class="footer">
         <div class="footer-top">
             <div class="footer-col">
-                <a href="index.html" class="footer-logo"><div class="footer-logo-icon"><img src="assets/icons/paw.svg" alt="PawsStore" class="footer-paw-icon"></div><span class="footer-logo-text">PawsStore</span></a>
-                <p class="footer-desc">Your trusted source for premium pet supplies and accessories.</p>
+                <a href="index.html" class="footer-logo"><div class="footer-logo-icon"><img src="assets/icons/game.svg" alt="KeyHub" class="footer-paw-icon"></div><span class="footer-logo-text">KeyHub</span></a>
+                <p class="footer-desc">Ваш надёжный источник игровых ключей.</p>
             </div>
             <div class="footer-col">
-                <h3 class="footer-heading">Quick Links</h3>
-                <ul class="footer-list"><li><a href="index.html">Shop All</a></li><li><a href="#">New Arrivals</a></li><li><a href="#">Best Sellers</a></li><li><a href="#">Sale Items</a></li></ul>
+                <h3 class="footer-heading">Быстрые ссылки</h3>
+                <ul class="footer-list"><li><a href="index.html">Все игры</a></li><li><a href="#">Новинки</a></li><li><a href="#">Хиты продаж</a></li><li><a href="#">Распродажа</a></li></ul>
             </div>
             <div class="footer-col">
-                <h3 class="footer-heading">Customer Service</h3>
-                <ul class="footer-list"><li><a href="#">Contact Us</a></li><li><a href="#">Shipping Info</a></li><li><a href="#">Returns Policy</a></li><li><a href="#">FAQ</a></li></ul>
+                <h3 class="footer-heading">Поддержка</h3>
+                <ul class="footer-list"><li><a href="#">Связаться с нами</a></li><li><a href="#">Часто задаваемые вопросы</a></li><li><a href="#">Политика возврата</a></li><li><a href="#">Помощь</a></li></ul>
             </div>
             <div class="footer-col">
-                <h3 class="footer-heading">Newsletter</h3>
-                <p class="footer-desc">Subscribe to get special offers and updates.</p>
-                <div class="footer-form"><input type="email" class="footer-input" placeholder="Your email"><button class="footer-btn" aria-label="Subscribe"><img src="assets/icons/mail.svg" alt="Subscribe" class="footer-mail-icon"></button></div>
+                <h3 class="footer-heading">Рассылка</h3>
+                <p class="footer-desc">Подпишитесь на эксклюзивные предложения.</p>
+                <div class="footer-form"><input type="email" class="footer-input" placeholder="Ваша почта"><button class="footer-btn" aria-label="Подписаться"><img src="assets/icons/mail.svg" alt="Подписаться" class="footer-mail-icon"></button></div>
             </div>
         </div>
         <div class="footer-bottom">
-            <p class="copyright">© 2026 PawsStore. All rights reserved.</p>
+            <p class="copyright">© 2026 KeyHub. Все права защищены.</p>
             <div class="socials">
                 <a href="#" class="social-link"><img src="assets/icons/facebook.svg" alt="Facebook" class="social-svg-fb"></a>
                 <a href="#" class="social-link"><img src="assets/icons/twitter.svg" alt="Twitter" class="social-svg-tw"></a>

@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 return;
             }
             
-            product = {
+           product = {
                 id: data.id,
                 name: data.title,
                 price: data.discount_price || data.price,
@@ -27,7 +27,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                 highlights: data.highlights || [],
                 description: data.description || '',
                 specs: data.specs || [],
-                image: data.image || `https://placehold.co/600x600/1E293B/F59E0B?text=Game`
+                image: data.image || `https://placehold.co/600x600/1E293B/F59E0B?text=Game`,
+                images: data.images || [data.image]
             };
         } catch (err) {
             console.error(err);
@@ -94,13 +95,19 @@ function renderProduct(product) {
         `).join('');
     }
     
-    const totalSlides = 3;
+       const images = product.images || [product.image];
+    const totalSlides = images.length;
     let currentSlide = 0;
     const track = document.getElementById('sliderTrack');
     const dots = document.getElementById('sliderDots');
-    
-    track.innerHTML = Array(totalSlides).fill(`<div class="slider-slide"><img src="${product.image}" alt="${product.name}"></div>`).join('');
-    dots.innerHTML = Array(totalSlides).fill(0).map((_, i) => `<button class="slider-dot ${i === 0 ? 'active' : ''}" data-index="${i}"></button>`).join('');
+
+    track.innerHTML = images.map(img => 
+        `<div class="slider-slide"><img src="${img}" alt="${product.name}"></div>`
+    ).join('');
+
+    dots.innerHTML = images.map((_, i) => 
+        `<button class="slider-dot ${i === 0 ? 'active' : ''}" data-index="${i}"></button>`
+    ).join('');
     
     function goToSlide(index) {
         if (index < 0) index = totalSlides - 1;

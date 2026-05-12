@@ -178,3 +178,25 @@ function removePromo() {
     if (discountRow) discountRow.remove();
     renderCart();
 }
+
+async function checkout() {
+    if (!cart || cart.length === 0) {
+        alert('Корзина пуста');
+        return;
+    }
+    
+    try {
+        const res = await fetch('api/checkout.php', { method: 'POST' });
+        const data = await res.json();
+        
+        if (data.success) {
+            alert(`Заказ ${data.order_number} оформлен!`);
+            await loadCartFromDB();
+            renderCart();
+        } else {
+            alert(data.message);
+        }
+    } catch (err) {
+        alert('Ошибка оформления заказа');
+    }
+}

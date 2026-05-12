@@ -136,14 +136,9 @@ async function checkAuth() {
     if (!accountBtn) return;
     
     if (cookies) {
-        accountBtn.innerHTML = '<img src="assets/icons/exit.svg" alt="Выход" class="icon-svg">';
-        accountBtn.href = '#';
-        accountBtn.onclick = (e) => {
-            e.preventDefault();
-            document.cookie = 'user_id=; path=/; max-age=0';
-            document.cookie = 'username=; path=/; max-age=0';
-            window.location.reload();
-        };
+        accountBtn.innerHTML = '<img src="assets/icons/account.svg" alt="Профиль" class="icon-svg">';
+        accountBtn.href = 'profile.html';
+        accountBtn.onclick = null;
     } else {
         accountBtn.innerHTML = '<img src="assets/icons/account.svg" alt="Аккаунт" class="icon-svg">';
         accountBtn.href = 'enter.html';

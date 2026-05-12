@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KeyHub — Профиль</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <style>
+        .profile-page { min-height: 80vh; padding: 40px 16px; }
+        .profile-container { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px; }
+        .profile-card { background: #1E293B; border: 1px solid #334155; border-radius: 16px; padding: 32px; }
+        .profile-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 24px; }
+        .profile-username { font-size: 28px; font-weight: 700; color: #F1F5F9; }
+        .profile-info { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+        .profile-row { display: flex; gap: 8px; font-size: 15px; color: #94A3B8; }
+        .profile-row span:first-child { color: #64748B; min-width: 80px; }
+        .orders-card { background: #1E293B; border: 1px solid #334155; border-radius: 16px; padding: 32px; }
+        .orders-title { font-size: 22px; font-weight: 700; color: #F1F5F9; margin-bottom: 20px; }
+        .order-item { display: flex; justify-content: space-between; align-items: center; padding: 16px; background: #0F172A; border-radius: 12px; margin-bottom: 8px; cursor: pointer; }
+        .order-item:hover { background: #334155; }
+        .order-number { font-weight: 600; color: #F1F5F9; }
+        .order-date { font-size: 13px; color: #64748B; }
+        .order-total { font-weight: 700; color: #F59E0B; }
+        .order-status { font-size: 13px; padding: 4px 10px; border-radius: 20px; }
+        .status-completed { background: rgba(34,197,94,0.15); color: #22C55E; }
+        .status-pending { background: rgba(245,158,11,0.15); color: #F59E0B; }
+        .btn-logout { padding: 10px 20px; background: #EF4444; color: white; border-radius: 8px; cursor: pointer; border: none; font-size: 14px; }
+        .keys-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; justify-content: center; align-items: center; }
+        .keys-modal.open { display: flex; }
+        .keys-card { background: #1E293B; border-radius: 16px; padding: 24px; max-width: 500px; width: 90%; }
+        .key-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #334155; }
+        .key-code { font-family: monospace; color: #F59E0B; font-size: 13px; }
+        .no-orders { text-align: center; color: #64748B; padding: 40px; }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="header-inner">
+            <a href="index.html" class="logo-link"><div class="logo-icon-container"><img src="assets/icons/game.svg" class="logo-paw-icon"></div><span class="logo-text">KeyHub</span></a>
+            <nav class="nav"><a href="index.html" class="nav-link">Магазин</a><a href="#" class="nav-link">Категории</a><a href="#" class="nav-link">Скидки</a><a href="#" class="nav-link">О нас</a></nav>
+            <div class="nav-icons">
+                <a href="profile.html" id="accountBtn" class="icon-btn"><img src="assets/icons/account.svg" class="icon-svg"></a>
+                <button class="icon-btn"><img src="assets/icons/search.svg" class="icon-svg"></button>
+                <a href="cart.html" class="icon-btn cart-btn-wrapper"><img src="assets/icons/basket.svg" class="icon-svg"><span id="cartBadge" class="cart-badge" style="display:none">0</span></a>
+                <button class="icon-btn burger-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg></button>
+            </div>
+        </div>
+    </header>
+
+    <div class="mobile-nav" id="mobileNav">
+        <nav class="mobile-nav-links"><a href="index.html">Магазин</a><a href="#">Категории</a><a href="#">Скидки</a><a href="#">О нас</a></nav>
+    </div>
+
+    <main class="profile-page">
+        <div class="profile-container">
+            <div class="profile-card">
+                <div class="profile-header">
+                    <div>
+                        <h1 class="profile-username" id="profileUsername">...</h1>
+                    </div>
+                    <button class="icon-btn" onclick="logout()">
+                        <img src="assets/icons/exit.svg" alt="Выход" class="icon-svg">
+                    </button>
+                </div>
+                <div class="profile-info">
+                    <div class="profile-row"><span>Email:</span> <span id="profileEmail">—</span></div>
+                    <div class="profile-row"><span>Телефон:</span> <span id="profilePhone">—</span></div>
+                    <div class="profile-row"><span>Регистрация:</span> <span id="profileDate">—</span></div>
+                </div>
+            </div>
+            <div class="orders-card">
+                <h2 class="orders-title">История заказов</h2>
+                <div id="ordersList"><div class="no-orders">Загрузка...</div></div>
+            </div>
+        </div>
+    </main>
+
+    <div class="keys-modal" id="keysModal">
+        <div class="keys-card">
+            <h3 style="color:#F1F5F9;margin-bottom:16px">Ключи заказа</h3>
+            <div id="keysList"></div>
+            <button class="btn-logout" style="width:100%;margin-top:16px;background:#334155" onclick="document.getElementById('keysModal').classList.remove('open')">Закрыть</button>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="footer-col"><a href="index.html" class="footer-logo"><div class="footer-logo-icon"><img src="assets/icons/game.svg" class="footer-paw-icon"></div><span class="footer-logo-text">KeyHub</span></a><p class="footer-desc">Ваш надёжный источник игровых ключей.</p></div>
+            <div class="footer-col"><h3 class="footer-heading">Быстрые ссылки</h3><ul class="footer-list"><li><a href="index.html">Все игры</a></li><li><a href="#">Новинки</a></li><li><a href="#">Хиты продаж</a></li><li><a href="#">Распродажа</a></li></ul></div>
+            <div class="footer-col"><h3 class="footer-heading">Поддержка</h3><ul class="footer-list"><li><a href="#">Связаться с нами</a></li><li><a href="#">Часто задаваемые вопросы</a></li><li><a href="#">Политика возврата</a></li><li><a href="#">Помощь</a></li></ul></div>
+            <div class="footer-col"><h3 class="footer-heading">Рассылка</h3><p class="footer-desc">Подпишитесь на эксклюзивные предложения.</p><div class="footer-form"><input type="email" class="footer-input" placeholder="Ваша почта"><button class="footer-btn"><img src="assets/icons/mail.svg" class="footer-mail-icon"></button></div></div>
+        </div>
+        <div class="footer-bottom"><p class="copyright">© 2026 KeyHub. Все права защищены.</p><div class="socials"><a href="#" class="social-link"><img src="assets/icons/facebook.svg" class="social-svg-fb"></a><a href="#" class="social-link"><img src="assets/icons/twitter.svg" class="social-svg-tw"></a><a href="#" class="social-link"><img src="assets/icons/instagram.svg" class="social-svg-ig"></a></div></div>
+    </footer>
+
+    <script src="js/mobile-nav.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/profile.js"></script>
+</body>
+</html>

@@ -1,4 +1,8 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+    await new Promise(resolve => setTimeout(resolve, 800));
+    if (typeof loadCartFromDB === 'function') {
+        await loadCartFromDB();
+    }
     renderCart();
 });
 
@@ -10,24 +14,19 @@ function renderCart() {
     
     if (!cart || cart.length === 0) {
         cartContent.innerHTML = '';
-        
         if (headerBar) headerBar.style.display = 'none';
         
         const emptyDiv = document.createElement('div');
         emptyDiv.className = 'cart-empty';
-        
         emptyDiv.innerHTML = `
             <div class="cart-empty-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
-                    <path d="M3 6h18"/>
-                    <path d="M16 10a4 4 0 0 1-8 0"/>
+                    <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/>
                 </svg>
             </div>
             <h2 class="cart-empty-title">Ваша корзина пуста</h2>
-            <p class="cart-empty-desc">Откройте для себя потрясающие игры для вашей коллекции!</p>
-            <a href="index.html" class="cart-empty-btn">
-                Начать покупки
+            <p class="cart-empty-desc">Откройте для себя потрясающие игры!</p>
+            <a href="index.html" class="cart-empty-btn">Начать покупки
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="m9 18 6-6-6-6"/>
                 </svg>
@@ -44,27 +43,23 @@ function renderCart() {
     cartSummary.style.display = 'block';
     
     const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-    document.getElementById('cartItemCount').textContent = 
-        `${totalItems} ${totalItems === 1 ? 'товар' : 'товаров'} к оформлению`;
-    document.getElementById('summaryItemCount').textContent = 
-        `${totalItems} ${totalItems === 1 ? 'товар' : 'товаров'} в корзине`;
+    document.getElementById('cartItemCount').textContent = `${totalItems} ${totalItems === 1 ? 'товар' : 'товаров'} к оформлению`;
+    document.getElementById('summaryItemCount').textContent = `${totalItems} ${totalItems === 1 ? 'товар' : 'товаров'} в корзине`;
     
     cartItemsEl.innerHTML = cart.map(item => `
         <div class="cart-item">
-            <a href="product.html?id=${item.id}" class="cart-item-img">
-                <img src="${item.image}" alt="${item.name}">
-            </a>
+            <a href="product.html?id=${item.id}" class="cart-item-img"><img src="${item.image}" alt="${item.name}"></a>
             <div class="cart-item-details">
                 <div class="cart-item-info">
                     <a href="product.html?id=${item.id}" class="cart-item-name">${item.name}</a>
                     <p class="cart-item-category">${item.category || 'Игры'}</p>
                 </div>
                 <div class="cart-item-qty">
-                    <button class="qty-btn" onclick="updateQty(${item.id}, -1)" ${item.quantity <= 1 ? 'disabled' : ''}>
+                    <button class="qty-btn" onclick="updateQty(${item.cart_id}, -1)" ${item.quantity <= 1 ? 'disabled' : ''}>
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/></svg>
                     </button>
                     <span class="qty-value">${item.quantity}</span>
-                    <button class="qty-btn" onclick="updateQty(${item.id}, 1)">
+                    <button class="qty-btn" onclick="updateQty(${item.cart_id}, 1)">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
                     </button>
                 </div>
@@ -73,7 +68,7 @@ function renderCart() {
                     <p class="cart-item-each">$${item.price.toFixed(2)} за шт.</p>
                 </div>
             </div>
-            <button class="cart-item-remove" onclick="removeItem(${item.id})" aria-label="Удалить">
+            <button class="cart-item-remove" onclick="removeItem(${item.cart_id})" aria-label="Удалить">
                 <img src="assets/icons/trash-basket.svg" alt="Удалить" class="remove-icon">
             </button>
         </div>
@@ -98,27 +93,37 @@ function renderCart() {
     }
 }
 
-function updateQty(id, change) {
-    const item = cart.find(i => i.id === id);
+function updateQty(cart_id, change) {
+    const item = cart.find(i => i.cart_id === cart_id);
     if (item) {
-        item.quantity += change;
-        if (item.quantity <= 0) cart = cart.filter(i => i.id !== id);
-        saveCart();
-        updateCartBadge();
-        renderCart();
+        const newQty = item.quantity + change;
+        updateCartQtyAPI(cart_id, newQty).then(() => {
+            loadCartFromDB().then(() => renderCart());
+        });
     }
 }
 
-function removeItem(id) {
-    const item = cart.find(i => i.id === id);
-    const itemName = item ? (item.name.length > 40 ? item.name.substring(0, 40) + '...' : item.name) : 'Товар';
-    
-    cart = cart.filter(i => i.id !== id);
-    saveCart();
-    updateCartBadge();
-    renderCart();
-    
-    showToast(`${itemName} удалён из корзины`);
+function removeItem(cart_id) {
+    const item = cart.find(i => i.cart_id === cart_id);
+    if (item) {
+        const itemName = item.name.length > 40 ? item.name.substring(0, 40) + '...' : item.name;
+        removeCartItemAPI(cart_id).then(() => {
+            loadCartFromDB().then(() => renderCart());
+            showToast(`${itemName} удалён из корзины`);
+        });
+    }
+}
+
+async function updateCartQtyAPI(cart_id, quantity) {
+    await fetch('api/cart.php', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ cart_id, quantity })
+    });
+}
+
+async function removeCartItemAPI(cart_id) {
+    await fetch(`api/cart.php?cart_id=${cart_id}`, { method: 'DELETE' });
 }
 
 function applyPromo() {
@@ -138,16 +143,12 @@ function applyPromo() {
         document.getElementById('summaryTotal').textContent = `$${total.toFixed(2)}`;
         
         const rows = document.querySelector('.summary-rows');
-        const existingDiscount = document.getElementById('discountRow');
-        if (!existingDiscount) {
+        if (!document.getElementById('discountRow')) {
             const discountRow = document.createElement('div');
             discountRow.id = 'discountRow';
             discountRow.className = 'summary-row';
             discountRow.style.color = '#00A63E';
-            discountRow.innerHTML = `
-                <span>Скидка (10%)</span>
-                <span>-$${discount.toFixed(2)}</span>
-            `;
+            discountRow.innerHTML = `<span>Скидка (10%)</span><span>-$${discount.toFixed(2)}</span>`;
             rows.insertBefore(discountRow, rows.lastElementChild);
         }
         
@@ -155,10 +156,7 @@ function applyPromo() {
             <div class="promo-applied">
                 <div class="promo-applied-left">
                     <div class="promo-check-icon"><span>✓</span></div>
-                    <div>
-                        <p class="promo-applied-code">SAVE10</p>
-                        <p class="promo-applied-text">Скидка 10% применена</p>
-                    </div>
+                    <div><p class="promo-applied-code">SAVE10</p><p class="promo-applied-text">Скидка 10% применена</p></div>
                 </div>
                 <button class="promo-remove-btn" onclick="removePromo()">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
@@ -175,13 +173,8 @@ function applyPromo() {
 
 function removePromo() {
     const promoWrap = document.querySelector('.promo-input-wrap');
-    promoWrap.innerHTML = `
-        <input type="text" placeholder="Введите код" class="promo-input">
-        <button class="promo-apply-btn" onclick="applyPromo()">Применить</button>
-    `;
-    
+    promoWrap.innerHTML = `<input type="text" placeholder="Введите код" class="promo-input"><button class="promo-apply-btn" onclick="applyPromo()">Применить</button>`;
     const discountRow = document.getElementById('discountRow');
     if (discountRow) discountRow.remove();
-    
     renderCart();
 }

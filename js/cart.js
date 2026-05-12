@@ -86,4 +86,73 @@ function showToast(message) {
     }, 3000);
 }
 
-document.addEventListener('DOMContentLoaded', loadCart);
+// ========== ЗАГРУЗКА КОРЗИНЫ ИЗ БД ==========
+async function loadCartFromDB() {
+    try {
+        const res = await fetch('api/cart.php');
+        const data = await res.json();
+        cart = data.map(item => ({
+            cart_id: item.cart_id,
+            id: item.id,
+            name: item.title,
+            price: item.discount_price || item.price,
+            image: item.image,
+            category: item.platform || item.category || 'Игры',
+            quantity: item.quantity
+        }));
+        updateCartBadge();
+    } catch (error) {
+        console.error('Ошибка загрузки корзины:', error);
+    }
+}
+
+// ========== ДОБАВЛЕНИЕ В БД ==========
+async function addToCartDB(product) {
+    try {
+        await fetch('api/cart.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ game_id: product.id, quantity: 1 })
+        });
+        await loadCartFromDB();
+    } catch (error) {
+        console.error('Ошибка добавления в корзину:', error);
+    }
+}
+
+// ========== ЗАМЕНА СТАРОЙ ФУНКЦИИ ==========
+const originalAddToCart = addToCart;
+addToCart = async function(product) {
+    await addToCartDB(product);
+    const itemName = product.name.length > 40 ? product.name.substring(0, 40) + '...' : product.name;
+    showToast(`Добавлено: ${itemName}`);
+};
+
+
+async function checkAuth() {
+    const cookies = document.cookie.split('; ').find(row => row.startsWith('user_id='));
+    
+    const accountBtn = document.getElementById('accountBtn');
+    if (!accountBtn) return;
+    
+    if (cookies) {
+        accountBtn.innerHTML = '<img src="assets/icons/exit.svg" alt="Выход" class="icon-svg">';
+        accountBtn.href = '#';
+        accountBtn.onclick = (e) => {
+            e.preventDefault();
+            document.cookie = 'user_id=; path=/; max-age=0';
+            document.cookie = 'username=; path=/; max-age=0';
+            window.location.reload();
+        };
+    } else {
+        accountBtn.innerHTML = '<img src="assets/icons/account.svg" alt="Аккаунт" class="icon-svg">';
+        accountBtn.href = 'enter.html';
+        accountBtn.onclick = null;
+    }
+}
+
+// ========== ИНИЦИАЛИЗАЦИЯ ==========
+document.addEventListener('DOMContentLoaded', () => {
+    loadCartFromDB();
+    checkAuth();
+});

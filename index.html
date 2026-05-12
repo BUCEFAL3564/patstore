@@ -38,7 +38,7 @@
             </nav>
 
             <div class="nav-icons">
-                <a href="enter.html" class="icon-btn" aria-label="Аккаунт">
+                <a href="enter.html" id="accountBtn" class="icon-btn" aria-label="Аккаунт">
                     <img src="assets/icons/account.svg" alt="Аккаунт" class="icon-svg">
                 </a>
                 <button class="icon-btn" aria-label="Поиск">
@@ -98,6 +98,12 @@
                             <label class="checkbox-row"><input type="checkbox" class="checkbox-input" value="3"><span class="checkbox-box"></span><span class="checkbox-text">3+ звёзд</span></label>
                         </div>
                     </div>
+                     <div class="filter-section">
+                        <h3 class="filter-heading">Платформа</h3>
+                        <div class="checkbox-group" id="platformFilters">
+                            <!-- Заполняется через JS -->
+                        </div>
+                    </div>
 
                     <div class="filter-section">
                         <h3 class="filter-heading">Цена</h3>
@@ -113,6 +119,7 @@
                             </div>
                         </div>
                     </div>
+                       
                 </div>
             </aside>
 

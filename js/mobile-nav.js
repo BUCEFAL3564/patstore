@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Бургер
+   
     const burger = document.querySelector('.burger-btn');
     const mobileNav = document.getElementById('mobileNav');
     
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
-    // Фильтры
+   
     const filterBtn = document.getElementById('filterToggleBtn');
     const closeBtn = document.getElementById('closeFiltersBtn');
     const sidebar = document.getElementById('sidebar');
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
-    // Перемещение sidebar
+    
     moveSidebar();
 });
 

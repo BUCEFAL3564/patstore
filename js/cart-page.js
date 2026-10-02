@@ -51,7 +51,7 @@ function renderCart() {
     document.getElementById('summaryItemCount').textContent = 
         `${totalItems} ${totalItems === 1 ? 'item' : 'items'} in your bag`;
     
-               cartItemsEl.innerHTML = cart.map(item => `
+        cartItemsEl.innerHTML = cart.map(item => `
         <div class="cart-item">
             <a href="product.html?id=${item.id}" class="cart-item-img">
                 <img src="${item.image}" alt="${item.name}">

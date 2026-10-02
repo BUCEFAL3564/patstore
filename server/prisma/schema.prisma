@@ -1,0 +1,79 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  customer
+  admin
+}
+
+model User {
+  id            Int      @id @default(autoincrement())
+  email         String   @unique @db.VarChar(255)
+  password_hash String   @db.VarChar(255)
+  role          Role     @default(customer)
+  created_at    DateTime @default(now())
+
+  cart Cart?
+
+  @@map("users")
+}
+
+model Product {
+  id             Int       @id @default(autoincrement())
+  title          String    @db.VarChar(255)
+  description    String    @db.Text
+  price          Decimal   @db.Decimal(10, 2)
+  rating         Decimal   @default(0) @db.Decimal(2, 1)
+  images         Json // массив URL, минимум 3
+  stock_quantity Int       @default(0)
+  created_at     DateTime  @default(now())
+  deleted_at     DateTime? // soft-delete: товар скрыт, но ссылки из корзин не ломаются
+
+  cart_items CartItem[]
+
+  @@index([price])
+  @@index([rating])
+  @@index([title])
+  @@map("products")
+}
+
+model Cart {
+  id         Int      @id @default(autoincrement())
+  user_id    Int      @unique
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  user  User       @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  items CartItem[]
+
+  @@map("carts")
+}
+
+model CartItem {
+  id         Int @id @default(autoincrement())
+  cart_id    Int
+  product_id Int
+  quantity   Int @default(1)
+
+  cart    Cart    @relation(fields: [cart_id], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [product_id], references: [id], onDelete: Restrict)
+
+  @@unique([cart_id, product_id])
+  @@index([product_id])
+  @@map("cart_items")
+}
+
+model PromoCode {
+  id                  Int     @id @default(autoincrement())
+  code                String  @unique @db.VarChar(50)
+  discount_percentage Int
+  is_active           Boolean @default(true)
+
+  @@map("promo_codes")
+}

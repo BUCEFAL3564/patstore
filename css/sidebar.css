@@ -20,17 +20,17 @@
     cursor: pointer;
     padding: 4px;
     border-radius: 50%;
-    color: #364153;
+    color: #94A3B8;
     transition: background 0.2s;
 }
 
 .filters-close-btn:hover {
-    background: #F3F4F6;
+    background: #334155;
 }
 
 .filters-card {
-    background: #FFFFFF;
-    border: 1px solid #E5E7EB;
+    background: #1E293B;
+    border: 1px solid #334155;
     border-radius: 10px;
     padding: 25px;
     display: flex;
@@ -43,7 +43,7 @@
     font-size: 18px;
     line-height: 28px;
     letter-spacing: -0.44px;
-    color: #101828;
+    color: #F1F5F9;
 }
 
 .filter-section {
@@ -57,10 +57,9 @@
     font-size: 18px;
     line-height: 27px;
     letter-spacing: -0.44px;
-    color: #101828;
+    color: #F1F5F9;
 }
 
-/* Checkboxes */
 /* Checkboxes */
 .checkbox-group {
     display: flex;
@@ -76,7 +75,6 @@
     user-select: none;
 }
 
-/* Скрываем нативный input */
 .checkbox-input {
     display: none;
 }
@@ -84,10 +82,10 @@
 .checkbox-box {
     width: 16px;
     height: 16px;
-    background: #F3F3F5;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: #334155;
+    border: 1px solid #475569;
     border-radius: 4px;
-    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.2);
     flex-shrink: 0;
     display: flex;
     align-items: center;
@@ -95,21 +93,19 @@
     transition: background 0.2s ease, border-color 0.2s ease;
 }
 
-/* Галочка (скрыта по умолчанию) */
 .checkbox-box::after {
     content: '';
     width: 5px;
     height: 8px;
-    border-right: 2px solid #FFFFFF;
-    border-bottom: 2px solid #FFFFFF;
+    border-right: 2px solid #0F172A;
+    border-bottom: 2px solid #0F172A;
     transform: rotate(45deg);
     display: none;
 }
 
-/* Активный чекбокс */
 .checkbox-input:checked + .checkbox-box {
-    background: #101828;
-    border-color: #101828;
+    background: #F59E0B;
+    border-color: #F59E0B;
 }
 
 .checkbox-input:checked + .checkbox-box::after {
@@ -121,8 +117,9 @@
     font-size: 14px;
     line-height: 20px;
     letter-spacing: -0.15px;
-    color: #364153;
+    color: #94A3B8;
 }
+
 /* Price Range */
 .price-row {
     display: flex;
@@ -141,7 +138,7 @@
     font-weight: 500;
     font-size: 12px;
     line-height: 16px;
-    color: #4A5565;
+    color: #94A3B8;
 }
 
 .price-input-wrap {
@@ -153,20 +150,20 @@
 .price-input {
     width: 87.38px;
     height: 42px;
-    border: 1px solid #D1D5DC;
+    background: #0F172A;
+    border: 1px solid #475569;
     border-radius: 10px;
     padding: 8px 12px 8px 28px;
     font-weight: 400;
     font-size: 16px;
     line-height: 24px;
     letter-spacing: -0.31px;
-    color: #0A0A0A;
-    background: #FFFFFF;
+    color: #F1F5F9;
     transition: border-color 0.2s ease;
 }
 
 .price-input:focus {
-    border-color: #FF6900;
+    border-color: #F59E0B;
 }
 
 .price-currency {
@@ -174,7 +171,7 @@
     left: 12px;
     font-weight: 400;
     font-size: 16px;
-    color: #6A7282;
+    color: #94A3B8;
     pointer-events: none;
 }
 
@@ -184,5 +181,5 @@
     height: 48px;
     font-weight: 400;
     font-size: 16px;
-    color: #99A1AF;
+    color: #94A3B8;
 }

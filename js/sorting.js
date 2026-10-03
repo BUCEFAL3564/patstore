@@ -7,19 +7,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const sortButtonText = document.getElementById('sortButtonText');
     const dropdown = document.querySelector('.sort-dropdown');
 
-    // Открыть/закрыть меню
+
     sortButton.addEventListener('click', () => {
         dropdown.classList.toggle('open');
     });
 
-    // Закрыть при клике вне меню
+
     document.addEventListener('click', (e) => {
         if (!dropdown.contains(e.target)) {
             dropdown.classList.remove('open');
         }
     });
 
-    // Выбор опции
+
     sortMenu.addEventListener('click', (e) => {
         if (e.target.classList.contains('sort-option')) {
             const value = e.target.dataset.sort;
@@ -28,14 +28,13 @@ document.addEventListener('DOMContentLoaded', () => {
             currentSort = value;
             sortButtonText.textContent = text;
 
-            // Обновить активный класс
+
             sortMenu.querySelectorAll('.sort-option').forEach(opt => opt.classList.remove('active'));
             e.target.classList.add('active');
 
-            // Закрыть меню
             dropdown.classList.remove('open');
 
-            // Применить сортировку
+
             sortProducts(value);
         }
     });

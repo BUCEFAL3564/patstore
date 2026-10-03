@@ -1,7 +1,7 @@
 /* ========== FOOTER ========== */
 .footer {
     width: 100%;
-    background: #101828;
+    background: #1E293B;
     padding: 48px 150px;
     display: flex;
     flex-direction: column;
@@ -23,7 +23,7 @@
     gap: 16px;
 }
 
-/* Column 1: Logo */
+/* Logo */
 .footer-logo {
     display: flex;
     align-items: center;
@@ -31,11 +31,10 @@
     height: 40px;
 }
 
-/* Footer logo */
 .footer-logo-icon {
     width: 40px;
     height: 40px;
-    background: #FF6900;
+    background: #F59E0B;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -49,19 +48,12 @@
     filter: brightness(0) invert(1);
 }
 
-/* Social icons */
-.social-svg {
-    width: 20px;
-    height: 20px;
-    display: block;
-}
-
 .footer-logo-text {
     font-weight: 600;
     font-size: 20px;
     line-height: 28px;
     letter-spacing: -0.45px;
-    color: #FFFFFF;
+    color: #F1F5F9;
 }
 
 .footer-desc {
@@ -69,16 +61,16 @@
     font-size: 14px;
     line-height: 20px;
     letter-spacing: -0.15px;
-    color: #99A1AF;
+    color: #94A3B8;
 }
 
-/* Columns 2-3: Headings & Lists */
+/* Заголовки колонок */
 .footer-heading {
     font-weight: 600;
     font-size: 18px;
     line-height: 27px;
     letter-spacing: -0.44px;
-    color: #FFFFFF;
+    color: #F1F5F9;
 }
 
 .footer-list {
@@ -92,15 +84,15 @@
     font-size: 14px;
     line-height: 20px;
     letter-spacing: -0.15px;
-    color: #D1D5DC;
+    color: #64748B;
     transition: color 0.2s ease;
 }
 
 .footer-list a:hover {
-    color: #FFFFFF;
+    color: #F59E0B;
 }
 
-/* Column 4: Newsletter */
+/* Форма подписки */
 .footer-form {
     display: flex;
     gap: 8px;
@@ -109,30 +101,30 @@
 .footer-input {
     width: auto;
     height: 38px;
-    background: #1E2939;
-    border: 1px solid #364153;
+    background: #0F172A;
+    border: 1px solid #334155;
     border-radius: 4px;
     padding: 8px 12px;
     font-weight: 400;
     font-size: 14px;
     line-height: 100%;
     letter-spacing: -0.15px;
-    color: #D1D5DC;
+    color: #F1F5F9;
     transition: border-color 0.2s ease;
 }
 
 .footer-input::placeholder {
-    color: rgba(209, 213, 220, 0.5);
+    color: rgba(148, 163, 184, 0.5);
 }
 
 .footer-input:focus {
-    border-color: #FF6900;
+    border-color: #F59E0B;
 }
 
 .footer-btn {
     width: 48px;
     height: 38px;
-    background: #FF6900;
+    background: #F59E0B;
     border-radius: 4px;
     display: flex;
     align-items: center;
@@ -141,16 +133,20 @@
 }
 
 .footer-btn:hover {
-    background: #e55d00;
+    background: #D97706;
 }
 
-
+.footer-mail-icon {
+    width: 20px;
+    height: 20px;
+    filter: brightness(0);
+}
 
 /* Footer Bottom */
 .footer-bottom {
     width: 100%;
     max-width: 1405px;
-    border-top: 1px solid #1E2939;
+    border-top: 1px solid #334155;
     padding-top: 32px;
     display: flex;
     justify-content: space-between;
@@ -162,7 +158,7 @@
     font-size: 14px;
     line-height: 20px;
     letter-spacing: -0.15px;
-    color: #99A1AF;
+    color: #94A3B8;
 }
 
 .socials {
@@ -190,12 +186,10 @@
     display: block;
 }
 
-
 .social-svg-fb {
-    width: 18x;
+    width: 18px;
     height: 18px;
 }
-
 
 .social-svg-tw {
     width: 25px;
@@ -207,21 +201,16 @@
     height: 30px;
 }
 
-.footer-mail-icon {
-    width: 20px;
-    height: 20px;
-    filter: brightness(100) invert(1);
-}
-
+/* Цвет иконок */
 .social-svg-fb,
 .social-svg-tw,
 .social-svg-ig {
     filter: invert(69%) sepia(8%) saturate(334%) hue-rotate(179deg) brightness(92%) contrast(86%);
 }
 
-/* Соц-иконки — оранжевый при наведении */
+/* Оранжевый при наведении */
 .social-link:hover .social-svg-fb,
 .social-link:hover .social-svg-tw,
 .social-link:hover .social-svg-ig {
-    filter: invert(45%) sepia(98%) saturate(1352%) hue-rotate(360deg) brightness(101%) contrast(101%);
+    filter: invert(55%) sepia(98%) saturate(750%) hue-rotate(360deg) brightness(101%) contrast(101%);
 }

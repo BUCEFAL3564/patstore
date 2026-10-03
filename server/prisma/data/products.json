@@ -1,0 +1,227 @@
+[
+  {
+    "title": "Cyberpunk 2077",
+    "description": "Cyberpunk 2077 — ролевая игра с открытым миром от создателей The Witcher 3: Wild Hunt. Действие происходит в Найт-Сити, мегаполисе, одержимом властью, гламуром и модификациями тела. Играйте за V, наёмника-киберпанка, и возьмитесь за оружие, которое решит судьбу города.",
+    "price": 29.99,
+    "rating": 4.5,
+    "images": [
+      "https://wallpapers.com/images/hd/cyberpunk-2077-hd-v-poster-q0o5txv6a3pqp7a9.webp",
+      "https://wallpapers.com/images/high/2560x1440-gaming-cyberpunk-2077-c6scpmaxnd7vkz3u.webp",
+      "https://wallpapers.com/images/high/cyberpunk-2077-1080p-gaming-nxgxdqn7djd7ukct.webp",
+      "https://wallpapers.com/images/high/3840x1080-4k-cyberpunk-2077-e5zkmw1cd6zktbh7.webp"
+    ],
+    "category": "Экшены",
+    "platform": "Steam",
+    "stock_quantity": 50
+  },
+  {
+    "title": "Elden Ring",
+    "description": "Elden Ring — ролевая игра в жанре тёмного фэнтези от FromSoftware и Джорджа Р. Р. Мартина. Исследуйте Междуземье — огромный мир, полный опасностей и тайн. Сражайтесь с боссами, собирайте руны и станьте Повелителем Элдена.",
+    "price": 49.99,
+    "rating": 5,
+    "images": [
+      "https://wallpapers.com/images/high/elden-ring-1080p-gaming-2hz135lvlbwj5oke.webp",
+      "https://wallpapers.com/images/high/elden-ring-ruins-q2pxae4lnu6oz2xn.webp",
+      "https://wallpapers.com/images/high/elden-ring-groveside-cave-4x6ga57wwioi3z1s.webp",
+      "https://wallpapers.com/images/high/elden-ring-night-camp-scene-zndobydari801492.webp"
+    ],
+    "category": "RPG",
+    "platform": "Steam",
+    "stock_quantity": 30
+  },
+  {
+    "title": "Starfield",
+    "description": "Starfield — первая новая вселенная за 25 лет от Bethesda Game Studios. Отправляйтесь в эпическое путешествие по звёздам. Настройте свой корабль, исследуйте более 1000 планет и раскройте величайшую тайну человечества.",
+    "price": 69.99,
+    "rating": 4,
+    "images": [
+      "https://wallpapers.com/images/high/woman-in-starfield-nosp3stc5tstwii8.webp",
+      "https://wallpapers.com/images/high/starfield-headquarter-base-antaqpfcjbb2uqqz.webp",
+      "https://wallpapers.com/images/high/market-in-starfield-bacc27u6c5df8b71.webp",
+      "https://wallpapers.com/images/high/starfield-astronauts-in-spacesuit-7qjxhp1e5xyzxl0c.webp"
+    ],
+    "category": "RPG",
+    "platform": "Steam",
+    "stock_quantity": 40
+  },
+  {
+    "title": "Red Dead Redemption 2",
+    "description": "Red Dead Redemption 2 — эпическая история о жизни и смерти в самом сердце Америки. Играйте за Артура Моргана, бандита из банды Ван дер Линде, и пройдите путь от беззакония к искуплению.",
+    "price": 19.99,
+    "rating": 5,
+    "images": [
+      "https://wallpapers.com/images/high/red-dead-redemption-2-full-hd-a242sno6kwo4mr52.webp",
+      "https://wallpapers.com/images/high/red-dead-redemption-2-4k-bonfire-gang-iupqmtbou1c9juja.webp",
+      "https://wallpapers.com/images/high/red-dead-redemption-2-4k-traveling-o69sjd4ei9gm3f6a.webp",
+      "https://wallpapers.com/images/high/rdr-oc4481uluim8nme6.webp"
+    ],
+    "category": "Экшены",
+    "platform": "Steam",
+    "stock_quantity": 25
+  },
+  {
+    "title": "Baldurs Gate 3",
+    "description": "Baldurs Gate 3 — ролевая игра от Larian Studios по вселенной Dungeons & Dragons. Соберите отряд, заводите романы, сражайтесь с иллитидами и решите судьбу Забытых Королевств в этой эпической RPG.",
+    "price": 59.99,
+    "rating": 5,
+    "images": [
+      "https://wallpapers.com/images/high/baldurs-gate3-adventurers-assemble-xbnemj0execbbjce.webp",
+      "https://wallpapers.com/images/high/baldurs-gate3-epic-battle-scene-37fgqiftb0zmvd2m.webp",
+      "https://wallpapers.com/images/high/baldurs-gate3-mysterious-foggy-graveyard-cgp4twkf5ff6ljz8.webp",
+      "https://wallpapers.com/images/high/baldurs-gate3-magic-duel-dragon-ayxdv9wemgqsiipv.webp"
+    ],
+    "category": "RPG",
+    "platform": "Steam",
+    "stock_quantity": 35
+  },
+  {
+    "title": "Forza Horizon 5",
+    "description": "Forza Horizon 5 — гоночная игра с открытым миром, действие которой происходит в Мексике. Участвуйте в гонках, исследуйте пустыни, джунгли и города за рулём сотен автомобилей.",
+    "price": 39.99,
+    "rating": 4.7,
+    "images": [
+      "https://wallpapers.com/images/high/forza-horizon-5-4k-v3ybyfru6xi6yp0i.webp",
+      "https://wallpapers.com/images/high/forza-horizon-5-4k-flopftmzetnigddb.webp",
+      "https://wallpapers.com/images/high/forza-horizon-5-4k-1w36g6z5gd7jai04.webp",
+      "https://wallpapers.com/images/high/forza-horizon-5-4k-lxjr092mji5iqamj.webp"
+    ],
+    "category": "Спортивные",
+    "platform": "Xbox",
+    "stock_quantity": 20
+  },
+  {
+    "title": "God of War Ragnarok",
+    "description": "God of War Ragnarok — продолжение эпического приключения Кратоса и Атрея. Фимбулвинтер уже наступил. Отправляйтесь во все девять миров в поисках ответов, пока силы Асгарда готовятся к Рагнарёку.",
+    "price": 49.99,
+    "rating": 4.8,
+    "images": [
+      "https://wallpapers.com/images/high/godof-war-ragnarok-leviathan-axe-4hn06yc4jliz7yjh.webp",
+      "https://wallpapers.com/images/high/godof-war-ragnarok-kratosand-atreus-meet-giant-mv8n1hr0bqzm8x8l.webp",
+      "https://wallpapers.com/images/high/kratosand-atreus-embrace-godof-war-ragnarok-erupbvjn1v119u8r.webp",
+      "https://wallpapers.com/images/high/godof-war-ragnarok-epic-battle-artwork-g76ji0udf83bqn7s.webp"
+    ],
+    "category": "Экшены",
+    "platform": "PlayStation",
+    "stock_quantity": 15
+  },
+  {
+    "title": "The Legend of Zelda: Tears of the Kingdom",
+    "description": "The Legend of Zelda: Tears of the Kingdom — продолжение Breath of the Wild. Исследуйте небеса и глубины Хайрула, создавайте удивительные устройства и раскройте тайну древней цивилизации Зонай.",
+    "price": 69.99,
+    "rating": 4.9,
+    "images": [
+      "https://wallpapers.com/images/high/the-legend-of-zelda-tears-of-the-kingdom-1920-x-1080-wallpaper-c3zga7xxu2k5btbp.webp",
+      "https://wallpapers.com/images/high/the-legend-of-zelda-tears-of-the-kingdom-1920-x-1080-wallpaper-igmb2zu6vbdkhbdp.webp",
+      "https://wallpapers.com/images/high/the-legend-of-zelda-tears-of-the-kingdom-1920-x-965-wallpaper-acplrqxvzb139xcu.webp",
+      "https://wallpapers.com/images/high/the-legend-of-zelda-tears-of-the-kingdom-1920-x-1080-wallpaper-a26wjmdvy13bg651.webp"
+    ],
+    "category": "Приключения",
+    "platform": "Nintendo",
+    "stock_quantity": 10
+  },
+  {
+    "title": "Resident Evil Village",
+    "description": "Resident Evil Village — Survival Horror от первого лица. Итан Уинтерс отправляется в загадочную деревню, чтобы спасти свою похищенную дочь. Вас ждут оборотни, вампиры и леденящие душу ужасы.",
+    "price": 19.99,
+    "rating": 4.3,
+    "images": [
+      "https://wallpapers.com/images/high/ethan-winters-facing-the-nightmares-in-resident-evil-village-su20i0rsboo9wqwg.webp",
+      "https://wallpapers.com/images/high/resident-evil-village-1920-x-1080-wallpaper-sdlglkp4t73zlwb6.webp",
+      "https://wallpapers.com/images/high/resident-evil-village-3840-x-2160-wallpaper-0tswwxcpher8ft6n.webp",
+      "https://wallpapers.com/images/high/resident-evil-village-1920-x-1080-wallpaper-sqa29dcy5n697p7e.webp"
+    ],
+    "category": "Экшены",
+    "platform": "Steam",
+    "stock_quantity": 45
+  },
+  {
+    "title": "Alan Wake 2",
+    "description": "Психологический хоррор от Remedy Entertainment. Сага Андерсон и агент ФБР Алан Уэйк расследуют ритуальные убийства в Брайт-Фоллс. Переключайтесь между реальностями и раскройте тайну Тёмной Обители.",
+    "price": 39.99,
+    "rating": 4.7,
+    "images": [
+      "https://wallpapers.com/images/high/alan-wake2-forest-encounter-g5kafljhf1as1ne9.webp",
+      "https://wallpapers.com/images/high/alan-wake2-f-b-i-agentin-mysterious-forest-jil7eydfvx5wrfn4.webp",
+      "https://wallpapers.com/images/high/alan-wake2-mysterious-street-scene-ghqmhm2kix28oium.webp",
+      "https://wallpapers.com/images/high/alan-wake2-dark-street-scene-dkv99ir54ruce4o3.webp"
+    ],
+    "category": "Хорроры",
+    "platform": "Epic Games",
+    "stock_quantity": 25
+  },
+  {
+    "title": "Fortnite",
+    "description": "Королевская битва от Epic Games. Сражайтесь с 99 игроками на огромной карте, стройте укрепления, собирайте оружие и станьте последним выжившим. Постоянные обновления и кроссоверы.",
+    "price": 0,
+    "rating": 4.5,
+    "images": [
+      "https://wallpapers.com/images/high/cool-fortnite-battle-royale-agdnagcuimlv2oj2.webp",
+      "https://wallpapers.com/images/high/cool-fortnite-skin-running-with-orange-aesthetic-guns-sa9apj0oo8tebxe0.webp",
+      "https://wallpapers.com/images/high/fortnite-battle-royale-desktop-18h1wd25rrefd1s0.webp",
+      "https://wallpapers.com/images/high/tiko-yb2gwhkwv0ypac88.webp"
+    ],
+    "category": "Шутеры",
+    "platform": "Epic Games",
+    "stock_quantity": 999
+  },
+  {
+    "title": "Assassins Creed Mirage",
+    "description": "Вернитесь к истокам серии. Багдад IX века, золотой век ислама. Играйте за Басима, хитрого уличного вора, который становится мастером-ассасином. Паркур, скрытность и захватывающая история.",
+    "price": 34.99,
+    "rating": 4.3,
+    "images": [
+      "https://wallpapers.com/images/high/assassin-s-creed-characters-1920-x-1080-wallpaper-geec257d8f5cu1uq.webp",
+      "https://wallpapers.com/images/high/assassin-s-creed-shadows-3x483a7dnj9dv6ec.webp",
+      "https://wallpapers.com/images/high/assassin-s-creed-syndicate-1332-x-850-wallpaper-nwqu16xjvaw13805.webp",
+      "https://wallpapers.com/images/high/assassin-s-creed-syndicate-1920-x-1080-wallpaper-kxyw1shcirca0yfp.webp"
+    ],
+    "category": "Экшены",
+    "platform": "Ubisoft",
+    "stock_quantity": 30
+  },
+  {
+    "title": "Far Cry 6",
+    "description": "Добро пожаловать в Яру — тропический рай, застывший во времени. Играйте за Дани Рохаса и присоединитесь к революции против диктатора Антона Кастильо. Открытый мир, оружие и хаос.",
+    "price": 19.99,
+    "rating": 4.1,
+    "images": [
+      "https://wallpapers.com/images/high/far-cry-6-promotional-artwork-w0h1yxz63prc9m5d.webp",
+      "https://wallpapers.com/images/high/far-cry-6-fire-and-fury-6olt2wk5adhy7rs4.webp",
+      "https://wallpapers.com/images/high/far-cry-6-dani-and-philly-yislswbocve04anp.webp",
+      "https://wallpapers.com/images/high/far-cry-6-swamp-in-yara-ioap7wxgwbiu0vsb.webp"
+    ],
+    "category": "Шутеры",
+    "platform": "Ubisoft",
+    "stock_quantity": 20
+  },
+  {
+    "title": "DOOM: The Dark Ages",
+    "description": "DOOM: The Dark Ages — приквел легендарной серии шутеров от id Software. Отправьтесь в средневековую войну против демонов. Новое оружие ближнего боя, щит-пила и беспощадные добивания в мрачном фэнтезийном мире.",
+    "price": 69.99,
+    "rating": 4.8,
+    "images": [
+      "https://wallpapers.com/images/high/doom-the-dark-ages-game-ujp0si88q3gqimed.webp",
+      "https://wallpapers.com/images/high/doom-dark-ages-fortress-1v4zdgyfvphbebtb.webp",
+      "https://wallpapers.com/images/high/doom-dark-ages-demon-battle-gh404oayimfype7j.webp",
+      "https://wallpapers.com/images/high/doom-dark-ages-infernal-forge-jdqama4gul72sazj.webp"
+    ],
+    "category": "Шутеры",
+    "platform": "Steam",
+    "stock_quantity": 40
+  },
+  {
+    "title": "The Last of Us Part II Remastered",
+    "description": "Продолжение легендарной игры от Naughty Dog. Элли и Эбби сталкиваются с последствиями своих действий в постапокалиптическом мире. Обновлённая графика, режим No Return и потерянные уровни.",
+    "price": 49.99,
+    "rating": 4.6,
+    "images": [
+      "https://wallpapers.com/images/high/the-last-of-us-2-wallpaper-a3a2ajsu6ruivul7.webp",
+      "https://wallpapers.com/images/high/the-last-of-us-2-wallpaper-7d0fbwpcog8u5r5j.webp",
+      "https://wallpapers.com/images/high/the-last-of-us-2-wallpaper-sn85pj515vrgk4r5.webp",
+      "https://wallpapers.com/images/high/the-last-of-us-2-wallpaper-1mx18aw1fc2ie4pj.webp"
+    ],
+    "category": "Экшены",
+    "platform": "PlayStation",
+    "stock_quantity": 30
+  }
+]

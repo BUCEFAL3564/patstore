@@ -43,19 +43,19 @@ document.addEventListener('DOMContentLoaded', () => {
 function applyFilters() {
     let filteredProducts = [...products];
     
-    // Фильтр по рейтингу
+
     if (activeRatingFilters.length > 0) {
         filteredProducts = filteredProducts.filter(product => {
             return activeRatingFilters.some(rating => product.rating >= rating);
         });
     }
     
-    // Фильтр по цене
+
     filteredProducts = filteredProducts.filter(product => {
         return product.price >= priceMin && product.price <= priceMax;
     });
     
-    // Обновить счётчик
+   
     const countEl = document.querySelector('.product-count');
     if (countEl) {
         countEl.textContent = `${filteredProducts.length} products`;

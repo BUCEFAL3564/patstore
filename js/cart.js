@@ -33,7 +33,7 @@ function addToCart(product) {
     saveCart();
     updateCartBadge();
     
-    // Toast
+    
     const itemName = product.name.length > 40 ? product.name.substring(0, 40) + '...' : product.name;
     showToast(`Added 1 ${itemName} to cart`);
 }

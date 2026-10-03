@@ -31,6 +31,8 @@ model Product {
   price          Decimal   @db.Decimal(10, 2)
   rating         Decimal   @default(0) @db.Decimal(2, 1)
   images         Json // массив URL, минимум 3
+  category       String?   @db.VarChar(100)
+  platform       String?   @db.VarChar(50)
   stock_quantity Int       @default(0)
   created_at     DateTime  @default(now())
   deleted_at     DateTime? // soft-delete: товар скрыт, но ссылки из корзин не ломаются

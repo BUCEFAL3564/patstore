@@ -40,4 +40,8 @@ async function login(req, res) {
   res.json({ token: signToken(user), user: toPublicUser(user) });
 }
 
-module.exports = { register, login };
+function me(req, res) {
+  res.json({ user: toPublicUser(req.user) });
+}
+
+module.exports = { register, login, me };

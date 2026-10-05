@@ -8,4 +8,10 @@ function signToken(user) {
   });
 }
 
-module.exports = { signToken };
+// Бросает TokenExpiredError / JsonWebTokenError, если токен просрочен или подделан.
+// Алгоритм зафиксирован, чтобы нельзя было подсунуть токен с alg: none
+function verifyToken(token) {
+  return jwt.verify(token, config.jwt.secret, { algorithms: ['HS256'] });
+}
+
+module.exports = { signToken, verifyToken };

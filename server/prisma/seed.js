@@ -1,10 +1,8 @@
 require('dotenv').config({ quiet: true });
 
-const bcrypt = require('bcryptjs');
 const prisma = require('../src/lib/prisma');
+const { hashPassword } = require('../src/lib/password');
 const products = require('./data/products.json');
-
-const SALT_ROUNDS = 10;
 
 function requireEnv(name) {
   const value = process.env[name];
@@ -12,8 +10,9 @@ function requireEnv(name) {
   return value;
 }
 
-async function seedUser(email, password, role) {
-  const password_hash = await bcrypt.hash(password, SALT_ROUNDS);
+async function seedUser(rawEmail, password, role) {
+  const email = rawEmail.trim().toLowerCase();
+  const password_hash = await hashPassword(password);
   return prisma.user.upsert({
     where: { email },
     update: { password_hash, role },

@@ -10,8 +10,30 @@ const optionalNumber = (field, { min, max }) => {
   return z.preprocess(emptyToUndefined, schema.optional());
 };
 
+const positiveInt = (field, { max, defaultValue }) =>
+  z.preprocess(
+    emptyToUndefined,
+    z.coerce
+      .number(`${field} must be a number`)
+      .int(`${field} must be an integer`)
+      .min(1, `${field} must be >= 1`)
+      .max(max, `${field} must be <= ${max}`)
+      .default(defaultValue)
+  );
+
+// Регистр не важен: ?order=DESC тоже принимается
+const optionalEnum = (field, values) =>
+  z.preprocess(
+    (value) => (typeof value === 'string' ? value.trim().toLowerCase() || undefined : value),
+    z.enum(values, `${field} must be one of: ${values.join(', ')}`).optional()
+  );
+
 const listProductsQuery = z
   .object({
+    page: positiveInt('page', { max: 100000, defaultValue: 1 }),
+    limit: positiveInt('limit', { max: 100, defaultValue: 12 }),
+    sort_by: optionalEnum('sort_by', ['price', 'title']),
+    order: optionalEnum('order', ['asc', 'desc']),
     search: z.preprocess(
       (value) => (typeof value === 'string' ? value.trim() || undefined : value),
       z.string('search must be a string').max(100, 'search is too long').optional()

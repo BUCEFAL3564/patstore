@@ -24,13 +24,32 @@ function buildProductWhere({ search, min_price, max_price, min_rating }) {
   return where;
 }
 
+// Сортировка, LIMIT/OFFSET и подсчёт тоже выполняет БД. id — второй ключ сортировки:
+// при одинаковых ценах порядок стабилен, и товары не повторяются и не теряются между страницами
 async function listProducts(req, res) {
-  const products = await prisma.product.findMany({
-    where: buildProductWhere(req.validated.query),
-    orderBy: { id: 'asc' },
-  });
+  const { page, limit, sort_by, order = 'asc', ...filters } = req.validated.query;
+  const where = buildProductWhere(filters);
 
-  res.json({ items: products.map(toPublicProduct) });
+  // count и выборка страницы в одной транзакции, чтобы meta и items не разошлись
+  const [total_items, products] = await prisma.$transaction([
+    prisma.product.count({ where }),
+    prisma.product.findMany({
+      where,
+      orderBy: sort_by ? [{ [sort_by]: order }, { id: 'asc' }] : [{ id: order }],
+      skip: (page - 1) * limit,
+      take: limit,
+    }),
+  ]);
+
+  res.json({
+    items: products.map(toPublicProduct),
+    meta: {
+      total_items,
+      total_pages: Math.ceil(total_items / limit),
+      current_page: page,
+      limit,
+    },
+  });
 }
 
 async function getProduct(req, res) {

@@ -63,4 +63,41 @@ async function getProduct(req, res) {
   res.json(toPublicProduct(product));
 }
 
-module.exports = { listProducts, getProduct };
+async function createProduct(req, res) {
+  const product = await prisma.product.create({ data: req.validated.body });
+
+  res.status(201).location(`/api/products/${product.id}`).json(toPublicProduct(product));
+}
+
+// updateMany вместо update: условие deleted_at: null проверяется тем же запросом,
+// поэтому удалённый товар нельзя изменить (и случайно «оживить»)
+async function updateProduct(req, res) {
+  const { id } = req.validated.params;
+  const { count } = await prisma.product.updateMany({
+    where: { id, deleted_at: null },
+    data: req.validated.body,
+  });
+  if (count === 0) {
+    throw new HttpError(404, 'Product not found');
+  }
+
+  const product = await prisma.product.findUnique({ where: { id } });
+  res.json(toPublicProduct(product));
+}
+
+// Soft-delete: строка остаётся в БД, поэтому внешние ключи из cart_items не ломаются,
+// а товар пропадает из каталога и GET /api/products/:id
+async function deleteProduct(req, res) {
+  const { id } = req.validated.params;
+  const { count } = await prisma.product.updateMany({
+    where: { id, deleted_at: null },
+    data: { deleted_at: new Date() },
+  });
+  if (count === 0) {
+    throw new HttpError(404, 'Product not found');
+  }
+
+  res.status(204).end();
+}
+
+module.exports = { listProducts, getProduct, createProduct, updateProduct, deleteProduct };

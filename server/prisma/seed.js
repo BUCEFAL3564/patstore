@@ -2,6 +2,8 @@ require('dotenv').config({ quiet: true });
 
 const prisma = require('../src/lib/prisma');
 const { hashPassword } = require('../src/lib/password');
+const cache = require('../src/lib/cache');
+const { invalidateCatalog } = require('../src/services/catalogCache');
 const products = require('./data/products.json');
 
 function requireEnv(name) {
@@ -58,6 +60,9 @@ async function main() {
 
   const { created, updated } = await seedProducts();
   console.log(`Products: ${created} created, ${updated} updated`);
+
+  // Сид меняет товары в обход API, поэтому кэш каталога сбрасываем сами
+  await invalidateCatalog();
 }
 
 main()
@@ -65,4 +70,7 @@ main()
     console.error(err);
     process.exitCode = 1;
   })
-  .finally(() => prisma.$disconnect());
+  .finally(() => {
+    cache.close();
+    return prisma.$disconnect();
+  });

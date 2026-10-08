@@ -8,7 +8,13 @@ const { notFound, errorHandler } = require('./middleware/errors');
 
 const app = express();
 
-app.use(cors({ origin: config.corsOrigins.length ? config.corsOrigins : true }));
+app.use(
+  cors({
+    origin: config.corsOrigins.length ? config.corsOrigins : true,
+    // Без этого браузерный JS не видит эти заголовки ответа
+    exposedHeaders: ['X-Cache', 'Location'],
+  })
+);
 app.use(express.json());
 
 app.get('/api/health', async (req, res) => {

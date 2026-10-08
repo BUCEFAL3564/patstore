@@ -1,6 +1,7 @@
 const prisma = require('../lib/prisma');
 const { HttpError } = require('../lib/httpError');
 const { toPublicProduct } = require('../serializers/product');
+const { readCatalogPage, writeCatalogPage, invalidateCatalog } = require('../services/catalogCache');
 
 // Prisma в MySQL не экранирует спецсимволы LIKE: без этого search=% находил бы все товары
 const escapeLike = (value) => value.replace(/[\\%_]/g, (char) => `\\${char}`);
@@ -25,8 +26,16 @@ function buildProductWhere({ search, min_price, max_price, min_rating }) {
 }
 
 // Сортировка, LIMIT/OFFSET и подсчёт тоже выполняет БД. id — второй ключ сортировки:
-// при одинаковых ценах порядок стабилен, и товары не повторяются и не теряются между страницами
+// при одинаковых ценах порядок стабилен, и товары не повторяются и не теряются между страницами.
+// Готовый ответ кэшируется в Memcached; заголовок X-Cache показывает, откуда он взят:
+// HIT — из кэша, MISS — из БД (и положен в кэш), BYPASS — кэш выключен или недоступен
 async function listProducts(req, res) {
+  const cached = await readCatalogPage(req.validated.query);
+  if (cached.body) {
+    res.set('X-Cache', 'HIT').type('application/json').send(cached.body);
+    return;
+  }
+
   const { page, limit, sort_by, order = 'asc', ...filters } = req.validated.query;
   const where = buildProductWhere(filters);
 
@@ -41,7 +50,7 @@ async function listProducts(req, res) {
     }),
   ]);
 
-  res.json({
+  const body = JSON.stringify({
     items: products.map(toPublicProduct),
     meta: {
       total_items,
@@ -50,6 +59,9 @@ async function listProducts(req, res) {
       limit,
     },
   });
+  await writeCatalogPage(cached.key, body);
+
+  res.set('X-Cache', cached.key ? 'MISS' : 'BYPASS').type('application/json').send(body);
 }
 
 async function getProduct(req, res) {
@@ -65,6 +77,7 @@ async function getProduct(req, res) {
 
 async function createProduct(req, res) {
   const product = await prisma.product.create({ data: req.validated.body });
+  await invalidateCatalog();
 
   res.status(201).location(`/api/products/${product.id}`).json(toPublicProduct(product));
 }
@@ -80,13 +93,14 @@ async function updateProduct(req, res) {
   if (count === 0) {
     throw new HttpError(404, 'Product not found');
   }
+  await invalidateCatalog();
 
   const product = await prisma.product.findUnique({ where: { id } });
   res.json(toPublicProduct(product));
 }
 
 // Soft-delete: строка остаётся в БД, поэтому внешние ключи из cart_items не ломаются,
-// а товар пропадает из каталога и GET /api/products/:id
+// а товар пропадает из каталога и GET /api/products/:id. Кэш каталога сбрасывается (ТЗ, п. 4)
 async function deleteProduct(req, res) {
   const { id } = req.validated.params;
   const { count } = await prisma.product.updateMany({
@@ -96,6 +110,7 @@ async function deleteProduct(req, res) {
   if (count === 0) {
     throw new HttpError(404, 'Product not found');
   }
+  await invalidateCatalog();
 
   res.status(204).end();
 }

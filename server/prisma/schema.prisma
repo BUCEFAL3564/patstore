@@ -46,13 +46,15 @@ model Product {
 }
 
 model Cart {
-  id         Int      @id @default(autoincrement())
-  user_id    Int      @unique
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  id            Int      @id @default(autoincrement())
+  user_id       Int      @unique
+  promo_code_id Int? // применённый промокод (POST /api/cart/apply-promo)
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
 
-  user  User       @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  items CartItem[]
+  user       User       @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  promo_code PromoCode? @relation(fields: [promo_code_id], references: [id], onDelete: SetNull)
+  items      CartItem[]
 
   @@map("carts")
 }
@@ -76,6 +78,8 @@ model PromoCode {
   code                String  @unique @db.VarChar(50)
   discount_percentage Int
   is_active           Boolean @default(true)
+
+  carts Cart[]
 
   @@map("promo_codes")
 }

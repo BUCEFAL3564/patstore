@@ -4,7 +4,10 @@ const { HttpError } = require('../lib/httpError');
 const { toPublicCart } = require('../serializers/cart');
 const { MAX_QUANTITY } = require('../validators/cart');
 
-const CART_INCLUDE = { items: { orderBy: { id: 'asc' }, include: { product: true } } };
+const CART_INCLUDE = {
+  items: { orderBy: { id: 'asc' }, include: { product: true } },
+  promo_code: true,
+};
 
 const isPrismaError = (err, ...codes) =>
   err instanceof Prisma.PrismaClientKnownRequestError && codes.includes(err.code);
@@ -126,4 +129,25 @@ async function deleteItem(req, res) {
   await sendCart(res, req.user.id);
 }
 
-module.exports = { getCart, addItem, updateItem, deleteItem };
+// ТЗ: проверка промокода и расчёт итога заказа со скидкой. Промокод запоминается в корзине,
+// поэтому скидка пересчитывается сама, если потом изменить состав корзины
+async function applyPromo(req, res) {
+  const promo = await prisma.promoCode.findUnique({ where: { code: req.validated.body.code } });
+  if (!promo) throw new HttpError(404, 'Promo code not found');
+  if (!promo.is_active) throw new HttpError(400, 'Promo code is not active');
+
+  const cart = await getOrCreateCart(req.user.id);
+  await prisma.cart.update({ where: { id: cart.id }, data: { promo_code_id: promo.id } });
+
+  await sendCart(res, req.user.id);
+}
+
+// Для кнопки «убрать промокод» на странице корзины
+async function removePromo(req, res) {
+  const cart = await getOrCreateCart(req.user.id);
+  await prisma.cart.update({ where: { id: cart.id }, data: { promo_code_id: null } });
+
+  await sendCart(res, req.user.id);
+}
+
+module.exports = { getCart, addItem, updateItem, deleteItem, applyPromo, removePromo };

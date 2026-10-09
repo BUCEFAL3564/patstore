@@ -26,11 +26,19 @@ function toPublicCart(cart) {
     };
   });
 
+  // Скидка считается от суммы доступных товаров и округляется до цента.
+  // Промокод, который выключили после применения (is_active = false), больше не действует
+  const promo = cart.promo_code?.is_active ? cart.promo_code : null;
+  const discountCents = promo ? Math.round((subtotalCents * promo.discount_percentage) / 100) : 0;
+
   return {
     id: cart.id,
     items,
     total_quantity: totalQuantity,
     subtotal: subtotalCents / 100,
+    promo: promo ? { code: promo.code, discount_percentage: promo.discount_percentage } : null,
+    discount: discountCents / 100,
+    total: (subtotalCents - discountCents) / 100,
   };
 }
 

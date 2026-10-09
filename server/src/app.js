@@ -4,6 +4,7 @@ const config = require('./config');
 const prisma = require('./lib/prisma');
 const authRouter = require('./routes/auth');
 const productsRouter = require('./routes/products');
+const cartRouter = require('./routes/cart');
 const { notFound, errorHandler } = require('./middleware/errors');
 
 const app = express();
@@ -28,6 +29,7 @@ app.get('/api/health', async (req, res) => {
 
 app.use('/api/auth', authRouter);
 app.use('/api/products', productsRouter);
+app.use('/api/cart', cartRouter);
 
 app.use(notFound);
 app.use(errorHandler);

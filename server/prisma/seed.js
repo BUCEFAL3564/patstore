@@ -42,7 +42,16 @@ async function seedProducts() {
   return { created, updated };
 }
 
+// --if-empty: наполнять только пустую базу. Так делает контейнер при каждом старте:
+// первый запуск получает тестовые данные, а последующие не затирают правки админа
+const ifEmpty = process.argv.includes('--if-empty');
+
 async function main() {
+  if (ifEmpty && (await prisma.product.count()) > 0) {
+    console.log('Seed skipped: database already has products');
+    return;
+  }
+
   const admin = await seedUser(requireEnv('SEED_ADMIN_EMAIL'), requireEnv('SEED_ADMIN_PASSWORD'), 'admin');
   const customer = await seedUser(
     requireEnv('SEED_CUSTOMER_EMAIL'),

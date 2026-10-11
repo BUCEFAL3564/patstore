@@ -6,6 +6,8 @@ const authRouter = require('./routes/auth');
 const productsRouter = require('./routes/products');
 const cartRouter = require('./routes/cart');
 const { notFound, errorHandler } = require('./middleware/errors');
+const swaggerUi = require('swagger-ui-express');
+const openapi = require('./docs/openapi');
 
 const app = express();
 
@@ -30,6 +32,17 @@ app.get('/api/health', async (req, res) => {
 app.use('/api/auth', authRouter);
 app.use('/api/products', productsRouter);
 app.use('/api/cart', cartRouter);
+
+// Интерактивная документация (Swagger UI) и сама спецификация OpenAPI в JSON
+app.get('/api/docs.json', (req, res) => res.json(openapi));
+app.use(
+  '/api/docs',
+  swaggerUi.serve,
+  swaggerUi.setup(openapi, {
+    customSiteTitle: 'KeyHub API — документация',
+    swaggerOptions: { persistAuthorization: true },
+  })
+);
 
 app.use(notFound);
 app.use(errorHandler);

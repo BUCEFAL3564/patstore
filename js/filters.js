@@ -1,109 +1,50 @@
-// ========== FILTERS LOGIC ==========
-let activeRatingFilters = [];
-let priceMin = 0;
-let priceMax = 100;
-
+// ========== FILTERS (рейтинг и цена → параметры запроса к API) ==========
 document.addEventListener('DOMContentLoaded', () => {
-    
+    if (!document.getElementById('productGrid')) return;
+
     // ===== RATING CHECKBOXES =====
+    // «4+» и «3+» вместе означают «от 3 звёзд», поэтому берём наименьший отмеченный
     const ratingCheckboxes = document.querySelectorAll('.checkbox-input');
-    
-    ratingCheckboxes.forEach(checkbox => {
+
+    ratingCheckboxes.forEach((checkbox) => {
+        checkbox.checked = catalogState.min_rating !== undefined && Number(checkbox.value) === catalogState.min_rating;
+
         checkbox.addEventListener('change', () => {
-            activeRatingFilters = [];
-            ratingCheckboxes.forEach(cb => {
-                if (cb.checked) {
-                    activeRatingFilters.push(parseInt(cb.value));
-                }
-            });
-            applyFilters();
+            const checked = [...ratingCheckboxes].filter((cb) => cb.checked).map((cb) => Number(cb.value));
+            updateCatalog({ min_rating: checked.length ? Math.min(...checked) : undefined });
         });
     });
-    
+
     // ===== PRICE INPUTS =====
-    const minInput = document.querySelector('.price-field:first-child .price-input');
-    const maxInput = document.querySelector('.price-field:last-child .price-input');
-    
-    if (minInput) {
-        minInput.addEventListener('input', () => {
-            priceMin = parseFloat(minInput.value) || 0;
-            applyFilters();
-        });
-    }
-    
-    if (maxInput) {
-        maxInput.addEventListener('input', () => {
-            priceMax = parseFloat(maxInput.value) || 100;
-            applyFilters();
-        });
-    }
+    const minInput = document.querySelector('.price-field:first-of-type .price-input');
+    const maxInput = document.querySelector('.price-field:last-of-type .price-input');
+    if (!minInput || !maxInput) return;
+
+    if (catalogState.min_price !== undefined) minInput.value = catalogState.min_price;
+    if (catalogState.max_price !== undefined) maxInput.value = catalogState.max_price;
+
+    const readPrice = (input) => (input.value.trim() === '' ? undefined : Number(input.value));
+
+    // Запрос уходит, когда пользователь перестал печатать (400 мс), а не на каждую цифру
+    let timer;
+    const onPriceInput = () => {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+            const min = readPrice(minInput);
+            const max = readPrice(maxInput);
+            const invalid = (v) => v !== undefined && (Number.isNaN(v) || v < 0);
+            const reversed = min !== undefined && max !== undefined && min > max;
+
+            minInput.classList.toggle('is-invalid', invalid(min) || reversed);
+            maxInput.classList.toggle('is-invalid', invalid(max) || reversed);
+            if (invalid(min) || invalid(max) || reversed) return;
+
+            if (min !== catalogState.min_price || max !== catalogState.max_price) {
+                updateCatalog({ min_price: min, max_price: max });
+            }
+        }, 400);
+    };
+
+    minInput.addEventListener('input', onPriceInput);
+    maxInput.addEventListener('input', onPriceInput);
 });
-
-// ========== APPLY FILTERS ==========
-function applyFilters() {
-    let filteredProducts = [...products];
-    
-
-    if (activeRatingFilters.length > 0) {
-        filteredProducts = filteredProducts.filter(product => {
-            return activeRatingFilters.some(rating => product.rating >= rating);
-        });
-    }
-    
-
-    filteredProducts = filteredProducts.filter(product => {
-        return product.price >= priceMin && product.price <= priceMax;
-    });
-    
-   
-    const countEl = document.querySelector('.product-count');
-    if (countEl) {
-        countEl.textContent = `${filteredProducts.length} products`;
-    }
-    
-
-    renderFilteredProducts(filteredProducts);
-}
-
-function renderFilteredProducts(filteredProducts) {
-    const grid = document.getElementById('productGrid');
-    
-    grid.innerHTML = filteredProducts.map(product => `
-        <a href="product.html?id=${product.id}" class="product-card">
-            <div class="product-overlay">
-                <div class="product-overlay-inner">
-                    <span class="overlay-name">${product.name}</span>
-                    <div class="overlay-rating-row">
-                        <div class="overlay-stars">
-                            ${renderStars(product.rating)}
-                        </div>
-                        <span class="overlay-rating-number">${product.rating}</span>
-                    </div>
-                    <div class="overlay-bottom">
-                        <span class="overlay-price">$${product.price.toFixed(2)}</span>
-                        <button class="overlay-cart-btn" aria-label="Add to cart" onclick="event.preventDefault(); addToCart(products.find(p => p.id === ${product.id}))">
-                            <span class="cart-icon-overlay">
-                                <span class="cart-body-overlay"></span>
-                                <span class="cart-wheel-overlay cart-wheel-1-overlay"></span>
-                                <span class="cart-wheel-overlay cart-wheel-2-overlay"></span>
-                            </span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="product-image-wrap">
-                <img src="${product.image}" alt="${product.name}" loading="lazy">
-                <span class="product-price-badge">$${product.price.toFixed(2)}</span>
-            </div>
-            <div class="product-info">
-                <h3 class="product-name">${product.name}</h3>
-                <div class="product-rating-row">
-                    <div class="product-stars">
-                        ${renderStars(product.rating)}
-                    </div>
-                    <span class="product-rating-number">${product.rating}</span>
-                </div>
-            </div>
-        </a>
-    `).join('');
-}

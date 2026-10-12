@@ -598,3 +598,25 @@
     line-height: 16px;
     color: #94A3B8;
 }
+/* ========== API STATES ========== */
+.product-message {
+    padding: 24px 16px;
+    text-align: center;
+    font-size: 18px;
+    color: #E2E8F0;
+}
+
+.product-back-link {
+    color: #F59E0B;
+    text-decoration: none;
+}
+
+.product-block-5:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Блок «Key Highlights» без данных не показываем (иначе — пустая рамка под ценой) */
+.product-block-2:empty {
+    display: none;
+}

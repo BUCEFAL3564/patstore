@@ -105,7 +105,7 @@ Memcached проще всего запустить в Docker: `docker run -d -p 
 | POST | `/api/auth/register` | все | Регистрация |
 | POST | `/api/auth/login` | все | Вход, выдаёт JWT |
 | GET | `/api/auth/me` | токен | Текущий пользователь |
-| GET | `/api/products` | все | Каталог: `page`, `limit`, `search`, `min_price`, `max_price`, `min_rating`, `sort_by` (`price`/`title`), `order` (`asc`/`desc`) |
+| GET | `/api/products` | все | Каталог: `page`, `limit`, `search`, `min_price`, `max_price`, `min_rating`, `category`, `sort_by` (`price`/`title`), `order` (`asc`/`desc`) |
 | GET | `/api/products/:id` | все | Один товар |
 | POST | `/api/products` | admin | Добавить товар |
 | PATCH | `/api/products/:id` | admin | Изменить товар |

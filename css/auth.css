@@ -126,3 +126,39 @@
 .auth-link:hover {
     color: #FBBF24;
 }
+/* ========== API STATES ========== */
+.auth-error {
+    padding: 12px 14px;
+    background: rgba(239, 68, 68, 0.12);
+    border: 1px solid #EF4444;
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #FCA5A5;
+}
+
+.auth-error[hidden] {
+    display: none;
+}
+
+.auth-btn:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+
+.auth-btn-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.auth-btn-secondary {
+    background: transparent;
+    border: 1px solid #475569;
+    color: #E2E8F0;
+}
+
+.auth-btn-secondary:hover {
+    background: #334155;
+}

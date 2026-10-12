@@ -8,7 +8,7 @@ const escapeLike = (value) => value.replace(/[\\%_]/g, (char) => `\\${char}`);
 
 // Все фильтры превращаются в WHERE запроса к БД, а не применяются к массиву в памяти (требование ТЗ).
 // Регистр при поиске не учитывается за счёт коллации utf8mb4_unicode_ci у таблицы
-function buildProductWhere({ search, min_price, max_price, min_rating }) {
+function buildProductWhere({ search, min_price, max_price, min_rating, category }) {
   const where = { deleted_at: null };
 
   if (search) {
@@ -20,6 +20,9 @@ function buildProductWhere({ search, min_price, max_price, min_rating }) {
   }
   if (min_rating !== undefined) {
     where.rating = { gte: min_rating };
+  }
+  if (category) {
+    where.category = category;
   }
 
   return where;

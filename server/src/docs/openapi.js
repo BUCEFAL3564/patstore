@@ -260,6 +260,12 @@ module.exports = {
           { name: 'min_price', in: 'query', schema: { type: 'number', minimum: 0 } },
           { name: 'max_price', in: 'query', schema: { type: 'number', minimum: 0 } },
           { name: 'min_rating', in: 'query', schema: { type: 'number', minimum: 0, maximum: 5 } },
+          {
+            name: 'category',
+            in: 'query',
+            description: 'Точное совпадение категории (например, RPG) — для блока «похожие товары»',
+            schema: { type: 'string', maxLength: 100 },
+          },
           { name: 'sort_by', in: 'query', schema: { type: 'string', enum: ['price', 'title'] } },
           { name: 'order', in: 'query', schema: { type: 'string', enum: ['asc', 'desc'], default: 'asc' } },
         ],

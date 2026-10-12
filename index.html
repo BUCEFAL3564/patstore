@@ -125,7 +125,7 @@
                                 <label class="price-label">Min</label>
                                 <div class="price-input-wrap">
                                     <span class="price-currency">$</span>
-                                    <input type="number" class="price-input" value="0">
+                                    <input type="number" class="price-input" placeholder="0" min="0" step="0.01">
                                 </div>
                             </div>
                             <span class="price-separator">-</span>
@@ -133,7 +133,7 @@
                                 <label class="price-label">Max</label>
                                 <div class="price-input-wrap">
                                     <span class="price-currency">$</span>
-                                    <input type="number" class="price-input" value="100">
+                                    <input type="number" class="price-input" placeholder="100" min="0" step="0.01">
                                 </div>
                             </div>
                         </div>
@@ -142,6 +142,11 @@
             </aside>
 
             <div class="main-content">
+                <form class="search-bar" id="searchForm" role="search">
+                    <img src="assets/icons/search.svg" alt="" class="search-bar-icon">
+                    <input type="search" class="search-input" id="searchInput" placeholder="Search games by title or description..." maxlength="100" aria-label="Search games">
+                    <button type="submit" class="search-btn">Search</button>
+                </form>
                 <div class="top-bar">
                     <div class="top-bar-left">
                         <button class="filter-toggle-btn" id="filterToggleBtn">
@@ -152,7 +157,7 @@
                             </svg>
                             <span>Filters</span>
                         </button>
-                        <span class="product-count">9 products</span>
+                        <span class="product-count"></span>
                     </div>
                     <div class="sort-group">
                         <span class="sort-label">Sort by:</span>
@@ -172,6 +177,7 @@
                 </div>
 
                 <div class="product-grid" id="productGrid"></div>
+                <nav class="pagination" id="pagination" aria-label="Catalog pages"></nav>
             </div>
         </div>
     </main>
@@ -235,6 +241,9 @@
 
     <div class="toast-container" id="toastContainer"></div>
     
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/header.js"></script>
     <script src="js/mobile-nav.js"></script>
     <script src="js/cart.js"></script>
     <script src="js/products.js"></script>

@@ -41,6 +41,11 @@ const listProductsQuery = z
     min_price: optionalNumber('min_price', { min: 0 }),
     max_price: optionalNumber('max_price', { min: 0 }),
     min_rating: optionalNumber('min_rating', { min: 0, max: 5 }),
+    // Точное совпадение категории — для блока «похожие товары» на странице товара
+    category: z.preprocess(
+      (value) => (typeof value === 'string' ? value.trim() || undefined : value),
+      z.string('category must be a string').max(100, 'category is too long').optional()
+    ),
   })
   .refine(
     (q) => q.min_price === undefined || q.max_price === undefined || q.min_price <= q.max_price,

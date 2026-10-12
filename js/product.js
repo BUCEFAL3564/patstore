@@ -1,149 +1,161 @@
-const urlParams = new URLSearchParams(window.location.search);
-const productId = parseInt(urlParams.get('id'));
+// ========== PRODUCT PAGE (GET /api/products/:id) ==========
+const productId = Number(new URLSearchParams(window.location.search).get('id'));
 
 async function loadProduct() {
+    if (!Number.isInteger(productId) || productId < 1) {
+        showProductMessage('Game not found');
+        return;
+    }
+
     try {
-        const response = await fetch(`api/getGame.php?id=${productId}`);
-        const data = await response.json();
-        
-        if (data.error) {
-            document.querySelector('.product-container').innerHTML = `<p style="color:white;text-align:center;padding:100px">Игра не найдена</p>`;
-            return;
-        }
-        
-        // Преобразуем под старый формат
-        const product = {
-            id: data.id,
-            name: data.title,
-            price: data.discount_price || data.price,
-            rating: data.rating,
-            category: data.category || 'Игры',
-            highlights: data.highlights || [],
-            description: data.description || '',
-            specs: data.specs || [],
-            image: data.image || `https://placehold.co/600x600/1E293B/F59E0B?text=Game`,
-            platform: data.platform
-        };
-        
+        const product = await api(`/products/${productId}`);
         renderProductPage(product);
-    } catch (error) {
-        console.error('Ошибка загрузки игры:', error);
+        loadRelatedProducts(product);
+    } catch (err) {
+        showProductMessage(err.status === 404 ? 'Game not found' : `Could not load the game: ${err.userMessage}`);
     }
 }
 
+function showProductMessage(text) {
+    document.querySelector('.product-container').innerHTML =
+        `<p class="product-message">${escapeHtml(text)}</p><p class="product-message"><a href="index.html" class="product-back-link">← Back to catalog</a></p>`;
+}
+
 function renderProductPage(product) {
-    document.getElementById('breadcrumbProduct').textContent = product.name;
-    document.getElementById('breadcrumbCategory').textContent = product.category;
-    
-    // Блок 1
+    const name = escapeHtml(product.title);
+    const category = escapeHtml(product.category || 'Games');
+    document.title = `KeyHub — ${product.title}`;
+    document.getElementById('breadcrumbProduct').textContent = product.title;
+    document.getElementById('breadcrumbCategory').textContent = product.category || 'Games';
+
+    // Блок 1: название, рейтинг, цена
     document.getElementById('productInfo').innerHTML = `
-        <span class="product-category">${product.platform || product.category}</span>
-        <h1 class="product-title">${product.name}</h1>
+        <span class="product-category">${escapeHtml(product.platform || product.category || 'Games')}</span>
+        <h1 class="product-title">${name}</h1>
         <div class="product-rating-block">
             <div class="product-stars-large">${renderLargeStars(product.rating)}</div>
             <span class="product-rating-text">${product.rating} out of 5 stars</span>
         </div>
-        <p class="product-price-large">$${product.price.toFixed(2)}</p>
+        <p class="product-price-large">${formatPrice(product.price)}</p>
     `;
-    
-    // Блок 2
-    if (product.highlights && product.highlights.length > 0) {
-        document.getElementById('productHighlights').innerHTML = `
-            <h3 class="highlights-heading">Key Highlights</h3>
-            <ul class="highlights-list">
-                ${product.highlights.map(h => `<li class="highlights-item">• ${h}</li>`).join('')}
-            </ul>
-        `;
-    }
-    
-    // Блок 3
+
+    // Блок 3: описание
     if (product.description) {
         document.getElementById('productDescription').innerHTML = `
             <h3 class="description-heading">Description</h3>
-            <p class="description-text">${product.description}</p>
+            <p class="description-text">${escapeHtml(product.description)}</p>
         `;
     }
-    
-    // Блок 4
+
+    // Блок 4: количество — не больше, чем на складе (и не больше 99 за раз)
+    const maxQuantity = Math.min(99, product.stock_quantity);
     let quantity = 1;
     const qtyValue = document.getElementById('qtyValue');
     document.getElementById('qtyMinus').addEventListener('click', () => {
         if (quantity > 1) { quantity--; qtyValue.textContent = quantity; }
     });
     document.getElementById('qtyPlus').addEventListener('click', () => {
-        if (quantity < 99) { quantity++; qtyValue.textContent = quantity; }
+        if (quantity < maxQuantity) { quantity++; qtyValue.textContent = quantity; }
     });
 
-    // Блок 5
-    document.getElementById('addToCartBtn').addEventListener('click', () => {
-        for (let i = 0; i < quantity; i++) addToCart(product);
-    });
-    
-    // Блок 6
-    if (product.specs && product.specs.length > 0) {
-        document.getElementById('specsGrid').innerHTML = product.specs.map(spec => `
-            <div class="spec-card">
-                <div class="spec-card-icon"><img src="assets/icons/exclamation-mark.svg" alt=""></div>
-                <div class="spec-card-text">
-                    <span class="spec-card-label">${spec.label}</span>
-                    <span class="spec-card-value">${spec.value}</span>
-                </div>
-            </div>
-        `).join('');
+    // Блок 5: в корзину — один запрос с нужным количеством
+    const addButton = document.getElementById('addToCartBtn');
+    if (product.stock_quantity < 1) {
+        addButton.disabled = true;
+        addButton.querySelector('.add-to-cart-text').textContent = 'Out of Stock';
+    } else {
+        addButton.addEventListener('click', async () => {
+            addButton.disabled = true;
+            await addToCart(product.id, quantity, product.title);
+            addButton.disabled = false;
+        });
     }
-    
-    // Слайдер
-    const totalSlides = 3;
+
+    // Блок 6: характеристики из данных API
+    const specs = [
+        { label: 'Platform', value: product.platform || '—' },
+        { label: 'Category', value: category },
+        { label: 'Rating', value: `${product.rating} / 5` },
+        { label: 'In Stock', value: product.stock_quantity > 0 ? `${product.stock_quantity} keys` : 'Out of stock' },
+    ];
+    document.getElementById('specsGrid').innerHTML = specs.map((spec) => `
+        <div class="spec-card">
+            <div class="spec-card-icon"><img src="assets/icons/exclamation-mark.svg" alt=""></div>
+            <div class="spec-card-text">
+                <span class="spec-card-label">${spec.label}</span>
+                <span class="spec-card-value">${escapeHtml(spec.value)}</span>
+            </div>
+        </div>
+    `).join('');
+
+    renderSlider(product);
+}
+
+// ========== SLIDER (все картинки из images[], по ТЗ — минимум 3) ==========
+function renderSlider(product) {
+    const images = product.images.length ? product.images : ['https://placehold.co/600x600/1E293B/F59E0B?text=Game'];
+    const totalSlides = images.length;
     let currentSlide = 0;
     const track = document.getElementById('sliderTrack');
     const dots = document.getElementById('sliderDots');
-    
-    track.innerHTML = Array(totalSlides).fill(`<div class="slider-slide"><img src="${product.image}" alt="${product.name}"></div>`).join('');
-    dots.innerHTML = Array(totalSlides).fill(0).map((_, i) => `<button class="slider-dot ${i === 0 ? 'active' : ''}" data-index="${i}"></button>`).join('');
-    
+
+    track.innerHTML = images.map((src, i) =>
+        `<div class="slider-slide"><img src="${escapeHtml(src)}" alt="${escapeHtml(product.title)} — image ${i + 1}"></div>`
+    ).join('');
+    dots.innerHTML = images.map((_, i) =>
+        `<button class="slider-dot ${i === 0 ? 'active' : ''}" data-index="${i}" aria-label="Image ${i + 1}"></button>`
+    ).join('');
+
     function goToSlide(index) {
         if (index < 0) index = totalSlides - 1;
         if (index >= totalSlides) index = 0;
         currentSlide = index;
         const slideWidth = track.querySelector('.slider-slide').offsetWidth;
         track.style.transform = `translateX(-${index * slideWidth}px)`;
-        document.querySelectorAll('.slider-dot').forEach((dot, i) => {
+        dots.querySelectorAll('.slider-dot').forEach((dot, i) => {
             dot.classList.toggle('active', i === index);
         });
     }
-    
+
     document.getElementById('sliderPrev').addEventListener('click', () => goToSlide(currentSlide - 1));
     document.getElementById('sliderNext').addEventListener('click', () => goToSlide(currentSlide + 1));
     dots.addEventListener('click', (e) => {
-        if (e.target.classList.contains('slider-dot')) goToSlide(parseInt(e.target.dataset.index));
+        if (e.target.classList.contains('slider-dot')) goToSlide(Number(e.target.dataset.index));
     });
-    
-    // Related Products
-    if (typeof products !== 'undefined' && products.length > 0) {
-        const relatedProducts = products.filter(p => 
-            p.category === product.category && p.id !== product.id
-        );
-        if (relatedProducts.length > 0) {
-            document.getElementById('relatedProducts').innerHTML = `
-                <h3 class="related-heading">Related Products</h3>
-                <div class="related-grid">
-                    ${relatedProducts.slice(0, 4).map(rp => `
-                        <a href="product.html?id=${rp.id}" class="related-card">
-                            <div class="related-card-img">
-                                <img src="${rp.image}" alt="${rp.name}" loading="lazy">
+    // После изменения ширины окна слайд должен остаться на месте
+    window.addEventListener('resize', () => goToSlide(currentSlide));
+}
+
+// ========== RELATED PRODUCTS (та же категория, фильтр в БД) ==========
+async function loadRelatedProducts(product) {
+    if (!product.category) return;
+
+    try {
+        const data = await api(`/products?category=${encodeURIComponent(product.category)}&limit=5`);
+        const related = data.items.filter((p) => p.id !== product.id).slice(0, 4);
+        if (related.length === 0) return;
+
+        document.getElementById('relatedProducts').innerHTML = `
+            <h3 class="related-heading">Related Products</h3>
+            <div class="related-grid">
+                ${related.map((rp) => `
+                    <a href="product.html?id=${rp.id}" class="related-card">
+                        <div class="related-card-img">
+                            <img src="${escapeHtml(rp.images[0] || '')}" alt="${escapeHtml(rp.title)}" loading="lazy">
+                        </div>
+                        <div class="related-card-info">
+                            <span class="related-card-name">${escapeHtml(rp.title)}</span>
+                            <div class="related-card-rating">
+                                <div class="related-card-stars">${renderStars(rp.rating)}</div>
+                                <span class="related-card-rating-num">${rp.rating}</span>
                             </div>
-                            <div class="related-card-info">
-                                <span class="related-card-name">${rp.name}</span>
-                                <div class="related-card-rating">
-                                    <div class="related-card-stars">${renderStars(rp.rating)}</div>
-                                    <span class="related-card-rating-num">${rp.rating}</span>
-                                </div>
-                            </div>
-                        </a>
-                    `).join('')}
-                </div>
-            `;
-        }
+                        </div>
+                    </a>
+                `).join('')}
+            </div>
+        `;
+    } catch {
+        // Похожие товары — необязательный блок: если не загрузились, страница работает без них
     }
 }
 

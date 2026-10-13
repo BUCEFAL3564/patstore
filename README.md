@@ -8,10 +8,12 @@
 
 | Что | Адрес |
 |---|---|
-| API на Render | _будет добавлено после деплоя_ |
-| Swagger (интерактивная документация) | _будет добавлено после деплоя_ · локально: http://localhost:3000/api/docs |
-| Спецификация OpenAPI (JSON) | локально: http://localhost:3000/api/docs.json |
-| Фронтенд | _будет добавлено после деплоя_ |
+| Сайт (фронтенд) | https://keyhub-web.onrender.com |
+| API на Render | https://keyhub-api.onrender.com/api · проверка: https://keyhub-api.onrender.com/api/health |
+| Swagger (интерактивная документация) | https://keyhub-api.onrender.com/api/docs · локально: http://localhost:3000/api/docs |
+| Спецификация OpenAPI (JSON) | https://keyhub-api.onrender.com/api/docs.json |
+
+> Сервисы на бесплатном плане Render засыпают без запросов: первый запрос после паузы может идти около минуты.
 
 ## Возможности API
 
@@ -53,6 +55,8 @@
 |---|---|---|
 | admin | `admin@keyhub.local` | `Admin12345` |
 | customer | `customer@keyhub.local` | `Customer12345` |
+
+На развёрнутом сайте вход `customer@keyhub.local` / `Customer12345` тот же, а у администратора отдельный надёжный пароль, который в репозиторий не попадает: публичный пароль позволил бы любому удалять товары.
 
 ## Локальный запуск без Docker
 

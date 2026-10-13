@@ -1,7 +1,7 @@
 // ========== API ADDRESS ==========
 // Локально (localhost или файл) — API на этом же компьютере.
 // На хостинге — адрес бэкенда на Render (заполняется при деплое).
-const PRODUCTION_API_URL = '';
+const PRODUCTION_API_URL = 'https://keyhub-api.onrender.com/api';
 
 const isLocal = ['localhost', '127.0.0.1', ''].includes(window.location.hostname);
 

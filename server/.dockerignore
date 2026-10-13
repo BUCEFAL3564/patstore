@@ -1,0 +1,9 @@
+# В образ не попадают зависимости с хоста (их ставит npm ci внутри) и секреты
+node_modules
+npm-debug.log*
+.env
+.env.*
+!.env.example
+Dockerfile
+docker-compose.yml
+.dockerignore

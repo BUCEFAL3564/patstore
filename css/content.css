@@ -233,7 +233,6 @@
     background: #1E293B;
     z-index: 4;
     position: relative;
-    
 }
 
 .product-name {
@@ -410,46 +409,146 @@
 .filter-toggle-btn:hover {
     background: #475569;
 }
-
-/* ========== TOAST ========== */
-.toast-container {
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    z-index: 1000;
+/* ========== SEARCH BAR ========== */
+.search-bar {
+    position: relative;
     display: flex;
-    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+
+.search-bar-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    width: 18px;
+    height: 18px;
+    transform: translateY(-50%);
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.search-input {
+    flex: 1;
+    min-width: 0;
+    height: 48px;
+    background: #1E293B;
+    border: 1px solid #334155;
+    border-radius: 10px;
+    padding: 0 16px 0 44px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: #F1F5F9;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.search-input::placeholder {
+    color: #64748B;
+}
+
+.search-input:focus {
+    border-color: #F59E0B;
+}
+
+.search-btn {
+    height: 48px;
+    padding: 0 24px;
+    background: #F59E0B;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    color: #0F172A;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.search-btn:hover {
+    background: #D97706;
+}
+
+/* ========== CATALOG STATES ========== */
+.product-grid.is-loading {
+    opacity: 0.5;
+    pointer-events: none;
+    transition: opacity 0.2s;
+}
+
+.catalog-message {
+    grid-column: 1 / -1;
+    padding: 48px 16px;
+    text-align: center;
+    font-size: 16px;
+    color: #94A3B8;
+}
+
+.price-input.is-invalid {
+    border-color: #EF4444;
+}
+
+/* ========== PAGINATION ========== */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
     gap: 8px;
 }
 
-.toast {
-    width: 356px !important;
-    height: 73px !important;
-    background: #1E293B !important;
-    border: 1px solid #334155 !important;
-    border-radius: 8px !important;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3) !important;
-    display: flex !important;
-    align-items: center !important;
-    padding: 0 14px !important;
-    gap: 10px !important;
-    animation: slideIn 0.3s ease !important;
+.pagination:empty {
+    display: none;
 }
 
-.toast-icon-wrap { width: 20px; height: 20px; flex-shrink: 0; }
-.toast-checkmark { width: 16px; height: 16px; }
-.toast-content { flex: 1; }
-
-.toast-text {
+.page-btn {
+    min-width: 40px;
+    height: 40px;
+    padding: 0 12px;
+    background: #1E293B;
+    border: 1px solid #334155;
+    border-radius: 8px;
     font-family: 'Inter', sans-serif;
     font-weight: 500;
-    font-size: 13px;
-    line-height: 19.5px;
-    letter-spacing: -0.08px;
-    color: #F1F5F9;
+    font-size: 15px;
+    color: #E2E8F0;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
 }
 
-@keyframes slideIn {
-    from { transform: translateX(100%); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
+.page-btn:hover:not(:disabled):not(.active) {
+    background: #334155;
+}
+
+.page-btn.active {
+    background: #F59E0B;
+    border-color: #F59E0B;
+    color: #0F172A;
+    cursor: default;
+}
+
+.page-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.page-ellipsis {
+    color: #64748B;
+    padding: 0 4px;
+}
+
+@media (max-width: 623px) {
+    .search-btn {
+        padding: 0 16px;
+    }
+}
+
+/* Скрытый оверлей карточки сдвинут вниз за её границы (translateY(100%)) и без этого
+   перехватывал клики по тому, что ниже, например по кнопкам пагинации */
+.product-overlay {
+    pointer-events: none;
+}
+
+.product-card:hover .product-overlay {
+    pointer-events: auto;
 }

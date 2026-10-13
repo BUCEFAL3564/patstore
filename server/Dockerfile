@@ -15,7 +15,9 @@ RUN npx prisma generate
 
 # ---------- 3. runtime: только то, что нужно для запуска
 FROM node:24-alpine AS runtime
-RUN apk add --no-cache openssl
+# memcached — для хостинга без отдельного сервиса кэша (Render free): запускается рядом с API,
+# если EMBEDDED_MEMCACHED=true. В docker-compose используется отдельный сервис memcached
+RUN apk add --no-cache openssl memcached
 ENV NODE_ENV=production
 WORKDIR /app
 

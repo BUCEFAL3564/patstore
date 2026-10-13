@@ -6,10 +6,12 @@ function required(name) {
 
 module.exports = {
   port: Number(process.env.PORT) || 3000,
+  // Адрес без схемы (keyhub-web.onrender.com — так его передаёт Render) считаем https://
   corsOrigins: (process.env.CORS_ORIGIN || '')
     .split(',')
-    .map((origin) => origin.trim())
-    .filter(Boolean),
+    .map((origin) => origin.trim().replace(/\/$/, ''))
+    .filter(Boolean)
+    .map((origin) => (/^https?:\/\//.test(origin) ? origin : `https://${origin}`)),
   jwt: {
     secret: required('JWT_SECRET'),
     expiresIn: process.env.JWT_EXPIRES_IN || '1d',

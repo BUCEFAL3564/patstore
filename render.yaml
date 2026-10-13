@@ -1,0 +1,61 @@
+# Render Blueprint: API (Docker) + фронтенд (статический сайт) одним деплоем.
+# Render → New → Blueprint → выбрать этот репозиторий. Секреты (sync: false) Render спросит при создании.
+services:
+  # ---------- REST API: собирается из server/Dockerfile
+  - type: web
+    name: keyhub-api
+    runtime: docker
+    plan: free
+    region: frankfurt
+    branch: main
+    rootDir: server
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health
+    envVars:
+      # Строка подключения TiDB Cloud (Connect → Prisma), с ?sslaccept=strict
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRES_IN
+        value: 1d
+      # Фронтенд, которому разрешены запросы (CORS)
+      - key: CORS_ORIGIN
+        fromService:
+          type: web
+          name: keyhub-web
+          property: host
+      # Memcached внутри контейнера API (отдельный сервис кэша на бесплатном плане недоступен)
+      - key: EMBEDDED_MEMCACHED
+        value: "true"
+      - key: MEMCACHED_SERVERS
+        value: 127.0.0.1:11211
+      - key: CACHE_TTL_SECONDS
+        value: "90"
+      # Нужны только если база пустая (первый запуск наполняет её тестовыми данными)
+      - key: SEED_ADMIN_EMAIL
+        value: admin@keyhub.local
+      - key: SEED_ADMIN_PASSWORD
+        generateValue: true
+      - key: SEED_CUSTOMER_EMAIL
+        value: customer@keyhub.local
+      - key: SEED_CUSTOMER_PASSWORD
+        value: Customer12345
+
+  # ---------- Фронтенд (HTML/CSS/JS прошлого семестра)
+  - type: web
+    name: keyhub-web
+    runtime: static
+    branch: main
+    # Копируем только файлы сайта и вписываем адрес API в js/config.js
+    buildCommand: >-
+      mkdir -p dist &&
+      cp -r index.html product.html cart.html enter.html register.html css js assets dist/ &&
+      sed -i "s#const PRODUCTION_API_URL = '';#const PRODUCTION_API_URL = 'https://${API_HOST}/api';#" dist/js/config.js
+    staticPublishPath: dist
+    envVars:
+      - key: API_HOST
+        fromService:
+          type: web
+          name: keyhub-api
+          property: host

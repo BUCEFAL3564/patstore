@@ -81,6 +81,7 @@ Memcached проще всего запустить в Docker: `docker run -d -p 
 | `JWT_EXPIRES_IN` | нет | Срок жизни токена (по умолчанию `1d`) | `1d` |
 | `CORS_ORIGIN` | нет | Адреса фронтенда через запятую. Пусто — разрешены все (только для разработки) | `https://keyhub.example.com` |
 | `MEMCACHED_SERVERS` | нет | Адрес Memcached `host:port`. Пусто — кэш выключен. В Docker Compose задаётся автоматически | `localhost:11211` |
+| `EMBEDDED_MEMCACHED` | нет | `true` — запустить Memcached внутри контейнера API (для хостинга без отдельного сервиса кэша, например Render free) | `true` |
 | `CACHE_TTL_SECONDS` | нет | Время жизни кэша каталога в секундах (по умолчанию 90) | `90` |
 | `PRISMA_LOG` | нет | `query` — печатать SQL-запросы в лог (видно, что фильтры выполняются в БД) | `query` |
 | `SEED_ADMIN_EMAIL` | да* | Email администратора для наполнения БД | `admin@keyhub.local` |
@@ -94,6 +95,19 @@ Memcached проще всего запустить в Docker: `docker run -d -p 
 | `APP_PORT` | нет | Порт API на хосте при запуске через Docker Compose | `3000` |
 
 \* нужны для наполнения БД (`npm run db:seed` и первый запуск контейнера).
+
+## Деплой
+
+| Часть | Где | Как |
+|---|---|---|
+| База данных | TiDB Cloud (Serverless MySQL) | строка подключения Prisma с `?sslaccept=strict` в `DATABASE_URL` |
+| Картинки товаров | Cloudinary | загружаются скриптом `server/scripts/upload-images-to-cloudinary.js` (нужна `CLOUDINARY_URL`), ссылки хранятся в `prisma/data/products.json` |
+| API | Render, Docker из `server/Dockerfile` | описан в [`render.yaml`](render.yaml): Render → New → Blueprint → этот репозиторий |
+| Фронтенд | Render, статический сайт | тот же `render.yaml`; адрес API подставляется в `js/config.js` при сборке |
+
+При старте контейнер сам применяет миграции к TiDB и наполняет пустую базу. На бесплатном плане Render отдельный сервис Memcached недоступен, поэтому Memcached запускается внутри контейнера API (`EMBEDDED_MEMCACHED=true`); при локальном запуске через Docker Compose это отдельный сервис. CORS разрешён только адресу фронтенда (`CORS_ORIGIN`).
+
+Бесплатный сервис Render засыпает после 15 минут без запросов, поэтому первый запрос после паузы может идти около минуты.
 
 ## Эндпоинты
 

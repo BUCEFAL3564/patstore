@@ -1,10 +1,7 @@
 const { toPublicProduct } = require('./product');
 
-// Деньги считаем в целых центах: 0.1 + 0.2 в float даёт 0.30000000000000004
 const toCents = (value) => Math.round(Number(value) * 100);
 
-// Товар, удалённый админом (soft-delete), остаётся в корзине с is_available: false —
-// пользователь видит, что он пропал, но в сумму и количество он не входит
 function toPublicCart(cart) {
   let subtotalCents = 0;
   let totalQuantity = 0;
@@ -26,8 +23,6 @@ function toPublicCart(cart) {
     };
   });
 
-  // Скидка считается от суммы доступных товаров и округляется до цента.
-  // Промокод, который выключили после применения (is_active = false), больше не действует
   const promo = cart.promo_code?.is_active ? cart.promo_code : null;
   const discountCents = promo ? Math.round((subtotalCents * promo.discount_percentage) / 100) : 0;
 

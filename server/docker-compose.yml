@@ -1,12 +1,8 @@
-# Локальный запуск бэкенда целиком: из папки server выполнить  docker compose up --build
-# Значения ${...} берутся из файла .env рядом (шаблон — .env.example)
-
 services:
   app:
     build: .
     env_file: .env
     environment:
-      # Внутри сети compose сервисы доступны по именам: mysql и memcached
       DATABASE_URL: mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@mysql:3306/${MYSQL_DATABASE}
       MEMCACHED_SERVERS: memcached:11211
       PORT: "3000"
@@ -27,7 +23,6 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     volumes:
-      # Именованный volume: данные БД переживают docker compose down и пересборку
       - mysql_data:/var/lib/mysql
     healthcheck:
       test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -u root -p$${MYSQL_ROOT_PASSWORD} --silent"]

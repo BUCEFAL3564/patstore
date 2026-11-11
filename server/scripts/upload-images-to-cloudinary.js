@@ -1,6 +1,3 @@
-// Переносит картинки товаров из prisma/data/products.json в Cloudinary и заменяет ссылки в этом файле.
-// Запуск: node scripts/upload-images-to-cloudinary.js   (нужна переменная CLOUDINARY_URL=cloudinary://key:secret@cloud)
-// Повторный запуск безопасен: картинки, которые уже в Cloudinary, пропускаются
 const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
@@ -17,7 +14,6 @@ function parseCloudinaryUrl(value) {
 const slugify = (text) =>
   text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60) || 'game';
 
-// Подписанная загрузка: Cloudinary сам скачивает картинку по ссылке (file = URL)
 async function upload({ apiKey, apiSecret, cloudName }, fileUrl, publicId) {
   const params = { overwrite: 'true', public_id: publicId, timestamp: Math.floor(Date.now() / 1000) };
   const toSign = Object.keys(params).sort().map((k) => `${k}=${params[k]}`).join('&');
@@ -49,7 +45,6 @@ async function main() {
         skipped++;
         continue;
       }
-      // До 3 попыток: внешний сайт с картинками иногда отвечает с задержкой
       for (let attempt = 1; ; attempt++) {
         try {
           product.images[i] = await upload(credentials, url, `${FOLDER}/${slug}-${i + 1}`);
@@ -62,7 +57,6 @@ async function main() {
         }
       }
     }
-    // Сохраняем после каждого товара: если что-то упадёт, уже загруженное не потеряется
     fs.writeFileSync(DATA_FILE, `${JSON.stringify(products, null, 2)}\n`);
   }
 

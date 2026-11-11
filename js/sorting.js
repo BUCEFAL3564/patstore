@@ -1,4 +1,3 @@
-// ========== SORTING (sort_by + order → параметры запроса к API) ==========
 const SORT_OPTIONS = {
     'name-asc': { sort_by: 'title', order: 'asc' },
     'name-desc': { sort_by: 'title', order: 'desc' },
@@ -19,7 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
         sortButtonText.textContent = option.textContent;
     };
 
-    // Выбранная сортировка из адресной строки
     const currentKey = Object.keys(SORT_OPTIONS).find((key) =>
         SORT_OPTIONS[key].sort_by === catalogState.sort_by && SORT_OPTIONS[key].order === catalogState.order);
     const currentOption = sortMenu.querySelector(`[data-sort="${currentKey}"]`);

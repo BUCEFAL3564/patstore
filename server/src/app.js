@@ -14,7 +14,6 @@ const app = express();
 app.use(
   cors({
     origin: config.corsOrigins.length ? config.corsOrigins : true,
-    // Без этого браузерный JS не видит эти заголовки ответа
     exposedHeaders: ['X-Cache', 'Location'],
   })
 );
@@ -33,7 +32,6 @@ app.use('/api/auth', authRouter);
 app.use('/api/products', productsRouter);
 app.use('/api/cart', cartRouter);
 
-// Интерактивная документация (Swagger UI) и сама спецификация OpenAPI в JSON
 app.get('/api/docs.json', (req, res) => res.json(openapi));
 app.use(
   '/api/docs',

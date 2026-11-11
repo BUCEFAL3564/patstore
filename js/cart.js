@@ -1,6 +1,3 @@
-// ========== CART (через API /api/cart) ==========
-// Корзина хранится на сервере и привязана к пользователю, поэтому нужна авторизация
-
 function setCartBadge(total) {
     const badge = document.getElementById('cartBadge');
     if (!badge) return;

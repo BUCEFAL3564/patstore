@@ -6,7 +6,6 @@ function required(name) {
 
 module.exports = {
   port: Number(process.env.PORT) || 3000,
-  // Адрес без схемы (keyhub-web.onrender.com — так его передаёт Render) считаем https://
   corsOrigins: (process.env.CORS_ORIGIN || '')
     .split(',')
     .map((origin) => origin.trim().replace(/\/$/, ''))
@@ -17,9 +16,7 @@ module.exports = {
     expiresIn: process.env.JWT_EXPIRES_IN || '1d',
   },
   cache: {
-    // Пусто = кэш выключен, API работает напрямую с БД
     servers: process.env.MEMCACHED_SERVERS || '',
-    // ТЗ: TTL 60–120 секунд
     ttlSeconds: Number(process.env.CACHE_TTL_SECONDS) || 90,
   },
 };

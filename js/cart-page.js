@@ -1,10 +1,6 @@
-// ========== CART PAGE (GET/PATCH/DELETE /api/cart…, промокод) ==========
-// Суммы, скидка и итог считает сервер; страница их только показывает
 const FREE_SHIPPING_FROM = 50;
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Enter в поле промокода = «Apply». Один обработчик на контейнер: поле пересоздаётся
-    // при перерисовке, а обработчик на самом поле навешивался бы заново каждый раз
     document.querySelector('.promo-input-wrap')?.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' && e.target.classList.contains('promo-input')) applyPromo();
     });
@@ -28,7 +24,6 @@ async function loadCart() {
     }
 }
 
-// Все изменения корзины возвращают корзину целиком — просто перерисовываем
 async function cartRequest(path, options) {
     try {
         const cart = await api(path, { ...options, auth: true });
@@ -51,8 +46,6 @@ const emptyIcon = `
         <path d="M16 10a4 4 0 0 1-8 0"/>
     </svg>`;
 
-// Сообщение («корзина пуста», «войдите») показывается отдельным блоком: позиции и итоги
-// только скрываются, чтобы их можно было снова показать без перезагрузки страницы
 function renderCartMessage(title, text, href, buttonText) {
     const headerBar = document.querySelector('.cart-header-bar');
     if (headerBar) headerBar.style.display = 'none';
@@ -139,7 +132,6 @@ function renderCart(cart) {
     `;
     }).join('');
 
-    // Итоги — значения из API
     document.getElementById('summarySubtotal').textContent = formatPrice(cart.subtotal);
     const discountRow = document.getElementById('discountRow');
     if (cart.promo) {

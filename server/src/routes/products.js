@@ -17,10 +17,8 @@ const {
 
 const router = Router();
 
-// Сначала проверка токена и роли, потом данных: без прав ответ 401/403, а не 400
 const adminOnly = [authenticate, requireRole('admin')];
 
-// Каталог открыт и для гостей: токен не нужен
 router.get('/', validate(listProductsQuery, 'query'), listProducts);
 router.get('/:id', validate(productIdParams, 'params'), getProduct);
 

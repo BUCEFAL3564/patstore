@@ -1,7 +1,3 @@
-// ========== SIGN IN / CREATE ACCOUNT (POST /api/auth/login, /api/auth/register) ==========
-
-// Куда вернуться после входа: только на страницы этого сайта (например, cart.html),
-// чтобы ссылкой вида ?redirect=https://… нельзя было увести пользователя на чужой сайт
 function redirectTarget() {
     const target = new URLSearchParams(window.location.search).get('redirect');
     return target && /^[\w-]+\.html(\?[^#]*)?$/.test(target) ? target : 'index.html';
@@ -17,7 +13,6 @@ function hideAuthError() {
     document.getElementById('authError').hidden = true;
 }
 
-// Отправка формы: кнопка блокируется, ошибки API показываются над кнопкой
 async function submitAuth(form, path, body, errorMessages) {
     const button = form.querySelector('.auth-btn');
     const buttonText = button.textContent;
@@ -36,7 +31,6 @@ async function submitAuth(form, path, body, errorMessages) {
     }
 }
 
-// Уже вошли — вместо формы входа показываем аккаунт и кнопку выхода
 function renderSignedIn(card, user) {
     card.innerHTML = `
         <div class="auth-header">

@@ -1,6 +1,3 @@
-// ========== CATALOG (GET /api/products) ==========
-// Поиск, фильтры, сортировка и пагинация выполняются на сервере (в БД);
-// страница только передаёт параметры и показывает результат
 const PAGE_SIZE = 12;
 
 const catalogState = {
@@ -13,12 +10,9 @@ const catalogState = {
     order: 'asc',
 };
 
-let products = []; // товары текущей страницы
+let products = [];
 let latestRequest = 0;
 
-// ========== URL <-> STATE ==========
-// Параметры каталога дублируются в адресной строке: страницу можно обновить
-// или отправить ссылку, и фильтры сохранятся
 function readStateFromUrl() {
     const params = new URLSearchParams(window.location.search);
     const number = (name) => {
@@ -56,18 +50,15 @@ function writeStateToUrl() {
     window.history.replaceState(null, '', query ? `?${query}` : window.location.pathname);
 }
 
-// changes — новые значения параметров; любой фильтр, кроме смены страницы, возвращает на 1-ю страницу
 function updateCatalog(changes) {
     Object.assign(catalogState, { page: 1 }, changes);
     loadProducts();
 }
 
-// ========== LOAD ==========
 async function loadProducts() {
     const grid = document.getElementById('productGrid');
     if (!grid) return;
 
-    // Если пользователь быстро меняет фильтры, ответы могут прийти не по порядку — показываем только последний
     const requestId = ++latestRequest;
     grid.classList.add('is-loading');
 
@@ -186,7 +177,6 @@ function renderProducts() {
     }).join('');
 }
 
-// ========== PAGINATION ==========
 function renderPagination(meta) {
     const nav = document.getElementById('pagination');
     if (!nav) return;
@@ -199,7 +189,6 @@ function renderPagination(meta) {
     const current = meta.current_page;
     const total = meta.total_pages;
 
-    // Номера рядом с текущей страницей, первая и последняя; остальное — многоточием
     const pages = [];
     for (let i = 1; i <= total; i++) {
         if (i === 1 || i === total || Math.abs(i - current) <= 1) pages.push(i);
@@ -227,11 +216,10 @@ function updateProductCount(total) {
 // ========== INIT ==========
 document.addEventListener('DOMContentLoaded', () => {
     const grid = document.getElementById('productGrid');
-    if (!grid) return; // products.js подключён на странице без каталога
+    if (!grid) return;
 
     readStateFromUrl();
 
-    // Кнопка «в корзину» на карточке: карточка — ссылка, поэтому отменяем переход
     grid.addEventListener('click', (e) => {
         const button = e.target.closest('[data-add-to-cart]');
         if (!button) return;
@@ -241,7 +229,6 @@ document.addEventListener('DOMContentLoaded', () => {
         addToCart(id, 1, product ? product.title : 'item');
     });
 
-    // Пагинация
     document.getElementById('pagination')?.addEventListener('click', (e) => {
         const button = e.target.closest('.page-btn');
         if (!button || button.disabled || button.classList.contains('active')) return;
@@ -250,7 +237,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.top-bar')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 
-    // Поиск
     const searchForm = document.getElementById('searchForm');
     const searchInput = document.getElementById('searchInput');
     if (searchForm && searchInput) {
@@ -259,7 +245,6 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             updateCatalog({ search: searchInput.value.trim() });
         });
-        // Крестик в поле поиска (type="search") очищает его — сразу показываем весь каталог
         searchInput.addEventListener('search', () => {
             if (searchInput.value === '' && catalogState.search !== '') updateCatalog({ search: '' });
         });

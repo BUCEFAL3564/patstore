@@ -409,7 +409,6 @@
 .filter-toggle-btn:hover {
     background: #475569;
 }
-/* ========== SEARCH BAR ========== */
 .search-bar {
     position: relative;
     display: flex;
@@ -469,7 +468,6 @@
     background: #D97706;
 }
 
-/* ========== CATALOG STATES ========== */
 .product-grid.is-loading {
     opacity: 0.5;
     pointer-events: none;
@@ -488,7 +486,6 @@
     border-color: #EF4444;
 }
 
-/* ========== PAGINATION ========== */
 .pagination {
     display: flex;
     justify-content: center;
@@ -543,8 +540,6 @@
     }
 }
 
-/* Скрытый оверлей карточки сдвинут вниз за её границы (translateY(100%)) и без этого
-   перехватывал клики по тому, что ниже, например по кнопкам пагинации */
 .product-overlay {
     pointer-events: none;
 }

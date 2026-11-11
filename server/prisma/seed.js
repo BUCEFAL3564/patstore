@@ -22,8 +22,6 @@ async function seedUser(rawEmail, password, role) {
   });
 }
 
-// У products нет уникального поля, поэтому сопоставляем по title:
-// повторный запуск сида обновляет товары, а не создаёт дубли
 async function seedProducts() {
   let created = 0;
   let updated = 0;
@@ -42,8 +40,6 @@ async function seedProducts() {
   return { created, updated };
 }
 
-// --if-empty: наполнять только пустую базу. Так делает контейнер при каждом старте:
-// первый запуск получает тестовые данные, а последующие не затирают правки админа
 const ifEmpty = process.argv.includes('--if-empty');
 
 async function main() {
@@ -70,7 +66,6 @@ async function main() {
   const { created, updated } = await seedProducts();
   console.log(`Products: ${created} created, ${updated} updated`);
 
-  // Сид меняет товары в обход API, поэтому кэш каталога сбрасываем сами
   await invalidateCatalog();
 }
 

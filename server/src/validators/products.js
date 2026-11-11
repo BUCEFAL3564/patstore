@@ -1,7 +1,5 @@
 const { z } = require('zod');
 
-// Query-параметры приходят строками. Пустое значение (?min_price=) считаем «не задано»,
-// иначе z.coerce превратил бы его в 0
 const emptyToUndefined = (value) => (value === '' ? undefined : value);
 
 const optionalNumber = (field, { min, max }) => {
@@ -21,7 +19,6 @@ const positiveInt = (field, { max, defaultValue }) =>
       .default(defaultValue)
   );
 
-// Регистр не важен: ?order=DESC тоже принимается
 const optionalEnum = (field, values) =>
   z.preprocess(
     (value) => (typeof value === 'string' ? value.trim().toLowerCase() || undefined : value),
@@ -41,7 +38,6 @@ const listProductsQuery = z
     min_price: optionalNumber('min_price', { min: 0 }),
     max_price: optionalNumber('max_price', { min: 0 }),
     min_rating: optionalNumber('min_rating', { min: 0, max: 5 }),
-    // Точное совпадение категории — для блока «похожие товары» на странице товара
     category: z.preprocess(
       (value) => (typeof value === 'string' ? value.trim() || undefined : value),
       z.string('category must be a string').max(100, 'category is too long').optional()
@@ -56,16 +52,12 @@ const productIdParams = z.object({
   id: z.coerce.number('id must be a number').int('id must be an integer').positive('id must be positive'),
 });
 
-// В БД price — DECIMAL(10,2), rating — DECIMAL(2,1): лишние знаки после запятой отклоняем,
-// а не даём MySQL молча их округлить
 const hasMaxDecimals = (digits) => (value) => {
   const scaled = value * 10 ** digits;
   return Math.abs(scaled - Math.round(scaled)) < 1e-6;
 };
-// Убирает хвосты float-арифметики: 0.1 + 0.2 = 0.30000000000000004 → 0.3
 const roundTo = (digits) => (value) => Math.round(value * 10 ** digits) / 10 ** digits;
 
-// Пустая строка в необязательном текстовом поле = «очистить» (null)
 const optionalText = (field, max) =>
   z.preprocess(
     (value) => (typeof value === 'string' ? value.trim() || null : value),
@@ -87,7 +79,6 @@ const productFields = {
     .max(5, 'rating must be <= 5')
     .refine(hasMaxDecimals(1), 'rating must have at most 1 decimal place')
     .transform(roundTo(1)),
-  // Минимум 3 картинки — требование ТЗ для слайдера. Только http(s), чтобы не пропустить javascript: и т.п.
   images: z
     .array(z.url({ protocol: /^https?$/, error: 'each image must be an http(s) URL' }), 'images must be an array of URLs')
     .min(3, 'at least 3 images are required')
@@ -101,7 +92,6 @@ const productFields = {
     .max(1000000, 'stock_quantity is too large'),
 };
 
-// Лишние поля (id, created_at, deleted_at и т.д.) zod отбрасывает, задать их через API нельзя
 const createProductBody = z.object({
   ...productFields,
   description: productFields.description.default(''),

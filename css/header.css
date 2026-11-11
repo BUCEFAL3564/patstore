@@ -171,7 +171,6 @@
 .mobile-nav-links a:hover {
     color: #F59E0B;
 }
-/* Пользователь вошёл в аккаунт — зелёная точка на иконке */
 .icon-btn.is-logged-in {
     position: relative;
 }

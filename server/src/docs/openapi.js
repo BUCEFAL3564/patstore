@@ -1,5 +1,3 @@
-// Спецификация OpenAPI 3.0 для Swagger UI (/api/docs) и машиночитаемого /api/docs.json
-
 const ref = (name) => ({ $ref: `#/components/schemas/${name}` });
 const json = (schema, example) => ({ 'application/json': { schema, ...(example && { example }) } });
 const response = (description, schema, example) => ({ description, ...(schema && { content: json(schema, example) }) });

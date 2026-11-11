@@ -3,7 +3,6 @@ node_modules/
 *.log
 .vscode/
 
-# env
 .env
 .env.*
 !.env.example

@@ -30,12 +30,12 @@ model Product {
   description    String    @db.Text
   price          Decimal   @db.Decimal(10, 2)
   rating         Decimal   @default(0) @db.Decimal(2, 1)
-  images         Json // массив URL, минимум 3
+  images         Json
   category       String?   @db.VarChar(100)
   platform       String?   @db.VarChar(50)
   stock_quantity Int       @default(0)
   created_at     DateTime  @default(now())
-  deleted_at     DateTime? // soft-delete: товар скрыт, но ссылки из корзин не ломаются
+  deleted_at     DateTime?
 
   cart_items CartItem[]
 
@@ -48,7 +48,7 @@ model Product {
 model Cart {
   id            Int      @id @default(autoincrement())
   user_id       Int      @unique
-  promo_code_id Int? // применённый промокод (POST /api/cart/apply-promo)
+  promo_code_id Int?
   created_at    DateTime @default(now())
   updated_at    DateTime @updatedAt
 

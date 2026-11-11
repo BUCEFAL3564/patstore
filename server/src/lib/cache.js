@@ -1,8 +1,6 @@
 const memjs = require('memjs');
 const config = require('../config');
 
-// Кэш не должен ронять API: если Memcached недоступен, каждый метод возвращает «промах»,
-// запрос идёт прямо в БД, а предупреждение пишется в лог один раз, пока связь не вернётся
 const client = config.cache.servers
   ? memjs.Client.create(config.cache.servers, {
       retries: 0,
@@ -14,9 +12,6 @@ const client = config.cache.servers
 
 let available = true;
 
-// memjs после обрыва соединения (например, Memcached перезапустили) может не завершить
-// следующий запрос никогда — её собственный timeout в этом случае не срабатывает.
-// Поэтому у каждой операции свой жёсткий таймаут
 const OPERATION_TIMEOUT_MS = 500;
 
 function withTimeout(promise) {
@@ -31,8 +26,6 @@ function withTimeout(promise) {
   return Promise.race([promise, timeout]).finally(() => clearTimeout(timer));
 }
 
-// Server#error уничтожает сокет и отклоняет повисшие запросы; при следующем обращении
-// memjs подключится заново (обычный close() сокет не сбрасывает, и переподключения не будет)
 function resetConnections() {
   for (const server of client.servers) {
     server.error(new Error('memcached operation timed out'));
@@ -66,7 +59,6 @@ const get = (key) =>
 
 const set = (key, value, ttlSeconds) => safely((c) => c.set(key, value, { expires: ttlSeconds }), false);
 
-// initial — значение, если ключа ещё нет. memjs.increment ломается на числах >= 2^32
 const increment = (key, amount, initial) =>
   safely(async (c) => (await c.increment(key, amount, { initial })).value, null);
 

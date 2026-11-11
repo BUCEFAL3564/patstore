@@ -13,9 +13,6 @@ const isPrismaError = (err, ...codes) =>
   err instanceof Prisma.PrismaClientKnownRequestError && codes.includes(err.code);
 const isUniqueViolation = (err) => isPrismaError(err, 'P2002');
 
-// Корзина создаётся при первом обращении. upsert в Prisma для MySQL — это SELECT, потом INSERT,
-// поэтому два одновременных первых запроса могут столкнуться на уникальном user_id.
-// Тогда просто читаем корзину, которую создал соседний запрос
 async function getOrCreateCart(userId) {
   try {
     return await prisma.cart.upsert({
@@ -47,8 +44,6 @@ async function getCart(req, res) {
   await sendCart(res, req.user.id);
 }
 
-// Повторное добавление того же товара увеличивает количество, а не создаёт вторую строку.
-// Ответ — вся корзина: фронтенду не нужен отдельный запрос, чтобы перерисовать её
 async function addItem(req, res) {
   const { product_id, quantity } = req.validated.body;
   const cart = await getOrCreateCart(req.user.id);
@@ -68,10 +63,6 @@ async function addItem(req, res) {
         return true;
       }
 
-      // Атомарно в БД: UPDATE ... SET quantity = quantity + ? блокирует строку до конца транзакции,
-      // поэтому одновременные добавления выстраиваются в очередь, а не затирают друг друга
-      // (прочитать, прибавить и записать в JS теряло бы добавления). Лимиты проверяем по
-      // результату; исключение откатывает транзакцию вместе с увеличением
       const updated = await tx.cartItem.update({
         where: { id: existing.id },
         data: { quantity: { increment: quantity } },
@@ -81,9 +72,6 @@ async function addItem(req, res) {
       return false;
     });
 
-  // Одновременные запросы могут столкнуться в БД: два INSERT одного нового товара (P2002),
-  // позицию удалили между чтением и UPDATE (P2025), взаимная блокировка (P2034).
-  // Тогда повторяем: со второй попытки запрос увидит уже существующую строку
   let created;
   for (let attempt = 1; ; attempt++) {
     try {
@@ -97,8 +85,6 @@ async function addItem(req, res) {
   await sendCart(res, req.user.id, created ? 201 : 200);
 }
 
-// Чужую позицию найти нельзя: условие cart.user_id в том же запросе, ответ 404, а не 403,
-// чтобы не подсказывать, что такой id вообще существует
 async function updateItem(req, res) {
   const { id } = req.validated.params;
   const { quantity } = req.validated.body;
@@ -129,8 +115,6 @@ async function deleteItem(req, res) {
   await sendCart(res, req.user.id);
 }
 
-// ТЗ: проверка промокода и расчёт итога заказа со скидкой. Промокод запоминается в корзине,
-// поэтому скидка пересчитывается сама, если потом изменить состав корзины
 async function applyPromo(req, res) {
   const promo = await prisma.promoCode.findUnique({ where: { code: req.validated.body.code } });
   if (!promo) throw new HttpError(404, 'Promo code not found');
@@ -142,7 +126,6 @@ async function applyPromo(req, res) {
   await sendCart(res, req.user.id);
 }
 
-// Для кнопки «убрать промокод» на странице корзины
 async function removePromo(req, res) {
   const cart = await getOrCreateCart(req.user.id);
   await prisma.cart.update({ where: { id: cart.id }, data: { promo_code_id: null } });

@@ -4,8 +4,6 @@ const { HttpError } = require('../lib/httpError');
 const { hashPassword, verifyPassword } = require('../lib/password');
 const { signToken } = require('../lib/jwt');
 
-// Сравниваем с этим хешем, когда email не найден: время ответа одинаковое,
-// и по нему нельзя узнать, зарегистрирован ли email
 const dummyHashPromise = hashPassword('dummy-password-for-timing');
 
 function toPublicUser(user) {
@@ -20,7 +18,6 @@ async function register(req, res) {
     const user = await prisma.user.create({ data: { email, password_hash } });
     res.status(201).json({ token: signToken(user), user: toPublicUser(user) });
   } catch (err) {
-    // Уникальный индекс на email ловит и одновременные регистрации, в отличие от проверки заранее
     if (err instanceof Prisma.PrismaClientKnownRequestError && err.code === 'P2002') {
       throw new HttpError(409, 'Email is already registered');
     }

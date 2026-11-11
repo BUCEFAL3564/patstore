@@ -1,4 +1,3 @@
-// ========== PRODUCT PAGE (GET /api/products/:id) ==========
 const productId = Number(new URLSearchParams(window.location.search).get('id'));
 
 async function loadProduct() {
@@ -28,7 +27,6 @@ function renderProductPage(product) {
     document.getElementById('breadcrumbProduct').textContent = product.title;
     document.getElementById('breadcrumbCategory').textContent = product.category || 'Games';
 
-    // Блок 1: название, рейтинг, цена
     document.getElementById('productInfo').innerHTML = `
         <span class="product-category">${escapeHtml(product.platform || product.category || 'Games')}</span>
         <h1 class="product-title">${name}</h1>
@@ -39,7 +37,6 @@ function renderProductPage(product) {
         <p class="product-price-large">${formatPrice(product.price)}</p>
     `;
 
-    // Блок 3: описание
     if (product.description) {
         document.getElementById('productDescription').innerHTML = `
             <h3 class="description-heading">Description</h3>
@@ -47,7 +44,6 @@ function renderProductPage(product) {
         `;
     }
 
-    // Блок 4: количество — не больше, чем на складе (и не больше 99 за раз)
     const maxQuantity = Math.min(99, product.stock_quantity);
     let quantity = 1;
     const qtyValue = document.getElementById('qtyValue');
@@ -58,7 +54,6 @@ function renderProductPage(product) {
         if (quantity < maxQuantity) { quantity++; qtyValue.textContent = quantity; }
     });
 
-    // Блок 5: в корзину — один запрос с нужным количеством
     const addButton = document.getElementById('addToCartBtn');
     if (product.stock_quantity < 1) {
         addButton.disabled = true;
@@ -71,7 +66,6 @@ function renderProductPage(product) {
         });
     }
 
-    // Блок 6: характеристики из данных API
     const specs = [
         { label: 'Platform', value: product.platform || '—' },
         { label: 'Category', value: category },
@@ -91,7 +85,6 @@ function renderProductPage(product) {
     renderSlider(product);
 }
 
-// ========== SLIDER (все картинки из images[], по ТЗ — минимум 3) ==========
 function renderSlider(product) {
     const images = product.images.length ? product.images : ['https://placehold.co/600x600/1E293B/F59E0B?text=Game'];
     const totalSlides = images.length;
@@ -122,11 +115,9 @@ function renderSlider(product) {
     dots.addEventListener('click', (e) => {
         if (e.target.classList.contains('slider-dot')) goToSlide(Number(e.target.dataset.index));
     });
-    // После изменения ширины окна слайд должен остаться на месте
     window.addEventListener('resize', () => goToSlide(currentSlide));
 }
 
-// ========== RELATED PRODUCTS (та же категория, фильтр в БД) ==========
 async function loadRelatedProducts(product) {
     if (!product.category) return;
 
@@ -155,7 +146,6 @@ async function loadRelatedProducts(product) {
             </div>
         `;
     } catch {
-        // Похожие товары — необязательный блок: если не загрузились, страница работает без них
     }
 }
 

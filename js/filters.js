@@ -1,9 +1,7 @@
-// ========== FILTERS (рейтинг и цена → параметры запроса к API) ==========
 document.addEventListener('DOMContentLoaded', () => {
     if (!document.getElementById('productGrid')) return;
 
     // ===== RATING CHECKBOXES =====
-    // «4+» и «3+» вместе означают «от 3 звёзд», поэтому берём наименьший отмеченный
     const ratingCheckboxes = document.querySelectorAll('.checkbox-input');
 
     ratingCheckboxes.forEach((checkbox) => {
@@ -25,7 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const readPrice = (input) => (input.value.trim() === '' ? undefined : Number(input.value));
 
-    // Запрос уходит, когда пользователь перестал печатать (400 мс), а не на каждую цифру
     let timer;
     const onPriceInput = () => {
         clearTimeout(timer);

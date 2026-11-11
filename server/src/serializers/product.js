@@ -1,5 +1,3 @@
-// Prisma отдаёт Decimal-поля объектами, и в JSON они превратились бы в строки ("29.99").
-// По ТЗ price и rating — числа, поэтому приводим явно. deleted_at наружу не отдаём
 function toPublicProduct(product) {
   return {
     id: product.id,

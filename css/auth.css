@@ -126,7 +126,6 @@
 .auth-link:hover {
     color: #FBBF24;
 }
-/* ========== API STATES ========== */
 .auth-error {
     padding: 12px 14px;
     background: rgba(239, 68, 68, 0.12);
